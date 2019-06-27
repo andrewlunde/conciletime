@@ -1,0 +1,39 @@
+ID: conciletime
+_schema-version: "2.1"
+description: CAP ConcileTime Data App
+version: 0.0.0
+modules:
+  - name: conciletime-db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: conciletime-db-hdi-container
+  - name: conciletime-srv
+    type: nodejs
+    path: srv
+    parameters:
+      memory: 512M
+      disk-quota: 256M
+    provides:
+      - name: srv_api
+        properties:
+          url: ${default-url}
+    requires:
+      - name: conciletime-db-hdi-container
+      - name: conciletime-uaa
+resources:
+  - name: conciletime-db-hdi-container
+    type: com.sap.xs.hdi-container
+    properties:
+      hdi-container-name: ${service-name}
+  - name: conciletime-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: default
+      service: xsuaa
+      config:
+        xsappname: conciletime-${space}
+        tenant-mode: dedicated
