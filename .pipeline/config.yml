@@ -1,0 +1,17 @@
+general:
+steps:
+  mtaBuild:
+    buildTarget: 'CF'
+  cloudFoundryDeploy:
+    deployTool: 'mtaDeployPlugin'
+    deployType: 'standard'
+    cloudFoundry:
+      apiEndpoint: 'https://api.cf.us10.hana.ondemand.com'
+      org: 'A-Team_ml'
+      space: 'ml'
+      credentialsId: 'CF_CREDENTIALSID'
+      dockerWorkspace: '/home/jenkins/piper'
+  mailSendNotifiction:
+    notificationAttachment: true
+    notificationRecipients: 'andrew.lunde@sap.com'
+    notifyCulprits: false
