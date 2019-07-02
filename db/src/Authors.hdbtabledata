@@ -8,7 +8,9 @@
                 "data_type": "CSV",
                 "file_name": "my.bookshop-Authors.csv",
                 "has_header": true,
-                "separator": ";"
+                "type_config" : { 
+                	"delimiter" : ";" 
+        		}
             },
             "import_settings": {
                 "import_columns": [
