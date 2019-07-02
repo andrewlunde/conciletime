@@ -15,7 +15,7 @@
             "import_settings": {
                 "import_columns": [
                 	"ID",
-					"name"
+					"NAME"
                 ],
                 "include_filter": []
             },

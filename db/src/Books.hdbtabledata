@@ -15,9 +15,9 @@
             "import_settings": {
                 "import_columns": [
                 	"ID",
-					"title",
-					"author_ID",
-					"stock"
+					"TITLE",
+					"AUTHOR_ID",
+					"STOCK"
                 ],
                 "include_filter": []
             },
