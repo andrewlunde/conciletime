@@ -206,3 +206,11 @@ Find more in the [help.sap.com](https://help.sap.com/viewer/65de2977205c403bbc10
 ## Commands...
 
 cf create-service conciletime-uaa
+
+## CI/CD
+
+In HANA2 SP04 XSA Node.js 10.15.3 for Linux x86-64    
+In CF v1.6.49 node	10.15.3	cflinuxfs3           4
+
+
+[Build Job in Jenkins]()

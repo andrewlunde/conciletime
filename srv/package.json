@@ -8,7 +8,7 @@
         "hdb": "^0.17.0"
     },
     "engines": {
-        "node": "^8.9",
+        "node": "^10.15.3",
         "npm": "^6"
     },
     "devDependencies": {},
