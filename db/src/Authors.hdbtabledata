@@ -1,0 +1,22 @@
+{
+	"format_version": 1,
+	"imports":
+	[
+        {
+            "target_table": "MY_BOOKSHOP_AUTHORS",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "gen/csv/my.bookshop-Authors.csv",
+                "has_header": true,
+                "separator": ";"
+            },
+            "import_settings": {
+                "import_columns": [
+                	"ID",
+					"name"
+                ],
+                "include_filter": []
+            }
+        }
+	]
+}
