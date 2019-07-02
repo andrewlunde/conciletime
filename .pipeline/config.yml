@@ -1,7 +1,11 @@
+# https://sap.github.io/jenkins-library/
 general:
 steps:
+  setupCommonPipelineEnvironment:
+    collectTelemetryData: true
   mtaBuild:
     buildTarget: 'CF'
+    defaultNpmRegistry: 'https://registry.npmjs.org/'
   cloudFoundryDeploy:
     deployTool: 'mtaDeployPlugin'
     deployType: 'standard'
@@ -11,6 +15,7 @@ steps:
       space: 'ml'
       credentialsId: 'CF_CREDENTIALSID'
       dockerWorkspace: '/home/jenkins/piper'
+    mtaExtensionDescriptor: 'mta_to_cf.mtaext'
   mailSendNotifiction:
     notificationAttachment: true
     notificationRecipients: 'andrew.lunde@sap.com'
