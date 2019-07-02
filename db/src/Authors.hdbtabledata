@@ -15,9 +15,13 @@
             "import_settings": {
                 "import_columns": [
                 	"ID",
-					"NAME"
+					"name"
                 ],
                 "include_filter": []
+            },
+            "column_mappings" : {
+                "ID" : "ID",
+                "name" : "NAME" 
             }
         }
 	]

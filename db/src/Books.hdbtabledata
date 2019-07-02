@@ -15,11 +15,17 @@
             "import_settings": {
                 "import_columns": [
                 	"ID",
-					"TITLE",
-					"AUTHOR_ID",
-					"STOCK"
+					"title",
+					"author_ID",
+					"stock"
                 ],
                 "include_filter": []
+            },
+            "column_mappings" : {
+                "ID" : "ID",
+                "title" : "TITLE", 
+                "author_ID" : "AUTHOR_ID", 
+                "stock" : "STOCK" 
             }
         }
 	]
