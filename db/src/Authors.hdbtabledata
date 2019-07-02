@@ -6,7 +6,7 @@
             "target_table": "MY_BOOKSHOP_AUTHORS",
             "source_data": {
                 "data_type": "CSV",
-                "file_name": "gen/csv/my.bookshop-Authors.csv",
+                "file_name": "csv/my.bookshop-Authors.csv",
                 "has_header": true,
                 "separator": ";"
             },
