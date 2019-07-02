@@ -23,9 +23,9 @@
             },
             "column_mappings" : {
                 "ID" : "ID",
-                "title" : "TITLE", 
-                "author_ID" : "AUTHOR_ID", 
-                "stock" : "STOCK" 
+                "TITLE" : "title", 
+                "AUTHOR_ID" : "author_ID", 
+                "STOCK" : "stock" 
             }
         }
 	]
