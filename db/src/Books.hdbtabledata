@@ -3,10 +3,10 @@
 	"imports":
 	[
         {
-            "target_table": "MY_BOOKSHOP_AUTHORS",
+            "target_table": "MY_BOOKSHOP_BOOKS",
             "source_data": {
                 "data_type": "CSV",
-                "file_name": "my.bookshop-Authors.csv",
+                "file_name": "my.bookshop-Books.csv",
                 "has_header": true,
                 "type_config" : { 
                 	"delimiter" : ";" 
@@ -15,7 +15,9 @@
             "import_settings": {
                 "import_columns": [
                 	"ID",
-					"NAME"
+					"TITLE",
+					"AUTHOR_ID",
+					"STOCK"
                 ],
                 "include_filter": []
             }
