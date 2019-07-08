@@ -1,6 +1,6 @@
 namespace rescuetime;
 
-entity Slice : managed {
+entity Slice {
   key ID  : UUID;
   account   : String;
   application   : String;
