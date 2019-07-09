@@ -1,7 +1,7 @@
 #!groovy
 // http://groovy-lang.org/syntax.html
 // http://groovy-lang.org/operators.html
-// http://groovy-lang.org/semantics.html
+// http://groovy-lang.org/semantics.html 
 node {
 	stage('Pull') {
 	    // cleanWs()
