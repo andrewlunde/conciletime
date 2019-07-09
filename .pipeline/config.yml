@@ -1,5 +1,6 @@
 # https://sap.github.io/jenkins-library/
 general:
+  gitSshKeyCredentialsId: 'GITHUBALUNDESAP'
 steps:
   setupCommonPipelineEnvironment:
     collectTelemetryData: true
