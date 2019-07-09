@@ -4,7 +4,7 @@ node() {
         checkout scm
         setupCommonPipelineEnvironment script:this
     }
-    stage('build') {
+    stage('Build') {
         mtaBuild script: this
     }
     stage('deploy') {

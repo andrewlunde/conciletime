@@ -1,6 +1,7 @@
 # https://sap.github.io/jenkins-library/
 general:
   gitSshKeyCredentialsId: 'GITHUBALUNDESAP'
+  collectTelemetryData: false
 steps:
   setupCommonPipelineEnvironment:
     collectTelemetryData: true
@@ -15,6 +16,7 @@ steps:
       org: 'A-Team_ml'
       space: 'ml'
       credentialsId: 'CF_CREDENTIALSID'
+      dockerImage: 's4sdk/docker-cf-cli'
       dockerWorkspace: '/home/jenkins/piper'
     mtaDeployParameters: '-f -e mta_to_cf.mtaext'
   xsaDeploy:
