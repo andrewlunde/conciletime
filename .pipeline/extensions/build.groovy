@@ -1,6 +1,6 @@
 void call(Map params) {
     //access stage name
-    echo "Start - Extension for stage: ${params.stageName}"
+    echo "XXX Start - Extension for stage: ${params.stageName}"
 
     //access config
     echo "Current stage config: ${params.config}"
