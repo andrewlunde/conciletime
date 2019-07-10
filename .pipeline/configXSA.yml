@@ -8,12 +8,14 @@ steps:
   mtaBuild:
     buildTarget: 'XSA'
     defaultNpmRegistry: 'https://registry.npmjs.org/'
-  xsaDeploy:
+  dockerExecute:
     XSA:
       apiEndpoint: 'https://api.parvus.lcfx.net'
       org: 'lcfx'
       space: 'DEV'
       credentialsId: 'CF_CREDENTIALSID'
+      dockerImage: 'alunde/xsa-cli'
+      dockerWorkspace: '/home/jenkins/piper'
   mailSendNotifiction:
     notificationAttachment: true
     notificationRecipients: 'andrew.lunde@sap.com'

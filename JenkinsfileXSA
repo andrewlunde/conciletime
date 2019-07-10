@@ -8,7 +8,9 @@ node() {
         mtaBuild script: this
     }
     stage('deploy') {
-        cloudFoundryDeploy script: this
+        dockerExecute(dockerImage: 'alunde/xsa-cli') {
+          sh "xs -v"
+        }
         mailSendNotification script: this
     }
 }
