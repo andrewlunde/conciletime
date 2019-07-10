@@ -2,7 +2,7 @@
 node() {
     stage('prepare') {
         checkout scm
-        setupCommonPipelineEnvironment script:this configFile: configXSA.yml
+        setupCommonPipelineEnvironment script:this, configFile: configXSA.yml
     }
     stage('Build') {
         mtaBuild script: this
