@@ -1,0 +1,20 @@
+# https://sap.github.io/jenkins-library/
+general:
+  gitSshKeyCredentialsId: 'GITHUBALUNDESAP'
+  collectTelemetryData: false
+steps:
+  setupCommonPipelineEnvironment:
+    collectTelemetryData: true
+  mtaBuild:
+    buildTarget: 'XSA'
+    defaultNpmRegistry: 'https://registry.npmjs.org/'
+  xsaDeploy:
+    XSA:
+      apiEndpoint: 'https://api.parvus.lcfx.net'
+      org: 'lcfx'
+      space: 'DEV'
+      credentialsId: 'CF_CREDENTIALSID'
+  mailSendNotifiction:
+    notificationAttachment: true
+    notificationRecipients: 'andrew.lunde@sap.com'
+    notifyCulprits: false

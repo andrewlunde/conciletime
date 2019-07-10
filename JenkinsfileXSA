@@ -1,90 +1,14 @@
-#!groovy
-// http://groovy-lang.org/syntax.html
-// http://groovy-lang.org/operators.html
-// http://groovy-lang.org/semantics.html 
-node {
-	stage('Pull') {
-	    // cleanWs()
-		git credentialsId: 'GITHUBALUNDESAP', url: 'https://github.com/alundesap/conciletime.git'
-	}
-	
-	stage('Prep') {
-		echo 'Reminder:  When executing things manually in the workspace, Use "sudo -u jenkins" so that you are running as jenkins.'
-		echo 'Commenting out the Surrogate section and uncommenting the Custom section of the mta.yaml file.'
-		sh 'python tools/desurrogate.py mta.yaml mta-des.yaml'
-		sh 'mv mta.yaml mta-save.yaml'
-		sh 'mv mta-des.yaml mta.yaml'
-		sh 'cat mta.yaml'
-	}
-
-	stage('Build') {
-		echo 'Building....'
-
-		echo 'Loggin In'
-		sh 'xs api https://hxe2.sfphcp.com:30030 --cacert /hana/shared/HXE/xs/controller_data/controller/ssl-pub/router/default.root.crt.pem'
-		sh 'xs login -u XSA_DEV -p Welcome9 -o HANAExpress -s DEV'
-		//sh 'xs a'
-		
-		echo 'Deploy to XSA'
-		sh 'mkdir -p target'
-		
-		// Override with local registry
-		//sh 'npm config delete @sap:registry ; npm config set registry "https://hxe2.sfphcp.com:51033" ; npm config set strict-ssl false'
-		
-		// Use SAP and Public registry
-		sh 'npm config set @sap:registry "https://npm.sap.com/" ; npm config set registry "https://registry.npmjs.org/" ; npm config set strict-ssl true'
-	
-		sh 'cd db ; rm -rf node_modules ; npm install ; cd ..'
-		sh 'cd js ; rm -rf node_modules ; npm install ; cd ..'
-		sh 'cd web ; rm -rf node_modules ; npm install ; cd ..'
-	
-		// This doesn't seem to be producting an mtad.yaml file with proper path/s
-		//sh 'mta --build-target XSA --mtar target/mta_python-xsa.mtar build'
-		//sh 'unmta target/mta_python-xsa.mtar --fix-version'
-		// Include the mtad.yaml file in the project
-		//sh 'cp target/mta_python-xsa_mtar/META-INF/mtad.yaml .'
-		
-		//
-		//sh 'xs deploy target/mta_python-xsa.mtar --use-namespaces'
-		//sh 'xs deploy . --use-namespaces --no-namespaces-for-services'
-		//
-	//	sh 'xsa_re_cs xsuaa default mta-python-uaa'
-		//
-		//sh 'xs create-service hana hdi-shared hdi-container'
-		// Better, doesn't fail if already exists...
-	//	sh 'xsa_re_cs hana hdi-shared hdi-container'
-		//
-		//sh 'npm config set registry "https://hxe2.sfphcp.com:51033" ; npm config set strict-ssl false ; cd js ; npm install ; cd ..'
-		//sh 'xs app di-local-npm-registry --urls'
-		//sh 'npm config set registry https://hxe2.sfphcp.com:51033'
-		//sh 'xs push XSA_DEV-klqh96msgfjiijux-mta_python-js -p js'
-		//sh 'xs bind-service XSA_DEV-klqh96msgfjiijux-mta_python-js XSA_DEV-klqh96msgfjiijux-mta_python-hdi-container'
-		//sh 'xs restart XSA_DEV-klqh96msgfjiijux-mta_python-js'
-		//sh 'xs env XSA_DEV-klqh96msgfjiijux-mta_python-js'
-		//
-		//sh 'xs push XSA_DEV-klqh96msgfjiijux-mta_python-python -p python -b sap_python_buildpack -c "python hello.py"'
-		//sh 'xs push XSA_DEV-klqh96msgfjiijux-mta_python-python -p python -b sap_python_buildpack"'
-		//sh 'xs bind-service XSA_DEV-klqh96msgfjiijux-mta_python-python XSA_DEV-klqh96msgfjiijux-mta_python-hdi-container'
-		//sh 'xs restart XSA_DEV-klqh96msgfjiijux-mta_python-python'
-		//sh 'xs env XSA_DEV-klqh96msgfjiijux-mta_python-python'
-		//
-		// Could dynamically figure out the the python module's url is and then set-env the destination var of the web module to match
-	}    
-	
-    stage('UnDeploy') {
-		echo 'UnDeploying.....'
-		sh 'xsa_undeploy mta_python'
+@Library('piper-library-os') _
+node() {
+    stage('prepare') {
+        checkout scm
+        setupCommonPipelineEnvironment script:this configFile: configXSA.yml
     }
-    
-    stage('Deploy') {
-		echo 'Deploying.....'
-		sh 'xs deploy . --use-namespaces --delete-services'
+    stage('Build') {
+        mtaBuild script: this
     }
-    
-    stage('Notify') {
-		mail to: 'andrew.lunde@sap.com', from: 'andrew.lunde@sap.com', 
-		subject: "XS-A on-prem Build is ready! Job ${env.JOB_NAME} (${env.BUILD_NUMBER})", 
-		body: "The mta_python app has been rebuilt. $JOB_URL \n\n AppRouter = https://hxe2.sfphcp.com:51127"
+    stage('deploy') {
+        cloudFoundryDeploy script: this
+        mailSendNotification script: this
     }
-
 }
