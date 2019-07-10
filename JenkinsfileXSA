@@ -5,7 +5,7 @@
 node {
 	stage('Pull') {
 	    // cleanWs()
-		git credentialsId: 'i830671', url: 'git@hxe2.sfphcp.com:BYOL/Python/mta_python.git'
+		git credentialsId: 'GITHUBALUNDESAP', url: 'https://github.com/alundesap/conciletime.git'
 	}
 	
 	stage('Prep') {
