@@ -6,7 +6,7 @@ steps:
   setupCommonPipelineEnvironment:
     collectTelemetryData: true
   mtaBuild:
-    buildTarget: 'XSA'
+    buildTarget: 'CF'
     defaultNpmRegistry: 'https://registry.npmjs.org/'
   dockerExecute:
     XSA:
