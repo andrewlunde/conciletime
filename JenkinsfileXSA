@@ -13,8 +13,12 @@ node() {
           sh "xs api https://api.parvus.lcfx.net:443 --skip-ssl-validation"
           sh "xs l -u XSA_ADMIN -p Plak8484 -o lcfx -s DEV"
           sh "xs a"
-          sh "xs deploy -h"
-          sh "exit 0"
+          sh "xs deploy -h  mtarFileName"
+          sh "ENVVAR=XXX123"
+          sh "echo ${PATH}"
+          sh "echo ${ENVVAR}"
+          sh "echo commonPipelineEnvironment.configuration.general.gitSshKeyCredentialsId"
+          sh "echo ${commonPipelineEnvironment.configuration.general.gitSshKeyCredentialsId}"
         }
         mailSendNotification script: this
     }
