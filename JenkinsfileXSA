@@ -14,9 +14,7 @@ node() {
           sh "xs l -u XSA_ADMIN -p Plak8484 -o lcfx -s DEV"
           sh "xs a"
           sh "echo 'mtarFileName'"
-          sh "ENVVAR=XXX123"
           sh "echo ${PATH}"
-          sh "echo ${ENVVAR}"
           sh "echo commonPipelineEnvironment.configuration.general.gitSshKeyCredentialsId"
           sh "echo ${commonPipelineEnvironment.configuration.general.gitSshKeyCredentialsId}"
         }
