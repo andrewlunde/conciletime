@@ -14,7 +14,7 @@ node() {
           sh "echo ${PATH}"
           sh "echo ${commonPipelineEnvironment.configuration.steps.dockerExecute.XSA.space}"
           sh "echo Generated archive /var/jenkins_home/workspace/ConcileTimeXSA/conciletime.mtar"
-          sh "xs deploy ${commonPipelineEnvironment.mtarFileName}"
+          sh "echo commonPipelineEnvironment.getMtarFilePath()"
         }
         mailSendNotification script: this
     }
