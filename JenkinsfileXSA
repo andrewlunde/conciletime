@@ -14,7 +14,7 @@ node() {
           sh "xs l -u XSA_ADMIN -p Plak8484 -o lcfx -s DEV"
           sh "xs a"
           sh "xs deploy -h"
-          sh "exit 1"
+          sh "exit 0"
         }
         mailSendNotification script: this
     }
