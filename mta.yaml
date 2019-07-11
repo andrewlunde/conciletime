@@ -7,31 +7,40 @@ modules:
     type: hdb
     path: db
     parameters:
+      app-name: conciletime-db
       memory: 256M
       disk-quota: 256M
+      host: conciletime-db
     requires:
-      - name: conciletime-db-hdi-container
+      - name: conciletime-hdb
   - name: conciletime-srv
     type: nodejs
     path: srv
     parameters:
+      app-name: conciletime-srv
       memory: 512M
       disk-quota: 256M
+      host: conciletime-srv
     provides:
       - name: srv_api
         properties:
           url: ${default-url}
     requires:
-      - name: conciletime-db-hdi-container
+      - name: conciletime-hdb
       - name: conciletime-uaa
 resources:
-  - name: conciletime-db-hdi-container
+  - name: conciletime-hdb
     type: com.sap.xs.hdi-container
+    parameters:
+      service-name: CONCILETIME_V0
+      config:
+        schema: CONCILETIME_V0_DEV
     properties:
       hdi-container-name: ${service-name}
   - name: conciletime-uaa
     type: org.cloudfoundry.managed-service
     parameters:
+      service-name: CONCILETIME_UAA
       service-plan: default
       service: xsuaa
       config:
