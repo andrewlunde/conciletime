@@ -9,7 +9,11 @@ node() {
     }
     stage('deploy') {
         dockerExecute(dockerImage: 'alunde/xsa-cli') {
-          sh "xs -v"
+          sh "xs api"
+          sh "xs api https://api.parvus.lcfx.net:443 --skip-ssl-validation"
+          sh "xs l -u XSA_ADMIN -p Plak8484 -o lcfx -s DEV"
+          sh "xs a"
+          exit 1
         }
         mailSendNotification script: this
     }
