@@ -12,7 +12,7 @@ modules:
      app-name: concile_srv_v0
      
 resources:
- - name: conciletime-db-hdi-container
+ - name: conciletime-hdb
    parameters:
      service-name: CONCILE_HDB
      config:
