@@ -16,6 +16,18 @@ steps:
       credentialsId: 'CF_CREDENTIALSID'
       dockerImage: 'alunde/xsa-cli'
       dockerWorkspace: '/home/jenkins/piper'
+  xsDeploy:
+    credentialsId: 'XS_CREDENTIALSID'
+    #docker:
+    #  dockerImage: ''
+    #  dockerPullImage: false
+    mode: 'NONE'  #[DEPLOY]/BG_DEPLOY/NONE
+    action: 'NONE'  #[NONE]/RESUME/ABORT/RETRY
+    #xsSessionFile: '.xsconfig'  
+    #mtaPath: 'path/to/archiveFile.mtar'
+    apiUrl: 'https://api.parvus.lcfx.net'
+    space: 'DEV'
+    org: 'lcfx'
   mailSendNotifiction:
     notificationAttachment: true
     notificationRecipients: 'andrew.lunde@sap.com'
