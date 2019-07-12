@@ -18,9 +18,9 @@ steps:
       dockerWorkspace: '/home/jenkins/piper'
   xsDeploy:
     credentialsId: 'XS_CREDENTIALSID'
-    #docker:
-    #  dockerImage: ''
-    #  dockerPullImage: false
+    docker:
+      dockerImage: 'alunde/xsa-cli'
+      dockerPullImage: true
     mode: 'DEPLOY'  #[DEPLOY]/BG_DEPLOY/NONE
     action: 'NONE'  #[NONE]/RESUME/ABORT/RETRY
     #xsSessionFile: '.xsconfig'  
