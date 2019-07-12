@@ -23,10 +23,10 @@ steps:
       dockerPullImage: true
     mode: 'DEPLOY'  #[DEPLOY]/BG_DEPLOY/NONE
     action: 'NONE'  #[NONE]/RESUME/ABORT/RETRY
-    #xsSessionFile: '.xsconfig'  
-    #mtaPath: 'path/to/archiveFile.mtar'
-    apiUrl: 'https://api.parvus.lcfx.net:443/ --skip-ssl-validation'
-    space: 'DEV'
+    #apiUrl: 'https://api.parvus.lcfx.net:443/ --skip-ssl-validation'
+    #space: 'DEV'
+    apiUrl: 'https://api.parvus.lcfx.net:443/'
+    space: 'DEV --skip-ssl-validation'
     org: 'lcfx'
   mailSendNotifiction:
     notificationAttachment: true
