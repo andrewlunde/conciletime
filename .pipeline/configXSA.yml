@@ -32,3 +32,6 @@ steps:
     notificationAttachment: true
     notificationRecipients: 'andrew.lunde@sap.com'
     notifyCulprits: false
+  slackSendNotification:
+    credentialsId: 'SLACKSECRET'
+    channel: '#jenkins_builds'

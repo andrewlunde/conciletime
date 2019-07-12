@@ -9,6 +9,6 @@ node() {
     }
     stage('deploy') {
         xsDeploy script: this
-        mailSendNotification script: this
+        slackSendNotification script: this
     }
 }
