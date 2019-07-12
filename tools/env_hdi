@@ -24,7 +24,6 @@ echo "host:$host port:$port tenant:$tenant org:$org xsa_user:$xsa_user"
 xsorcf=$1
 container=$2
 version=$3
-space=$4
 echo "xsorcf:$xsorcf container:$container space:$space"
 echo ""
 #exit
@@ -34,11 +33,11 @@ doexport2=""
 if [ "$#" -eq 3 ]; then
   if [ $xsorcf = "xs" ]; then
     dowait=" --wait-indefinitely"
-    doexport1=" --export-json /dev/stdout 2>/dev/null | tail -n +5"
+    doexport1=" --export-json /dev/stdout 2>/dev/null | tail -n +5 > /dev/xscfenv.out"
     echo "XS cool."
   else
     if [ $xsorcf = "cf" ]; then
-      doexport1=" | tail -n +5 | head -n -11"
+      doexport1=" | tail -n +5 | head -n -11 > /dev/xscfenv.out"
       doexport2=" | head -n -1"
       echo "CF cool."
     else
@@ -58,31 +57,53 @@ if [ "$#" -eq 3 ]; then
 
   cmd=$xsorcf' target -o '$org' -s '$space
   echo $cmd
-  eval $cmd
+  #eval $cmd
 
   cmd=$xsorcf' service '$container_uc'_'$version_uc
   echo $cmd
-  if [ $do_run -eq 1 ]; then eval $cmd; fi
-  RESULT=$?
+  #if [ $do_run -eq 1 ]; then eval $cmd; fi
+  #RESULT=$?
 
-  echo 'HDI SERVICE RESULT:'$RESULT
+  #echo 'HDI SERVICE RESULT:'$RESULT
 
   echo ""
+#
 
-  cmd='HDI_SCHEMA=$('$xsorcf' env '$container_lc'_db_'$version_lc' '$doexport1' | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.schema'"'"$doexport2')'
+  cmd=$xsorcf' env '$container_lc'-db '$doexport1
+  echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo ""
+
+  cmd='HDI_SCHEMA=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.schema'"'"$doexport2')'
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   echo 'export HDI_SCHEMA='$HDI_SCHEMA
 
-  cmd='HDI_USER=$('$xsorcf' env '$container_lc'_db_'$version_lc' '$doexport1' | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.user'"'"$doexport2')'
+  cmd='HDI_USER=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.user'"'"$doexport2')'
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   echo 'export HDI_USER='$HDI_USER
 
-  cmd='HDI_PASS=$('$xsorcf' env '$container_lc'_db_'$version_lc' '$doexport1' | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.password'"'"$doexport2')'
+  cmd='HDI_PASS=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.password'"'"$doexport2')'
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   echo 'export HDI_PASS='$HDI_PASS
+
+  cmd='HDI_HOST=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.host'"'"$doexport2')'
+  #echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo 'export HDI_HOST='$HDI_HOST
+
+  cmd='HDI_PORT=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.port'"'"$doexport2')'
+  #echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo 'export HDI_PORT='$HDI_PORT
+  echo ""
+  echo 'echo $HDI_SCHEMA'
+  echo 'echo $HDI_USER'
+  echo 'echo $HDI_PASS'
+  echo 'echo $HDI_HOST'
+  echo 'echo $HDI_PORT'
 
   #exit 1
 
