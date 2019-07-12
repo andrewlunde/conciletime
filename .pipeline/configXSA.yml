@@ -25,7 +25,7 @@ steps:
     action: 'NONE'  #[NONE]/RESUME/ABORT/RETRY
     #xsSessionFile: '.xsconfig'  
     #mtaPath: 'path/to/archiveFile.mtar'
-    apiUrl: 'https://api.parvus.lcfx.net:443/'
+    apiUrl: 'https://api.parvus.lcfx.net:443/ --skip-ssl-validation'
     space: 'DEV'
     org: 'lcfx'
   mailSendNotifiction:
