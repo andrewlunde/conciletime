@@ -1,6 +1,6 @@
 PROCEDURE "collect_slice"( 
 	in in_entity_name nvarchar(32),
-	in in_justiction integer,
+	in in_justicion integer,
 	out ex_message NVARCHAR(255) )
    LANGUAGE SQLSCRIPT
    SQL SECURITY INVOKER
