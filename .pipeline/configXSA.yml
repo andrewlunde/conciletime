@@ -21,7 +21,7 @@ steps:
     #docker:
     #  dockerImage: ''
     #  dockerPullImage: false
-    mode: 'NONE'  #[DEPLOY]/BG_DEPLOY/NONE
+    mode: 'DEPLOY'  #[DEPLOY]/BG_DEPLOY/NONE
     action: 'NONE'  #[NONE]/RESUME/ABORT/RETRY
     #xsSessionFile: '.xsconfig'  
     #mtaPath: 'path/to/archiveFile.mtar'
