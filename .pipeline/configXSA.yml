@@ -23,11 +23,11 @@ steps:
       dockerPullImage: true
     mode: 'DEPLOY'  #[DEPLOY]/BG_DEPLOY/NONE
     action: 'NONE'  #[NONE]/RESUME/ABORT/RETRY
-    #apiUrl: 'https://api.parvus.lcfx.net:443/ --skip-ssl-validation'
-    #space: 'DEV'
     apiUrl: 'https://api.parvus.lcfx.net:443/'
-    space: 'DEV --skip-ssl-validation'
+    space: 'DEV'
     org: 'lcfx'
+    loginOpts: '--skip-ssl-validation'
+    deployOpts: ''
   mailSendNotifiction:
     notificationAttachment: true
     notificationRecipients: 'andrew.lunde@sap.com'
