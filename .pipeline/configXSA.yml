@@ -19,8 +19,9 @@ steps:
   xsDeploy:
     credentialsId: 'XS_CREDENTIALSID'
     docker:
-      dockerImage: 'alunde/xsa-cli'
-      dockerPullImage: true
+      #dockerImage: 'alunde/xsa-cli'
+      #dockerPullImage: true
+      dockerImage: 'ppiper/xs-cli'
     mode: 'DEPLOY'  #[DEPLOY]/BG_DEPLOY/NONE
     action: 'NONE'  #[NONE]/RESUME/ABORT/RETRY
     apiUrl: 'https://api.parvus.lcfx.net:443/'
