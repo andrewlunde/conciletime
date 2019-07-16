@@ -1,2 +1,8 @@
 general:
   extensionRepository: 'https://github.wdf.sap.corp/MA/cloud-s4-sdk-pipeline-extensions.git' # (1)
+steps:
+  setupCommonPipelineEnvironment:
+    collectTelemetryData: true
+  mtaBuild:
+    buildTarget: 'CF'
+    defaultNpmRegistry: 'https://registry.npmjs.org/'
