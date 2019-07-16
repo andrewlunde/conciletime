@@ -23,10 +23,14 @@
 general:
 
 ### Step-specific configuration
+# https://github.wdf.sap.corp/MA/cloud-s4-sdk-pipeline/blob/master/configuration.md#step-configuration
 steps:
-
+  mtaBuild:
+    buildTarget: 'CF'
+    defaultNpmRegistry: 'https://registry.npmjs.org/'
 
 ### Stage-specific configuration
+# https://github.wdf.sap.corp/MA/cloud-s4-sdk-pipeline/blob/master/configuration.md#stage-configuration
 stages:
 #  integrationTests:
 #    credentials:
