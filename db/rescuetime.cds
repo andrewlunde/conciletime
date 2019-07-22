@@ -9,10 +9,3 @@ entity Slices : cuid, managed, temporal {
   application   : String;
   document   : String;
 }
-
-define view SlicesDuration as SELECT from Slices {
-  ID,
-  validFrom as SliceTime,
-  application,
-  document
-}
