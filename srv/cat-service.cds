@@ -6,4 +6,6 @@ service CatalogService {
   entity Authors  @readonly as projection on my.Authors;
   entity Orders @insertonly as projection on my.Orders;
   entity Slices as projection on rt.Slices;
+  entity Slices_Duration @readonly as projection on rt.Slices_Duration;
+  
 }
