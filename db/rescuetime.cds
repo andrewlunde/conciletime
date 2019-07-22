@@ -9,3 +9,12 @@ entity Slices : cuid, managed, temporal {
   application   : String;
   document   : String;
 }
+
+@cds.persistence.exists
+entity Slices_Duration {
+  key ID : String(36); 
+  Application : String(5000);
+  Document : String(5000);
+  SliceTime : DateTime;
+  Duration : DateTime;
+}
