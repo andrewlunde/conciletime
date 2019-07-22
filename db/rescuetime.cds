@@ -16,5 +16,5 @@ entity Slices_Duration {
   Application : String(5000);
   Document : String(5000);
   SliceTime : DateTime;
-  Duration : DateTime;
+  Duration : Integer;
 }
