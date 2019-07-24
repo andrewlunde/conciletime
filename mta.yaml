@@ -28,6 +28,18 @@ modules:
     requires:
       - name: conciletime-hdb
       - name: conciletime-uaa
+  - name: web
+    type: html5
+    path: web
+    requires:
+     - name: conciletime-uaa
+     - name: srv_api
+       group: destinations
+       properties:
+         name: odata_be
+         url: ~{url}
+         forwardAuthToken: true
+      
 resources:
   - name: conciletime-hdb
     type: com.sap.xs.hdi-container
