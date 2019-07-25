@@ -20,7 +20,7 @@ modules:
       app-name: conciletime-srv
       memory: 512M
       disk-quota: 256M
-      host: conciletime
+      host: conciletime-srv
     provides:
       - name: srv_api
         properties:
@@ -31,6 +31,11 @@ modules:
   - name: web
     type: html5
     path: web
+    parameters:
+      app-name: conciletime-srv
+      memory: 512M
+      disk-quota: 256M
+      host: conciletime
     requires:
      - name: conciletime-uaa
      - name: srv_api
