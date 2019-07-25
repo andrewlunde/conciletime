@@ -34,3 +34,7 @@ In CF v1.6.49 node	10.15.3	cflinuxfs3           4
 
 [Build Job in Jenkins](http://jenkins.sap-a-team.com:8080/job/ConcileTime/)
 
+## Git Tags
+```
+git tag -a post00 -m "Naïve Sherpa : Meet The Naïve Sherpa"
+```
