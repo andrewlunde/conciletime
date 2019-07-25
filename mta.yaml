@@ -28,7 +28,7 @@ modules:
     requires:
       - name: conciletime-hdb
       - name: conciletime-uaa
-  - name: web
+  - name: conciletime-web
     type: html5
     path: web
     parameters:
