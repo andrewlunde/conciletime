@@ -13,8 +13,8 @@ steps:
     deployType: 'standard'
     cloudFoundry:
       apiEndpoint: 'https://api.cf.us10.hana.ondemand.com'
-      org: 'A-Team_ml'
-      space: 'ml'
+      org: 'ConcileTime'
+      space: 'dev'
       credentialsId: 'CF_CREDENTIALSID'
       dockerImage: 's4sdk/docker-cf-cli'
       dockerWorkspace: '/home/jenkins/piper'
