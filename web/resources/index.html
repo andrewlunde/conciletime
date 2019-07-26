@@ -11,7 +11,12 @@
 <!-- <a href="https://hanaexpress-sap-di-local-npm-registry.us.sap-a-team.com/%40sap%2Fxsenv">Query Local NPM Registry</a><br /> -->
 <a href="catalog">ODATA Catalog</a> Provided by the srv module.<br />
 <a href=catalog/metadata>catalog/$metadata</a> Provided by the srv module, Metadata.<br />
-<iframe width="800" height="1600" src="https://qtrial2019q2az1.az1.qualtrics.com/jfe/form/SV_3WTHBnmyjnxXHgN" frameborder="0" allowfullscreen></iframe>
+<iframe width="800" height="1200" src="https://qtrial2019q2az1.az1.qualtrics.com/jfe/form/SV_3WTHBnmyjnxXHgN" frameborder="0" allowfullscreen></iframe>
+<p>Certificate Warnings:</p><br />
+<p>If your browser is giving you certificate warnings, you may install the following certificates in your system.</p>
+<a href="conciletime_ca.pem.zip">ConcileTime CA Cert</a> should be installed in your trusted certificate authority store and marked as trusted."<br />
+<a href="conciletime_int.pem.zip">ConcileTime Intermediate Cert</a> should be installed in your intermediate certificate store."<br />
+<br />
 <p>Authorization troubleshooting hint:</p><br />
 <p>Browse to this URL and inspect the authorities to confirm the user has the expected roles.</p>
 <p>api=$(xs api | grep endpoint | tr -s ' ' | cut -d ' ' -f 3) ; apiinfo=$(echo -n $api"/v2/info") ; echo $apiinfo ; uaa=$(curl -k -s $apiinfo | tr "," "\n" | grep authorizationEndpoint | cut -d '"' -f 4) ; cnfwho=$(echo -n $uaa"/config?action=who") ; echo $cnfwho</p>
