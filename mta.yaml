@@ -44,6 +44,9 @@ modules:
          name: odata_be
          url: ~{url}
          forwardAuthToken: true
+    properties:
+      #TENANT_HOST_PATTERN: '^(.*).cfapps.(.*).hana.ondemand.com'
+      TENANT_HOST_PATTERN: '^(.*).conciletime.com'
       
 resources:
   - name: conciletime-hdb

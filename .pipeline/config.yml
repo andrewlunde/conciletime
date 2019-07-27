@@ -19,7 +19,7 @@ steps:
       dockerImage: 's4sdk/docker-cf-cli'
       dockerWorkspace: '/home/jenkins/piper'
     mtaDeployParameters: '-f -e mta_to_cf.mtaext'
-    postDeployCommand: 'map-route concile_web_v0 conciletime.com --hostname www'
+    postDeployCommand: 'map-route concile_web_v0 conciletime.com --hostname conciletime'
   xsaDeploy:
     XSA:
       apiEndpoint: 'https://api.parvus.lcfx.net'
