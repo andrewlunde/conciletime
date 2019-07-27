@@ -19,6 +19,14 @@ steps:
       dockerImage: 's4sdk/docker-cf-cli'
       dockerWorkspace: '/home/jenkins/piper'
     mtaDeployParameters: '-f -e mta_to_cf.mtaext'
+  dockerExecute:
+    cloudFoundry:
+      apiEndpoint: 'https://api.cf.us10.hana.ondemand.com'
+      org: 'ConcileTime'
+      space: 'dev'
+      credentialsId: 'CF_CREDENTIALSID'
+      dockerImage: 's4sdk/docker-cf-cli'
+      dockerWorkspace: '/home/jenkins/piper'
   xsaDeploy:
     XSA:
       apiEndpoint: 'https://api.parvus.lcfx.net'
