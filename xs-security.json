@@ -1,5 +1,6 @@
 {
 	"xsappname": "ConcileTime",
+	"tenant-mode": "shared",
 	"description": "Business App that helps to (re)Concile Time.",
 	"scopes": [
 		{
