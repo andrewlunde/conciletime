@@ -1,6 +1,6 @@
 #!/bin/bash
-org="lcfx"
-space="DEV"
+org="ConcileTime"
+space="dev"
 tenant="HXE"
 host="parvus.lcfx.net"
 port="30015"

@@ -2,7 +2,8 @@
 do_run=1 # Execute(evaluate) the commands
 #do_run=0 # Don't evaluate any commands
 #
-MY_DIR=$(dirname $(readlink -f $0))
+#MY_DIR=$(dirname $(readlink -f $0))
+MY_DIR="/Users/i830671/git/conciletime/tools"
 . $MY_DIR/common.sh
 #echo $?
 if [ $? -eq 1 ]; then
@@ -27,18 +28,19 @@ version=$3
 echo "xsorcf:$xsorcf container:$container space:$space"
 echo ""
 #exit
+tmpfile="/tmp/xscfenv.out"
 dowait=""
 doexport1=""
 doexport2=""
 if [ "$#" -eq 3 ]; then
   if [ $xsorcf = "xs" ]; then
     dowait=" --wait-indefinitely"
-    doexport1=" --export-json /dev/stdout 2>/dev/null | tail -n +5 > /dev/xscfenv.out"
+    doexport1=" --export-json /dev/stdout 2>/dev/null | tail -n +5 > $tmpfile"
     echo "XS cool."
   else
     if [ $xsorcf = "cf" ]; then
-      doexport1=" | tail -n +5 | head -n -11 > /dev/xscfenv.out"
-      doexport2=" | head -n -1"
+      doexport1=" | tail -n +5 | tail -r | tail -n +10 | tail -r > $tmpfile"
+      doexport2=" | tail -r | tail -n +1 | tail -r"
       echo "CF cool."
     else
       echo "Not XS or CF, try again."
@@ -69,41 +71,56 @@ if [ "$#" -eq 3 ]; then
   echo ""
 #
 
-  cmd=$xsorcf' env '$container_lc'-db '$doexport1
+  cmd=$xsorcf' env '$container_lc'_db_'$version_lc' '$doexport1
   echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   echo ""
+  
+  lineNum=$(grep -n VCAP_APPLICATION /tmp/xscfenv.out | head -n 1 | cut -d: -f1)
+  
+  #head -n $[$lineNum - 3] /tmp/xscfenv.out
 
-  cmd='HDI_SCHEMA=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.schema'"'"$doexport2')'
+  lineNum=$[$lineNum - 3]
+    
+  #echo "lineNum="$lineNum
+
+  cmd='HDI_SCHEMA=$(head -n '$lineNum' '$tmpfile' | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.schema'"'"$doexport2')'
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   echo 'export HDI_SCHEMA='$HDI_SCHEMA
 
-  cmd='HDI_USER=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.user'"'"$doexport2')'
+  cmd='HDI_USER=$(head -n '$lineNum' '$tmpfile' | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.user'"'"$doexport2')'
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   echo 'export HDI_USER='$HDI_USER
 
-  cmd='HDI_PASS=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.password'"'"$doexport2')'
+  cmd='HDI_PASS=$(head -n '$lineNum' '$tmpfile' | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.password'"'"$doexport2')'
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   echo 'export HDI_PASS='$HDI_PASS
 
-  cmd='HDI_HOST=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.host'"'"$doexport2')'
+  cmd='HDI_HOST=$(head -n '$lineNum' '$tmpfile' | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.host'"'"$doexport2')'
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   echo 'export HDI_HOST='$HDI_HOST
 
-  cmd='HDI_PORT=$(cat /dev/xscfenv.out | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.port'"'"$doexport2')'
+  cmd='HDI_PORT=$(head -n '$lineNum' '$tmpfile' | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.port'"'"$doexport2')'
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   echo 'export HDI_PORT='$HDI_PORT
+  
+  cmd='HDI_CERT=$(head -n '$lineNum' '$tmpfile' | jq -r '"'"'.VCAP_SERVICES.hana[0].credentials.certificate'"'"$doexport2')'
+  #echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo 'export HDI_CERT="'$HDI_CERT'"'
+  
   echo ""
   echo 'echo $HDI_SCHEMA'
   echo 'echo $HDI_USER'
   echo 'echo $HDI_PASS'
   echo 'echo $HDI_HOST'
   echo 'echo $HDI_PORT'
+  echo 'echo $HDI_CERT'
 
   #exit 1
 
