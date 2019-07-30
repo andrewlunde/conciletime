@@ -6,10 +6,7 @@
 		"redirect-uris":
 		[
 		       "https://conciletime.conciletime.com",
-		       "https://conciletime.conciletime.com/login/callback",
-		       "https://conciletime.conciletime.com/catalog/$metadata",
-		       "https://www.conciletime.com",
-		       "https://www.conciletime.com/login/callback"
+		       "https://conciletime.conciletime.com/login/callback"
 		]   
 	},
 	"scopes": [
