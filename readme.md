@@ -43,3 +43,31 @@ git push origin --tags
 
 ## Fix Jenkinsfile
 [dockerExecute](https://sap.github.io/jenkins-library/steps/dockerExecute/)
+
+
+## Set up ConcileTime for Subscriptions
+Determine the Internal app name.
+```
+cf env concile_utl_v0 | grep -A 30 '"xsuaa":' | grep xsappname
+```
+Adjust the registry-config.json file.
+```
+vi registry-config.json
+```
+Create the saas-registry service instance and bind the module that serves the /callback/v1.0/tenants endpoint to it. 
+```
+cf cs saas-registry application conciltime-registry -c registry-config.json
+cf bs concile_utl_v0 conciltime-registry
+cf restage concile_utl_v0
+```
+Note, once you have subscribers, you won't be able to undeploy the app with --delete-services.
+Make sure to unsubscribe all subscribers before undeploying.
+
+You can however undeploy without deleting services and the UAA and HDI will remain.
+```
+cf undeploy conciletime -f
+```
+
+However, if the subsciber tries to go the the application, it will give this error.
+404 Not Found: Requested route ('ct-sub0.conciletime.com') does not exist.
+

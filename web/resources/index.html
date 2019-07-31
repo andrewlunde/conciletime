@@ -14,15 +14,6 @@
 <a href=https://conciletime.conciletime.com/catalog/$metadata>catalog/$metadata</a> Provided by the srv module, Metadata.(conciletime.com)<br />
 <a href=https://conciletime.cfapps.us10.hana.ondemand.com/catalog/$metadata>catalog/$metadata</a> Provided by the srv module, Metadata.(cfapps.us10.hana.ondemand.com)<br />
 <iframe width="800" height="940" src="https://qtrial2019q2az1.az1.qualtrics.com/jfe/form/SV_3WTHBnmyjnxXHgN" frameborder="0" allowfullscreen></iframe>
-<p>Certificate Warnings:</p><br />
-<p>If your browser is giving you certificate warnings, you may install the following certificates in your system.</p>
-<a href="conciletime_ca.pem.zip">ConcileTime CA Cert</a> should be installed in your trusted certificate authority store and marked as trusted.<br />
-<a href="conciletime_int.pem.zip">ConcileTime Intermediate Cert</a> should be installed in your intermediate certificate store.<br />
-<p>Once the certificates are installed on your system, browsing to <strong><a href="https://www.conciletime.com">ConcileTime</a></strong> should no longer trigger browser warnings.<br />
-<br />
-<p>Authorization troubleshooting hint:</p><br />
-<p>Browse to this URL and inspect the authorities to confirm the user has the expected roles.</p>
-<p>api=$(xs api | grep endpoint | tr -s ' ' | cut -d ' ' -f 3) ; apiinfo=$(echo -n $api"/v2/info") ; echo $apiinfo ; uaa=$(curl -k -s $apiinfo | tr "," "\n" | grep authorizationEndpoint | cut -d '"' -f 4) ; cnfwho=$(echo -n $uaa"/config?action=who") ; echo $cnfwho</p>
 
 </body>
 </html>
