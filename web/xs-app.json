@@ -12,13 +12,13 @@
       "source": "(login/)(.*)",
       "destination": "util_be",
       "csrfProtection": true,
-      "authenticationType": "xsuaa"
+      "authenticationType": "none"
     },
     {
       "source": "(callback/)(.*)",
       "destination": "util_be",
       "csrfProtection": true,
-      "authenticationType": "xsuaa"
+      "authenticationType": "none"
     },
    {
       "localDir": "resources",
