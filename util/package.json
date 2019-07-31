@@ -1,0 +1,16 @@
+{
+  "dependencies": {},
+  "description": "Utility Module for  Callback and Logon Routines",
+  "devDependencies": {
+  },
+  "files": [],
+  "main": "server.js",
+  "name": "util",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "version": "1.0.0"
+}

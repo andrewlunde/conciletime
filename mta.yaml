@@ -28,6 +28,20 @@ modules:
     requires:
       - name: conciletime-hdb
       - name: conciletime-uaa
+  - name: conciletime-utl
+    type: nodejs
+    path: util
+    parameters:
+      app-name: conciletime-utl
+      memory: 512M
+      disk-quota: 256M
+      host: conciletime-utl
+    provides:
+      - name: util_api
+        properties:
+          url: ${default-url}
+    requires:
+      - name: conciletime-uaa
   - name: conciletime-web
     type: html5
     path: web
@@ -44,10 +58,17 @@ modules:
          name: odata_be
          url: ~{url}
          forwardAuthToken: true
+     - name: util_api
+       group: destinations
+       properties:
+         name: util_be
+         url: ~{url}
+         forwardAuthToken: true
     properties:
       #TENANT_HOST_PATTERN: '^(.*).cfapps.(.*).hana.ondemand.com'
       TENANT_HOST_PATTERN: '^(.*).conciletime.com'
       
+
 resources:
   - name: conciletime-hdb
     type: com.sap.xs.hdi-container

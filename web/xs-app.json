@@ -9,6 +9,18 @@
       "authenticationType": "xsuaa"
     },
     {
+      "source": "(login/)(.*)",
+      "destination": "util_be",
+      "csrfProtection": true,
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "(callback/)(.*)",
+      "destination": "util_be",
+      "csrfProtection": true,
+      "authenticationType": "xsuaa"
+    },
+   {
       "localDir": "resources",
       "source": "^/(.*)",
       "authenticationType": "none"
