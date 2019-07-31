@@ -6,7 +6,8 @@
 		"express": "~4.16.0",
 		"passport": "^0.4.0",
 		"stringify-object": "latest",
-		"body-parser": "latest"
+	    "nodemon": "latest",
+	    "body-parser": "latest"
   },
   "description": "Utility Module for  Callback and Logon Routines",
   "devDependencies": {
@@ -15,7 +16,7 @@
   "main": "server.js",
   "name": "util",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "engines": {
     "node": "8.x"
