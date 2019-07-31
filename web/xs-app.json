@@ -20,7 +20,13 @@
       "csrfProtection": true,
       "authenticationType": "none"
     },
-   {
+    {
+      "source": "(app/)(.*)",
+      "destination": "app_be",
+      "csrfProtection": true,
+      "authenticationType": "xsuaa"
+    },
+    {
       "localDir": "resources",
       "source": "^/(.*)",
       "authenticationType": "none"

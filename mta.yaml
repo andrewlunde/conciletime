@@ -42,6 +42,18 @@ modules:
           url: ${default-url}
     requires:
       - name: conciletime-uaa
+  - name: conciletime-app
+    type: nodejs
+    path: app
+    parameters:
+      app-name: conciletime-app
+      memory: 512M
+      disk-quota: 256M
+      host: conciletime-app
+    provides:
+     - name: app_api
+       properties:
+          url: ${default-url}
   - name: conciletime-web
     type: html5
     path: web
@@ -64,10 +76,25 @@ modules:
          name: util_be
          url: ~{url}
          forwardAuthToken: true
+     - name: app_api
+       group: destinations
+       properties:
+         name: app_be
+         url: ~{url}
+         forwardAuthToken: true
     properties:
       #TENANT_HOST_PATTERN: '^(.*).cfapps.(.*).hana.ondemand.com'
       TENANT_HOST_PATTERN: '^(.*).conciletime.com'
       
+
+
+  - name: app
+    type: nodejs
+    path: app
+    provides:
+     - name: app_api
+       properties:
+          url: ${default-url}
 
 resources:
   - name: conciletime-hdb

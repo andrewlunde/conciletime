@@ -15,6 +15,10 @@ modules:
    parameters:
      app-name: concile_utl_v0
      
+ - name: conciletime-app
+   parameters:
+     app-name: concile_app_v0
+     
  - name: conciletime-web
    parameters:
      app-name: concile_web_v0
