@@ -28,9 +28,6 @@ resources:
       
  - name: conciletime-uaa
    parameters:
-     #path: xs-security.json
-     path: ./xs-security.json
-     
      service-name: CONCILE_UAA
      service-plan: application
      service: xsuaa
