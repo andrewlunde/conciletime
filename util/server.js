@@ -33,9 +33,9 @@ function mtMiddleware(req, res, next) {
 }
 
 
-//passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({uaa: {tag: "xsuaa"}}).uaa));
-//app.use(passport.initialize());
-//app.use(passport.authenticate("JWT", {session: false}));
+passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({uaa: {tag: "xsuaa"}}).uaa));
+app.use(passport.initialize());
+app.use(passport.authenticate("JWT", {session: false}));
 
 app.use(bodyParser.json());
 
@@ -57,7 +57,7 @@ app.get("/", function (req, res) {
 	});
 
 	var responseStr = "";
-	responseStr += "<!DOCTYPE HTML><html><head><title>MTApp</title></head><body><h1>MTApp</h1><h2>Welcome " + req.authInfo.userInfo.givenName + " " + req.authInfo.userInfo.familyName + "!</h2><p><b>Subdomain:</b> " + req.authInfo.subdomain + "</p><br />";
+	responseStr += "<!DOCTYPE HTML><html><head><title>ConcileTime</title></head><body><h1>ConcileTime</h1><h2>Welcome " + req.authInfo.userInfo.givenName + " " + req.authInfo.userInfo.familyName + "!</h2><p><b>Subdomain:</b> " + req.authInfo.subdomain + "</p><br />";
 	responseStr += "<a href=\"/get_xxx\">/get_xxx</a><br />";
 	var isAuthorized = req.authInfo.checkScope(req.authInfo.xsappname + '.create');
 	if (isAuthorized) {
@@ -67,17 +67,36 @@ app.get("/", function (req, res) {
 	res.status(200).send(responseStr);
 });
 
-app.get("/login/callback", function (req, res) {
+//subscribe/onboard a subscriber tenant
+app.get("/callback/v1.0/tenants/*", function (req, res) {
+	//var reqStr = stringifyObj(req, {
+	var reqStr = stringifyObj(req.authInfo.userInfo, {
+    indent: "   ",
+    singleQuotes: false
+});
+
+	reqStr += "\n\n";
+
+	reqStr += stringifyObj(req.authInfo.scopes, {
+    indent: "   ",
+    singleQuotes: false
+});
+
 	var responseStr = "";
-	responseStr += "<!DOCTYPE HTML><html><head><title>MTApp</title></head><body><h1>ConcileTime Util</h1> <h2>Welcome!</h2><br />";
-	responseStr += "<a href=\"/get_xxx\">/get_xxx</a><br />";
+	responseStr += "<!DOCTYPE HTML><html><head><title>ConcileTime</title></head><body><h1>ConcileTime</h1><h2>Welcome " + req.authInfo.userInfo.givenName + " " + req.authInfo.userInfo.familyName + "!</h2><p><b>Subdomain:</b> " + req.authInfo.subdomain + "</p><br />";
+	responseStr += "Tenant callback endpoint only allows PUT and DELETE methods.<br />";
+	var isAuthorized = req.authInfo.checkScope(req.authInfo.xsappname + '.create');
+	if (isAuthorized) {
+		responseStr += "<a href=\"/add_legal_entity\">/add_legal_entity</a><br />";
+	}
+	responseStr += "<p><b>Identity Zone:</b> " + req.authInfo.identityZone + "</p><p><b>Origin:</b> " + req.authInfo.origin + "</p>" + "<br /><br /><pre>" + reqStr + "</pre>" + "</body></html>";
 	res.status(200).send(responseStr);
 });
 
 
 // subscribe/onboard a subscriber tenant
 app.put("/callback/v1.0/tenants/*", function (req, res) {
-	var tenantAppURL = "https:\/\/" + req.body.subscribedSubdomain + "-ar" + ".cfapps.us10.hana.ondemand.com";
+	var tenantAppURL = "https:\/\/" + req.body.subscribedSubdomain + ".conciletime.com";
 	res.status(200).send(tenantAppURL);
 });
 
