@@ -1,5 +1,13 @@
 {
-  "dependencies": {},
+  "dependencies": {
+		"@sap/xsenv": "latest",
+		"@sap/xssec": "latest",
+		"@sap/hdbext": "latest",
+		"express": "~4.16.0",
+		"passport": "^0.4.0",
+		"stringify-object": "latest",
+		"body-parser": "latest"
+  },
   "description": "Utility Module for  Callback and Logon Routines",
   "devDependencies": {
   },
