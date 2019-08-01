@@ -86,16 +86,6 @@ modules:
       #TENANT_HOST_PATTERN: '^(.*).cfapps.(.*).hana.ondemand.com'
       TENANT_HOST_PATTERN: '^(.*).conciletime.com'
       
-
-
-  - name: app
-    type: nodejs
-    path: app
-    provides:
-     - name: app_api
-       properties:
-          url: ${default-url}
-
 resources:
   - name: conciletime-hdb
     type: com.sap.xs.hdi-container
