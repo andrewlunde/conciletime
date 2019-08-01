@@ -10,10 +10,15 @@ Welcome to ConcileTime.
 
 File / Folder | Purpose
 ---------|----------
-`srv/` | models and code
+`.pipleline/` | Piper configuration
+`app/` | main application code
 `db/` | database content
+`domain/` | custom domain artifacts
+`files/` | docs and the like
+`srv/` | models and code
 `tools/` | command line tools
-`web/` | front-end UI
+`util/` | multitenant subscribe/unsubscribe code
+`web/` | front-end UI(lame) and static content
 `package.json` | project metadata and configuration
 `readme.md` | this readme
 
@@ -37,6 +42,7 @@ In CF v1.6.49 node	10.15.3	cflinuxfs3           4
 ## Git Tags
 ```
 git tag -a post00 -m "Naïve Sherpa : Meet The Naïve Sherpa"
+git tag -a post01 -m "Naïve Sherpa : The Journey"
 
 git push origin --tags
 ```
