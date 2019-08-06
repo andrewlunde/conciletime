@@ -105,3 +105,11 @@ resources:
       config:
         xsappname: conciletime-${space}
         tenant-mode: dedicated
+  - name: conciletime-log
+    type: application-logs
+    parameters:
+      service-name: CONCILETIME_LOG
+      service-plan: lite
+      service: application-logs
+    
+    
