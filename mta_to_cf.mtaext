@@ -41,7 +41,7 @@ resources:
        tenant-mode: shared
  - name: conciletime-log
    parameters:
-     service-name: CONCILETIME_LOG
+     service-name: CONCILE_LOG
      service-plan: standard
      service: application-logs
          

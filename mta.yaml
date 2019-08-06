@@ -54,6 +54,8 @@ modules:
      - name: app_api
        properties:
           url: ${default-url}
+    requires:
+      - name: conciletime-uaa
   - name: conciletime-web
     type: html5
     path: web
@@ -64,6 +66,7 @@ modules:
       host: conciletime
     requires:
      - name: conciletime-uaa
+     - name: conciletime-log
      - name: srv_api
        group: destinations
        properties:
