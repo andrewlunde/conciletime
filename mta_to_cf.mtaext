@@ -39,4 +39,9 @@ resources:
      config:
        xsappname: conciletime
        tenant-mode: shared
+ - name: conciletime-log
+   parameters:
+     service-name: CONCILETIME_LOG
+     service-plan: standard
+     service: application-logs
          
