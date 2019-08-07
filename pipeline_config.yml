@@ -23,7 +23,7 @@
 general:
   productiveBranch: 'master'
   collectTelemetryData: false
-  automaticVersioning: true
+  automaticVersioning: true 
 
 ### Step-specific configuration
 steps:
