@@ -23,7 +23,7 @@
 general:
   productiveBranch: 'master'
   collectTelemetryData: false
-  automaticVersioning: true 
+  automaticVersioning: true
 
 ### Step-specific configuration
 steps:
@@ -40,11 +40,13 @@ stages:
 #    nonErpDestinations:
 #      - 'myCustomDestination'
 
-#  productionDeployment:
-#    cfTargets:
-#      - org: 'myOrg'
-#        space: 'mySpace'
-#        apiEndpoint: 'https://'
-#        appName: 'myAppName'
-#        manifest: 'manifest.yml'
-#        credentialsId: 'myDeploymentCredentialsId'
+  productionDeployment:
+    appUrls:
+     - url: '*.conciletime.com'
+       credentialId: 'ALUNDESAP'
+    cfTargets:
+      - org: 'ConcileTime'
+        space: 'dev'
+        apiEndpoint: 'https://api.cf.us10.hana.ondemand.com'
+        credentialsId: 'ALUNDESAP'
+        mtaExtensionDescriptor: 'mta_to_cf.mtaext'
