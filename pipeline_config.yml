@@ -22,6 +22,7 @@
 ### General project setup
 general:
   productiveBranch: 'master'
+  projectName: 'conciletime'
   collectTelemetryData: false
   automaticVersioning: true
 
