@@ -43,6 +43,7 @@ In CF v1.6.49 node	10.15.3	cflinuxfs3           4
 ```
 git tag -a post00 -m "Naïve Sherpa : Meet The Naïve Sherpa"
 git tag -a post01 -m "Naïve Sherpa : The Journey"
+git tag -a post02 -m "Naïve Sherpa : The Project"
 
 git push origin --tags
 ```
