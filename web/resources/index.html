@@ -30,6 +30,7 @@ function doOnLoad() {
 	if (uu) {
 		var expires = "";
 		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
+		sendVisit(uu, expires);
 	}
 	else {
 		console.log("No ConcileTimeUU Cookie");
@@ -39,8 +40,55 @@ function doOnLoad() {
 		var expires = (parts[2]).split("=")[1];
 		uu = (parts[0]).split("=")[1];
 		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
+		sendVisit(uu, expires);
 	}
 }
+
+var xhr = new XMLHttpRequest();
+
+function dumpResponseHeaders(xhr_obj) {
+    var hdr_out = "";
+    hdr_out += "Response Headers\n";
+    hdr_out += "\n";
+    var headers = xhr_obj.getAllResponseHeaders();
+    return (hdr_out + headers + "\n");
+}
+
+var request_obj = 
+{
+	"ID": "",
+	"UUGUID": "",
+	"EXPIRES": ""
+};
+
+function sendVisit(uu, expires)
+{
+
+		request_obj = 
+		{
+			"ID": guid(),
+			"UUGUID": uu,
+			"EXPIRES": expires
+	   	};
+	
+		xhr = new XMLHttpRequest();
+		xhr.open('POST', 'catalog/Visits');
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.setRequestHeader('Accept', 'application/json');
+
+		xhr.onload = function() {
+		    if (xhr.status === 201) {
+		        document.getElementById("response_content").innerHTML = "<pre>\n" + dumpResponseHeaders(xhr) + "Response Body: \n" + JSON.stringify(JSON.parse(xhr.responseText), null, 2) + "</pre>\n";
+		    }
+		    else {
+		        alert("Yipe!  Got status " + xhr.status + " : " + xhr.statusText + " ::\n " + JSON.parse(xhr.responseText).error.message.value + " \n:: expected 201.");
+		    }
+		};
+
+		xhr.send(JSON.stringify(request_obj));
+
+}
+
 </script>
 </head>
 <body style="font-family: Tahoma, Geneva, sans-serif" onload="doOnLoad()">
@@ -53,5 +101,8 @@ function doOnLoad() {
 <a href=https://conciletime.cfapps.us10.hana.ondemand.com/catalog/$metadata>catalog/$metadata</a> Provided by the srv module, Metadata.(cfapps.us10.hana.ondemand.com)<br />
 <iframe width="800" height="940" src="https://qtrial2019q2az1.az1.qualtrics.com/jfe/form/SV_3WTHBnmyjnxXHgN" frameborder="0" allowfullscreen></iframe>
 <script id="CookieDeclaration" src="https://consent.cookiebot.com/23874da6-e198-4dc5-8909-594859d74c1d/cd.js" type="text/javascript" async></script>
+<div id="response_content">
+No results returned yet.    
+</div>
 </body>
 </html>
