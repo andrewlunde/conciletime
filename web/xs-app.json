@@ -3,10 +3,17 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "(catalog/)(.*)",
+      "source": "(catalog/Visits)(.*)",
       "destination": "odata_be",
       "csrfProtection": true,
-      "authenticationType": "xsuaa"
+      "httpMethods": ["GET", "POST"],
+      "authenticationType": "none"
+    },
+    {
+        "source": "(catalog/)(.*)",
+        "destination": "odata_be",
+        "csrfProtection": true,
+        "authenticationType": "xsuaa"
     },
     {
       "source": "(login/)(.*)",

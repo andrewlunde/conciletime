@@ -5,8 +5,45 @@
 <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
 <title>web</title>
 <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="23874da6-e198-4dc5-8909-594859d74c1d" type="text/javascript" async></script>
+/* https://github.com/js-cookie/js-cookie */
+<script src="/inc/jscookie.js"></script>
+<script type="text/javascript">
+function guid(len) {
+        var buf = [],
+            chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+            charlen = chars.length,
+            length = len || 32;
+            
+        for (var i = 0; i < length; i++) {
+            buf[i] = chars.charAt(Math.floor(Math.random() * charlen));
+        }
+        
+        return buf.join('');
+    }
+
+// console.log(guid());  
+// console.log(guid(15));
+</script>
+<script type="text/javascript">
+function doOnLoad() {
+	var uu = Cookies.get('ConcileTimeUU');	
+	if (uu) {
+		var expires = "";
+		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
+	}
+	else {
+		console.log("No ConcileTimeUU Cookie");
+		uu = Cookies.set('ConcileTimeUU', guid(), { expires: 365 });
+		console.log("ConcileTimeUU Cookie: " + uu);
+		var parts = uu.split(";")
+		var expires = (parts[2]).split("=")[1];
+		uu = (parts[0]).split("=")[1];
+		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
+	}
+}
+</script>
 </head>
-<body style="font-family: Tahoma, Geneva, sans-serif">
+<body style="font-family: Tahoma, Geneva, sans-serif" onload="doOnLoad()">
 <strong><a href="https://www.conciletime.com">ConcileTime</a></strong><br />
 <br />
 <!-- <a href="https://hanaexpress-sap-di-local-npm-registry.us.sap-a-team.com/%40sap%2Fxsenv">Query Local NPM Registry</a><br /> -->
