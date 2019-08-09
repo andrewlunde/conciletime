@@ -5,6 +5,8 @@ Welcome to ConcileTime.
 ## Blog Posts
 
 [00 Naïve Sherpa : Meet The Naïve Sherpa](https://blogs.sap.com/2019/07/22/00-naive-sherpa-meet-the-naive-sherpa/)
+[01 Naïve Sherpa : The Journey](https://blogs.sap.com/2019/08/02/01-naive-sherpa-the-journey/)
+[02 Naïve Sherpa : Project ConcileTime](https://blogs.sap.com/2019/08/07/02-naive-sherpa-project-conciletime/)
 
 ## Project Structure
 
@@ -20,7 +22,7 @@ File / Folder | Purpose
 `util/` | multitenant subscribe/unsubscribe code
 `web/` | front-end UI(lame) and static content
 `package.json` | project metadata and configuration
-`readme.md` | this readme
+`README.md` | this README
 
 
 ## More...
