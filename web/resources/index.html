@@ -8,21 +8,14 @@
 /* https://github.com/js-cookie/js-cookie */
 <script src="/inc/jscookie.js"></script>
 <script type="text/javascript">
-function guid(len) {
-        var buf = [],
-            chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
-            charlen = chars.length,
-            length = len || 32;
-            
-        for (var i = 0; i < length; i++) {
-            buf[i] = chars.charAt(Math.floor(Math.random() * charlen));
-        }
-        
-        return buf.join('');
+function guid() {
+    function _p8(s) {
+        var p = (Math.random().toString(16)+"000000000").substr(2,8);
+        return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
     }
-
+    return _p8() + _p8(true) + _p8(true) + _p8();
+}
 // console.log(guid());  
-// console.log(guid(15));
 </script>
 <script type="text/javascript">
 function doOnLoad() {
@@ -57,8 +50,9 @@ function dumpResponseHeaders(xhr_obj) {
 var request_obj = 
 {
 	"ID": "",
-	"UUGUID": "",
-	"EXPIRES": ""
+	"uuguid": "",
+	"expiresOn": "",
+	"createdAt": ""
 };
 
 function sendVisit(uu, expires)
@@ -67,8 +61,9 @@ function sendVisit(uu, expires)
 		request_obj = 
 		{
 			"ID": guid(),
-			"UUGUID": uu,
-			"EXPIRES": expires
+			"uuguid": uu,
+			"expiresOn": expires,
+			"createdAt": ""
 	   	};
 	
 		xhr = new XMLHttpRequest();

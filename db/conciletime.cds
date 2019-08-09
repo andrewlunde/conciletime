@@ -5,6 +5,7 @@ using { managed } from '@sap/cds/common';
 using { temporal } from '@sap/cds/common';
 
 entity UUVisits : cuid {
-  uuguid   : String;
-  expires   : String;
+  uuguid	: UUID;
+  expiresOn	: String;
+  createdAt	: DateTime @cds.on.insert: $now;
 }
