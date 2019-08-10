@@ -58,12 +58,20 @@ var request_obj =
 function sendVisit(uu, expires)
 {
 
+	//     "expiresOn": "Sat, 08 Aug 2020 22:01:20 GMT",
+    //      "createdAt": "2019-08-09T22:02:33Z"
+
+    	// var d = new Date(Date.parse('Sat, 08 Aug 2020 22:01:20 GMT'));
+
+		var d = new Date(Date.parse(expires));
+		var dISO = d.toISOString();
+	
 		request_obj = 
 		{
 			"ID": guid(),
 			"uuguid": uu,
-			"expiresOn": expires,
-			"createdAt": ""
+			"expiresOn": dISO
+			// Don't send createdAt, will use NOW()
 	   	};
 	
 		xhr = new XMLHttpRequest();
