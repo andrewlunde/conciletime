@@ -6,6 +6,6 @@ using { temporal } from '@sap/cds/common';
 
 entity UUVisits : cuid {
   uuguid	: UUID;
-  expiresOn	: String;
+  expiresOn	: DateTime;
   createdAt	: DateTime @cds.on.insert: $now;
 }
