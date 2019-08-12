@@ -21,7 +21,7 @@ function guid() {
 function doOnLoad() {
 	var uu = Cookies.get('ConcileTimeUU');	
 	if (uu) {
-		var expires = "";
+		var expires = "null";
 		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
 		sendVisit(uu, expires);
 	}
@@ -63,8 +63,13 @@ function sendVisit(uu, expires)
 
     	// var d = new Date(Date.parse('Sat, 08 Aug 2020 22:01:20 GMT'));
 
-		var d = new Date(Date.parse(expires));
-		var dISO = d.toISOString();
+		var d = {};
+		var dISO = "null";
+		
+		if (expires != "null") {
+			d = new Date(Date.parse(expires));
+			dISO = d.toISOString();
+		}
 	
 		request_obj = 
 		{
