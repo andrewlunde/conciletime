@@ -16,30 +16,139 @@
 #
 # This is a YAML-file. YAML is a indentation-sensitive file format. Please make sure to properly indent changes to it.
 ###
-
-
-
-### General project setup
+# https://github.wdf.sap.corp/ConCISe/GettingStartedBookshop/blob/sk_gke/pipeline_config.yml
+        
+#Project Setup
 general:
-  productiveBranch: 'master'
-  projectName: 'conciletime'
-  collectTelemetryData: false
+  unsafeMode: true
   automaticVersioning: true
+  collectTelemetryData: false
+  projectName: 'conciletime'
+  productiveBranch: 'master'
+  extensionRepository: 'https://github.wdf.sap.corp/ConCISe/cloud-s4-sdk-pipeline-extensions.git'
+  jenkinsKubernetes:
+    jnlpAgent: 'build-milestones.docker.repositories.sapcdn.io/com.sap.concise.jenkins/jnlp-agent:0.8'
+    securityContext:
+      runAsUser: 1000
+      fsGroup: 1000
 
-### Step-specific configuration
+#Steps Specific Configuration
 steps:
+  artifactSetVersion:
+    commitVersion: false
+    timestampTemplate: '%Y%m%d%H%M%S'
+
+  mavenExecute:
+    dockerImage: 's4sdk/docker-maven-npm:latest'
+
+  executeNpm:
+    dockerImage: 's4sdk/docker-node-browsers:v15'
+  executeSourceClearScan:
+    dockerImage: 's4sdk/docker-maven-npm:latest'
+
+  cloudFoundryDeploy:
+    dockerImage: 'docker.wdf.sap.corp:51162/s4sdk/docker-cf-cli:latest'
+    mtaDeployParameters: '-f --version-rule ALL'
+
+  executeVulasScan:
+    vulasSpaceToken: '3C1CB977AD2AC2C2C75A064D56C9A411'
+
+  executeFortifyScan:
+    dockerImage: 'docker.wdf.sap.corp:50000/piper/fortify:latest'
+    verbose: true
+    maximumMemoryUsage: 8000M
+    additionalScanOptions: '-Dfortify.sca.Xss=8M'
+    projectSettingsFile: '/home/piper/.m2/settings.xml'
 
 
-### Stage-specific configuration
+#Stage Specific Configurations
 stages:
-#  integrationTests:
-#    credentials:
-#      - alias: 'mySystemAlias'
-#        credentialId: 'mySystemCredentialsId'
+  integrationTests:
+    createHdiContainer: true
+    cloudFoundry:
+      org: 'CLOUDCIDEV_cloudcidev'
+      space: 'D070410Test'
+      apiEndpoint: 'https://api.cf.sap.hana.ondemand.com'
+      credentialsId: 'integr_test_s4sdk_cf_deploy'
+    sidecarName: 'redis'
+    sidecarImage: 'redis'
+    sidecarReadyCommand: 'redis_start'
 
-#  s4SdkQualityChecks:
-#    nonErpDestinations:
-#      - 'myCustomDestination'
+  whitesourceScan:
+    product: 'SHC - CLOUD CI GETTINGSTARTEDBOOKSHOP'
+    whitesourceProductToken: 'af7c2a3cdccc408192538819d0e26753a1f826e2835b4d5f8bed65540453444c'
+    credentialsId: 'whiteSourceCredential'
+    whitesourceUserTokenCredentialsId: 'whiteSourceUserKey'
+    ppms:
+      ID: '73555000100200010552'
+      credentialsId: 'ppmsCheck'
+
+  fortifyScan:
+    environment: 'docker'
+    sscUrl: 'https://fortify.mo.sap.corp/ssc'
+    fortifyProjectName: 'sap-GettingStartedBookshop1'
+    projectVersionId: '22396'
+    fortifyCredentialId: 'fortifyCredential'
+    fortifyAuditStatusCheckTokenCredentialId: 'fortifyPiperToken1'
+
+  checkmarxScan:
+    groupId: '300c6c9f-d403-43bf-bbc8-9cca6cd285dc'
+    checkMarxProjectName: 'CLOUD CI GettingStartedBookShop'
+    checkmarxCredentialsId: 'checkmarxscan'
+    checkmarxServerUrl: 'https://cx.wdf.sap.corp:443'
+    preset: '100008'
+
+  additionalTools:
+    vulas:
+      enabled: true
+
+  npmAudit:
+    auditedAdvisories:
+      - 550
+      - 535
+      - 745
+      - 782
+      - 593
+      - 607
+      - 146
+      - 755
+      - 788
+      - 803
+      - 813
+      - 886
+      - 1065
+      - 1068
+      - 1070
+
+  s4SdkQualityChecks:
+    jacocoExcludes:
+      - '**/OrdersService.class'
+
+  lint:
+    ui5BestPractices:
+      failThreshold:
+        error: 100
+        warning: 500
+        info: 1000
+
+  endToEndTests:
+    cfTargets:
+      - org: 'CLOUDCIDEV_cloudcidev'
+#        space: 'cap-endToEndTests'
+#       As long as no hana-db is configured in cap-endToEndTests
+        space: 'D070410Test'
+        apiEndpoint: 'https://api.cf.sap.hana.ondemand.com'
+        credentialsId: 'e2e-tests-d070410'
+    appUrls:
+      - url: 'https://cloudcidev-cloudcidev-d070410test-app.cfapps.sap.hana.ondemand.com'
+        credentialId: 'integr_test_s4sdk_app_user'
+
+  performanceTests:
+    cfTargets:
+      - org: 'CLOUDCIDEV_cloudcidev'
+        space: 'cap-performanceTests'
+        apiEndpoint: 'https://api.cf.sap.hana.ondemand.com'
+        credentialsId: 'integr_test_s4sdk_cf_deploy'
 
   productionDeployment:
     appUrls:
@@ -48,6 +157,8 @@ stages:
     cfTargets:
       - org: 'ConcileTime'
         space: 'dev'
+        appName: 'ConcileTime'
         apiEndpoint: 'https://api.cf.us10.hana.ondemand.com'
         credentialsId: 'ALUNDESAP'
         mtaExtensionDescriptor: 'mta_to_cf.mtaext'
+                
