@@ -65,7 +65,7 @@ modules:
       disk-quota: 512M
       host: conciletime-jyp
     provides:
-     - name: juypter_api
+     - name: jupyter_api
        properties:
           url: ${default-url}
     requires:
