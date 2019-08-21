@@ -81,3 +81,9 @@ cf undeploy conciletime -f
 However, if the subsciber tries to go the the application, it will give this error.
 404 Not Found: Requested route ('ct-sub0.conciletime.com') does not exist.
 
+```
+cf push concile_db_v0 -k 1024M -m 256M --no-hostname -p db
+```
+
+Current CF Python version found here.
+https://github.com/cloudfoundry/python-buildpack/releases/tag/v1.6.34

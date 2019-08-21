@@ -56,6 +56,20 @@ modules:
           url: ${default-url}
     requires:
       - name: conciletime-uaa
+  - name: conciletime-jyp
+    type: python
+    path: juypter
+    parameters:
+      app-name: conciletime-jyp
+      memory: 1024M
+      disk-quota: 512M
+      host: conciletime-jyp
+    provides:
+     - name: juypter_api
+       properties:
+          url: ${default-url}
+    requires:
+      - name: conciletime-hdb
   - name: conciletime-web
     type: html5
     path: web
@@ -83,6 +97,12 @@ modules:
        group: destinations
        properties:
          name: app_be
+         url: ~{url}
+         forwardAuthToken: true
+     - name: jupyter_api
+       group: destinations
+       properties:
+         name: jupyter_be
          url: ~{url}
          forwardAuthToken: true
     properties:

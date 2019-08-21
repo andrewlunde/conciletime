@@ -18,6 +18,10 @@ modules:
  - name: conciletime-app
    parameters:
      app-name: concile_app_v0
+   
+ - name: conciletime-jyp
+   parameters:
+     app-name: concile_jyp_v0
      
  - name: conciletime-web
    parameters:
