@@ -63,7 +63,9 @@ modules:
       app-name: conciletime-jyp
       memory: 1024M
       disk-quota: 512M
-      host: conciletime-jyp
+      host: jupyter
+      domain: conciletime.com
+      health-check-type: none
     provides:
      - name: jupyter_api
        properties:
