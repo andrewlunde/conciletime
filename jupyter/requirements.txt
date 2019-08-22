@@ -5,4 +5,8 @@
 #sap_xssec
 #hdbcli
 #pydevd
+#
+cfenv
+sap-xssec
+hdbcli
 jupyter

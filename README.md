@@ -83,7 +83,7 @@ However, if the subsciber tries to go the the application, it will give this err
 
 ```
 cf push concile_db_v0 -k 1024M -m 256M --no-hostname -p db
-cf push concile_jyp_v0 -k 1024M -m 1024M -u none -n jupyter -d conciletime.com -p juypter
+cf push concile_jpy_v0 -k 1024M -m 1024M -u none -n jupyter -d conciletime.com -p jupyter
 ```
 
 Current CF Python version found here.

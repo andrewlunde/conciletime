@@ -66,6 +66,7 @@ modules:
       host: jupyter
       domain: conciletime.com
       health-check-type: http
+      health-check-http-endpoint: /jupyter
     provides:
      - name: jupyter_api
        properties:
