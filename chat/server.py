@@ -67,6 +67,7 @@ def hello_world():
     output = '<strong>Hello Chat! I am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0)) + '</strong> Try these links.</br>\n'
     output += '<a href="/env">/env</a><br />\n'
     output += '<a href="/chat/test">/chat/test</a><br />\n'
+    output += '<a href="/chat/client">/chat/client</a><br />\n'
     output += '<a href="/chat/db_only">/chat/db_only</a><br />\n'
     output += '<a href="/auth_chat/db_valid">/auth_chat/db_valid</a><br />\n'
     return output
@@ -90,10 +91,11 @@ def dump_env():
     return output
 
 # Coming through the app-router
-@app.route('/chat/links')
+@app.route('/chat')
 def python_links():
     output = '<strong>Hello World! I am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0)) + '</strong> Try these links.</br>\n'
     output += '<a href="/chat/test">/chat/test</a><br />\n'
+    output += '<a href="/chat/client">/chat/client</a><br />\n'
     output += '<a href="/chat/db_only">/chat/db_only</a><br />\n'
     output += '<a href="/auth_chat/db_valid">/auth_chat/db_valid</a><br />\n'
     return output

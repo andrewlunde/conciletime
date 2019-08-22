@@ -78,8 +78,8 @@ modules:
     path: chat
     parameters:
       app-name: conciletime-cht
-      memory: 512M
-      disk-quota: 256M
+      memory: 128M
+      disk-quota: 512M
       host: chat
       domain: conciletime.com
       health-check-type: none
