@@ -88,3 +88,7 @@ cf push concile_jpy_v0 -k 1024M -m 1024M -u none -n jupyter -d conciletime.com -
 
 Current CF Python version found here.
 https://github.com/cloudfoundry/python-buildpack/releases/tag/v1.6.34
+
+Jupyter Config Docs:
+https://jupyter-notebook.readthedocs.io/en/stable/config.html
+https://www.kubeflow.org/docs/notebooks/custom-notebook/
