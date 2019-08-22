@@ -85,7 +85,7 @@ modules:
       health-check-type: none
       health-check-http-endpoint: /chat
     provides:
-     - name: jupyter_api
+     - name: chat_api
        properties:
           url: ${default-url}
     requires:

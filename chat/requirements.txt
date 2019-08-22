@@ -3,3 +3,4 @@ Flask
 cfenv
 sap-xssec
 hdbcli
+pydevd

@@ -103,6 +103,14 @@ def python_links():
 def unauth_test():
     return 'Python UnAuthorized Test, Yo! <br />\nI am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0))
 
+@app.route('/chat/client')
+def chat_client():
+    output = 'Chat Client HTML in chat.html'
+    with open('chat.html', 'r') as myfile:
+        output = myfile.read()
+    return Response(output, mimetype='text/html' , status=200,)
+
+
 @app.route('/chat/post', methods=['POST'])
 def unauth_post():
     output = 'Python Chat Post to DB (Dangerous!). \n'

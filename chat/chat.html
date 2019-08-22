@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+<title>chat</title>
+<script type="text/javascript">
+function guid() {
+    function _p8(s) {
+        var p = (Math.random().toString(16)+"000000000").substr(2,8);
+        return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
+    }
+    return _p8() + _p8(true) + _p8(true) + _p8();
+}
+// console.log(guid());  
+</script>
+<script type="text/javascript">
+function doOnLoad() {
+	console.log("doOnLoad Starts");
+	console.log("doOnLoad Ends");
+}
+
+var xhr = new XMLHttpRequest();
+
+function dumpResponseHeaders(xhr_obj) {
+    var hdr_out = "";
+    hdr_out += "Response Headers\n";
+    hdr_out += "\n";
+    var headers = xhr_obj.getAllResponseHeaders();
+    return (hdr_out + headers + "\n");
+}
+
+</script>
+</head>
+<body style="font-family: Tahoma, Geneva, sans-serif" onload="doOnLoad()">
+<strong><a href="https://www.conciletime.com">ConcileTime</a></strong><br />
+<br />
+<div id="response_content">
+No results returned yet.    
+</div>
+</body>
+</html>
