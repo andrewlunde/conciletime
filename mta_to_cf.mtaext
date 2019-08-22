@@ -23,6 +23,10 @@ modules:
    parameters:
      app-name: concile_jpy_v0
      
+ - name: conciletime-cht
+   parameters:
+     app-name: concile_cht_v0
+     
  - name: conciletime-web
    parameters:
      app-name: concile_web_v0

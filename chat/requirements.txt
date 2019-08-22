@@ -1,0 +1,5 @@
+# Bring dependencies local with pip
+Flask
+cfenv
+sap-xssec
+hdbcli
