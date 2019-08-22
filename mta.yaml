@@ -62,7 +62,7 @@ modules:
     parameters:
       app-name: conciletime-jpy
       memory: 1024M
-      disk-quota: 512M
+      disk-quota: 2048M
       host: jupyter
       domain: conciletime.com
       health-check-type: http
