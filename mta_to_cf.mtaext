@@ -19,9 +19,9 @@ modules:
    parameters:
      app-name: concile_app_v0
    
- - name: conciletime-jyp
+ - name: conciletime-jpy
    parameters:
-     app-name: concile_jyp_v0
+     app-name: concile_jpy_v0
      
  - name: conciletime-web
    parameters:

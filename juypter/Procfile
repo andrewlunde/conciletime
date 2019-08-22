@@ -1,1 +1,0 @@
-web: python ../deps/0/python/bin/jupyter notebook --no-browser --port 8080 --ip '*'

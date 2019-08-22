@@ -56,16 +56,16 @@ modules:
           url: ${default-url}
     requires:
       - name: conciletime-uaa
-  - name: conciletime-jyp
+  - name: conciletime-jpy
     type: python
-    path: juypter
+    path: jupyter
     parameters:
-      app-name: conciletime-jyp
+      app-name: conciletime-jpy
       memory: 1024M
       disk-quota: 512M
       host: jupyter
       domain: conciletime.com
-      health-check-type: none
+      health-check-type: http
     provides:
      - name: jupyter_api
        properties:
