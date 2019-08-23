@@ -69,9 +69,25 @@ Create the saas-registry service instance and bind the module that serves the /c
 cf cs saas-registry application conciltime-registry -c registry-config.json
 cf bs concile_utl_v0 conciltime-registry
 cf restage concile_utl_v0
+
+// Manually Deleting Subscriptions...Using Postman!  See snippets.txt
+cf env concile_utl_v0
+
+POST https://conciletime.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials&response_type=token
+Username : sb-52a0b95f-6f53-43e8-9f82-541bdfbd4f92-clone!b2387|lps-registry-broker!b4
+Password : vzj8oO+wdlDM5yx31hQcKgjvF/Y=
+
+GET https://tenant-onboarding.cfapps.us10.hana.ondemand.com/api/v2.0/subscription
+
+DELETE https://tenant-onboarding.cfapps.us10.hana.ondemand.com/api/v2.0/subscription/tenants/e3b47f06-fd71-4167-b4a2-6fb89e60d0d5?jobUuid=a57a5dca-9f96-4b48-93e7-b67a6f9268b3
+
+cf unbind-service concile_utl_v0 conciltime-registry
+cf delete-service conciltime-registry -f
+cf update-service conciltime-registry -c registry-config.json
 ```
 Note, once you have subscribers, you won't be able to undeploy the app with --delete-services.
 Make sure to unsubscribe all subscribers before undeploying.
+
 
 You can however undeploy without deleting services and the UAA and HDI will remain.
 ```

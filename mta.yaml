@@ -35,7 +35,8 @@ modules:
       app-name: conciletime-utl
       memory: 512M
       disk-quota: 256M
-      host: conciletime-utl
+      host: utility
+      domain: conciletime.com
     provides:
       - name: util_api
         properties:
@@ -98,7 +99,9 @@ modules:
       app-name: conciletime-web
       memory: 512M
       disk-quota: 256M
-      host: conciletime
+      #host: conciletime
+      host: '*'
+      domain: conciletime.com
     requires:
      - name: conciletime-uaa
      - name: conciletime-log

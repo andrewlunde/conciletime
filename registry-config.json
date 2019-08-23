@@ -4,6 +4,6 @@
 	"description": "Business App that helps to (re)Concile Time.",
 	"category": "Provider A-Team",
 	"appUrls": {
-		"onSubscription": "https://conciletime.conciletime.com/callback/v1.0/tenants/{tenantId}"
+		"onSubscription": "https://utility.conciletime.com/callback/v1.0/tenants/{tenantId}"
 	}
 }
