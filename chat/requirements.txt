@@ -1,5 +1,7 @@
 # Bring dependencies local with pip
 Flask
+# https://blog.miguelgrinberg.com/post/easy-websockets-with-flask-and-gevent 
+Flask-SocketIO
 cfenv
 sap-xssec
 hdbcli

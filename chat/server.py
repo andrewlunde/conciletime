@@ -2,7 +2,11 @@
 XSA Python buildpack app example
 Author: Andrew Lunde
 """
-from flask import Flask
+from threading import Lock
+
+from flask import Flask, render_template, session, request, copy_current_request_context
+from flask_socketio import SocketIO, emit, join_room, leave_room, close_room, rooms, disconnect
+
 from flask import request
 from flask import Response
 
@@ -25,8 +29,29 @@ from cfenv import AppEnv
 #https://help.sap.com/viewer/0eec0d68141541d1b07893a39944924e/2.0.03/en-US/d12c86af7cb442d1b9f8520e2aba7758.html
 from hdbcli import dbapi
 
+# Set this variable to "threading", "eventlet" or "gevent" to test the
+# different async modes, or leave it set to None for the application to choose
+# the best option based on installed packages.
+async_mode = None
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app, async_mode=async_mode, cors_allowed_origins="*") #cors required when using Multitenancy
+
+thread = None
+thread_lock = Lock()
+
+
+def background_thread():
+    """Example of how to send server generated events to clients."""
+    count = 0
+    while True:
+        socketio.sleep(10)
+        count += 1
+        socketio.emit('my_response',
+                      {'data': 'Server generated event', 'count': count},
+                      namespace='/chat')
+
 env = AppEnv()
 
 # Get port from environment variable or choose 9099 as local default
@@ -66,7 +91,9 @@ def attach(port, host):
 def hello_world():
     output = '<strong>Hello Chat! I am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0)) + '</strong> Try these links.</br>\n'
     output += '<a href="/env">/env</a><br />\n'
+    output += '<a href="/chat">Chat Client</a><br />\n'
     output += '<a href="/chat/test">/chat/test</a><br />\n'
+    output += '<a href="/chat/links">/chat/links</a><br />\n'
     output += '<a href="/chat/client">/chat/client</a><br />\n'
     output += '<a href="/chat/db_only">/chat/db_only</a><br />\n'
     output += '<a href="/auth_chat/db_valid">/auth_chat/db_valid</a><br />\n'
@@ -91,8 +118,8 @@ def dump_env():
     return output
 
 # Coming through the app-router
-@app.route('/chat')
-def python_links():
+@app.route('/chat/links')
+def chat_links():
     output = '<strong>Hello World! I am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0)) + '</strong> Try these links.</br>\n'
     output += '<a href="/chat/test">/chat/test</a><br />\n'
     output += '<a href="/chat/client">/chat/client</a><br />\n'
@@ -100,18 +127,28 @@ def python_links():
     output += '<a href="/auth_chat/db_valid">/auth_chat/db_valid</a><br />\n'
     return output
 
-# If there is a request for a python/test, return Testing message and module's instance number
-@app.route('/chat/test')
-def unauth_test():
-    return 'Python UnAuthorized Test, Yo! <br />\nI am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0))
+#@app.route('/chat/client')
+#def index():
+#    return render_template('index.html')
 
 @app.route('/chat/client')
 def chat_client():
     output = 'Chat Client HTML in chat.html'
-    with open('chat.html', 'r') as myfile:
+    with open('template/index.html', 'r') as myfile:
         output = myfile.read()
     return Response(output, mimetype='text/html' , status=200,)
 
+@app.route('/chat/sessions')
+def chat_sessions():
+    output = 'Chat Client HTML in chat.html'
+    with open('template/sessions.html', 'r') as myfile:
+        output = myfile.read()
+    return Response(output, mimetype='text/html' , status=200,)
+
+# If there is a request for a python/test, return Testing message and module's instance number
+@app.route('/chat/test')
+def unauth_test():
+    return 'Python UnAuthorized Test, Yo! <br />\nI am instance ' + str(os.getenv("CF_INSTANCE_INDEX", 0))
 
 @app.route('/chat/post', methods=['POST'])
 def unauth_post():
@@ -377,10 +414,99 @@ def auth_db_valid():
     # Return the results
     return output
 
+# Websocket handlers
+
+@socketio.on('my_event', namespace='/chat')
+def test_message(message):
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    emit('my_response',
+         {'data': message['data'], 'count': session['receive_count']})
+
+
+@socketio.on('my_broadcast_event', namespace='/chat')
+def test_broadcast_message(message):
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    emit('my_response',
+         {'data': message['data'], 'count': session['receive_count']},
+         broadcast=True)
+
+
+@socketio.on('join', namespace='/chat')
+def join(message):
+    join_room(message['room'])
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    emit('my_response',
+         {'data': 'In rooms: ' + ', '.join(rooms()),
+          'count': session['receive_count']})
+
+
+@socketio.on('leave', namespace='/chat')
+def leave(message):
+    leave_room(message['room'])
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    emit('my_response',
+         {'data': 'In rooms: ' + ', '.join(rooms()),
+          'count': session['receive_count']})
+
+
+@socketio.on('close_room', namespace='/chat')
+def close(message):
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    emit('my_response', {'data': 'Room ' + message['room'] + ' is closing.',
+                         'count': session['receive_count']},
+         room=message['room'])
+    close_room(message['room'])
+
+
+@socketio.on('my_room_event', namespace='/chat')
+def send_room_message(message):
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    emit('my_response',
+         {'data': message['data'], 'count': session['receive_count']},
+         room=message['room'])
+
+
+@socketio.on('disconnect_request', namespace='/chat')
+def disconnect_request():
+    @copy_current_request_context
+    def can_disconnect():
+        disconnect()
+
+    session['receive_count'] = session.get('receive_count', 0) + 1
+    # for this emit we use a callback function
+    # when the callback function is invoked we know that the message has been
+    # received and it is safe to disconnect
+    emit('my_response',
+         {'data': 'Disconnected!', 'count': session['receive_count']},
+         callback=can_disconnect)
+
+
+@socketio.on('my_ping', namespace='/chat')
+def ping_pong():
+    emit('my_pong')
+
+
+@socketio.on('connect', namespace='/chat')
+def test_connect():
+    global thread
+    with thread_lock:
+        if thread is None:
+            thread = socketio.start_background_task(background_thread)
+    emit('my_response', {'data': 'Connected', 'count': 0})
+
+
+@socketio.on('disconnect', namespace='/chat')
+def test_disconnect():
+    print('Client disconnected', request.sid)
+
+
 if __name__ == '__main__':
     # Run the app, listening on all IPs with our chosen port number
     # Use this for production 
     #app.run(host='0.0.0.0', port=port)
+    
     # Use this for debugging 
-    app.run(debug=True, host='0.0.0.0', port=port)
+    #app.run(debug=True, host='0.0.0.0', port=port)
+    # Websocket mode , cors_allowed_origins='*'
+    socketio.run(app, host='0.0.0.0', port=port)
 

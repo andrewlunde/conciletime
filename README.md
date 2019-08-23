@@ -92,3 +92,8 @@ https://github.com/cloudfoundry/python-buildpack/releases/tag/v1.6.34
 Jupyter Config Docs:
 https://jupyter-notebook.readthedocs.io/en/stable/config.html
 https://www.kubeflow.org/docs/notebooks/custom-notebook/
+
+
+```
+cf push concile_cht_v0 -k 512M -m 128M -u none -n chat -d conciletime.com -p chat
+```
