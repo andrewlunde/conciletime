@@ -89,6 +89,7 @@ modules:
        properties:
           url: ${default-url}
     requires:
+      - name: conciletime-uaa
       - name: conciletime-hdb
   - name: conciletime-web
     type: html5
