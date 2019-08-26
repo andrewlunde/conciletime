@@ -36,7 +36,8 @@ modules:
       app-name: conciletime-utl
       memory: 512M
       disk-quota: 256M
-      host: utility-${space}
+      #host: utility-${space} #The registry-config.json specifies this hostname uniquely
+      host: utility
       domain: conciletime.com
     provides:
       - name: util_api
