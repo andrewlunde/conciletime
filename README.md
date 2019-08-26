@@ -66,7 +66,8 @@ vi registry-config.json
 ```
 Create the saas-registry service instance and bind the module that serves the /callback/v1.0/tenants endpoint to it. 
 ```
-cf create-service saas-registry application CONCILE_REG -c registry-config-dev.json
+cf t -s (dev/prod)
+cf create-service saas-registry application CONCILE_REG -c registry-config-(dev/prod).json
 cf bind-service concile_utl_v0 CONCILE_REG
 cf restage concile_utl_v0
 
@@ -81,9 +82,9 @@ GET https://tenant-onboarding.cfapps.us10.hana.ondemand.com/api/v2.0/subscriptio
 
 DELETE https://tenant-onboarding.cfapps.us10.hana.ondemand.com/api/v2.0/subscription/tenants/e3b47f06-fd71-4167-b4a2-6fb89e60d0d5?jobUuid=a57a5dca-9f96-4b48-93e7-b67a6f9268b3
 
-cf unbind-service concile_utl_v0 conciltime-registry
-cf delete-service conciltime-registry -f
-cf update-service conciltime-registry -c registry-config.json
+cf unbind-service concile_utl_v0 CONCILE_REG
+cf delete-service CONCILE_REG -f
+cf update-service CONCILE_REG -c registry-config-(dev/prod).json
 ```
 Note, once you have subscribers, you won't be able to undeploy the app with --delete-services.
 Make sure to unsubscribe all subscribers before undeploying.

@@ -1,0 +1,35 @@
+# https://sap.github.io/jenkins-library/
+general:
+  gitSshKeyCredentialsId: 'GITHUBALUNDESAP'
+  collectTelemetryData: false
+steps:
+  setupCommonPipelineEnvironment:
+    collectTelemetryData: true
+  mtaBuild:
+    buildTarget: 'CF'
+    defaultNpmRegistry: 'https://registry.npmjs.org/'
+  cloudFoundryDeploy:
+    deployTool: 'mtaDeployPlugin'
+    deployType: 'standard'
+    cloudFoundry:
+      apiEndpoint: 'https://api.cf.us10.hana.ondemand.com'
+      org: 'ConcileTime'
+      space: 'prod'
+      credentialsId: 'CF_CREDENTIALSID'
+      dockerImage: 's4sdk/docker-cf-cli'
+      dockerWorkspace: '/home/jenkins/piper'
+    mtaDeployParameters: '-f -e mta_to_cf.mtaext'
+    postDeployCommand: "cf map-route concile_web_v0 conciletime.com --hostname '*' ; cf bs concile_utl_v0 CONCILE_REG ; cf restage concile_utl_v0"
+  xsaDeploy:
+    XSA:
+      apiEndpoint: 'https://api.parvus.lcfx.net'
+      org: 'lcfx'
+      space: 'DEV'
+      credentialsId: 'CF_CREDENTIALSID'
+  mailSendNotifiction:
+    notificationAttachment: true
+    notificationRecipients: 'andrew.lunde@sap.com'
+    notifyCulprits: false
+  slackSendNotification:
+    credentialsId: 'SLACKSECRET'
+    channel: '#jenkins_builds'

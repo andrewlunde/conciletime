@@ -1,0 +1,9 @@
+{
+	"appId": "conciletime!t2387",
+	"displayName": "ConcileTime-PROD",
+	"description": "Business App that helps to (re)Concile Time.",
+	"category": "Provider A-Team",
+	"appUrls": {
+		"onSubscription": "https://utility-prod.conciletime.com/callback/v1.0/tenants/{tenantId}"
+	}
+}
