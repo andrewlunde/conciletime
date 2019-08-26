@@ -1,4 +1,4 @@
-@Library('piper-library-os-xs') _
+@Library('piper-library-os-acl') _
 node() {
     stage('prepare') {
         checkout scm
@@ -8,7 +8,7 @@ node() {
         mtaBuild script: this
     }
     stage('deploy') {
-        xsDeploy script: this
+        cloudFoundryDeploy script: this
         slackSendNotification script: this
     }
 }
