@@ -94,6 +94,21 @@ modules:
     requires:
       - name: conciletime-uaa
       - name: conciletime-hdb
+  - name: conciletime-jpy
+    type: python
+    path: jupyter
+    parameters:
+      app-name: conciletime-pha
+      memory: 1024M
+      disk-quota: 1024M
+      host: phantom-${space}
+      domain: conciletime.com
+      health-check-type: none
+      #health-check-http-endpoint: /???
+      docker:
+         image: alunde/phantomjs
+         #username: <optional username>
+         #password: <optional password>
   - name: conciletime-web
     type: html5
     path: web
