@@ -94,9 +94,8 @@ modules:
     requires:
       - name: conciletime-uaa
       - name: conciletime-hdb
-  - name: conciletime-jpy
-    type: python
-    path: jupyter
+  - name: conciletime-pha
+    #type: custom
     parameters:
       app-name: conciletime-pha
       memory: 1024M
