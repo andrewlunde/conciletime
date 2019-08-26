@@ -124,10 +124,10 @@ modules:
       memory: 512M
       disk-quota: 256M
       #host: conciletime
-      #host: '*'
-      hosts: 
-       - conciletime
-       - whatever
+      host: '*'
+      #hosts: 
+      # - conciletime
+      # - whatever
       domain: conciletime.com
     requires:
      - name: conciletime-uaa

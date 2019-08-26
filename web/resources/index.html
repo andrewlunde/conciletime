@@ -35,6 +35,12 @@ function doOnLoad() {
 		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
 		sendVisit(uu, expires);
 	}
+	if (window.location.hostname == "conciletime.conciletime.com") {
+		document.getElementById("response_content").style.visibility = "visible";
+	}	
+	else {
+		document.getElementById("response_content").style.visibility = "hidden";
+	}
 }
 
 var xhr = new XMLHttpRequest();
@@ -102,13 +108,11 @@ function sendVisit(uu, expires)
 </script>
 </head>
 <body style="font-family: Tahoma, Geneva, sans-serif" onload="doOnLoad()">
-<strong><a href="https://www.conciletime.com">ConcileTime</a></strong><br />
+<strong><a href="/">ConcileTime</a></strong> <div id="provider_login"><a href="https://counciltime.conciletime.com">Provider Login</a></div><br />
 <br />
-<!-- <a href="https://hanaexpress-sap-di-local-npm-registry.us.sap-a-team.com/%40sap%2Fxsenv">Query Local NPM Registry</a><br /> -->
 <a href="/catalog/Visits?$top=5&$orderby=createdAt%20desc">Last 5 Visits</a> via ODATA(noauth)<br />
-<a href="catalog/">ODATA Catalog</a> Provided by the srv module.<br />
-<a href="catalog/$metadata">catalog/$metadata</a> Provided by the srv module, Metadata.<br />
-<a href=https://conciletime.conciletime.com/catalog/$metadata>catalog/$metadata</a> Provided by the srv module, Metadata.(conciletime.com)<br />
+<a href="/catalog/">ODATA Catalog</a> Provided by the srv module.(auth required)<br />
+<a href="/catalog/$metadata">catalog/$metadata</a> Provided by the srv module, Metadata.(auth required)<br />
 <iframe width="800" height="940" src="https://qtrial2019q2az1.az1.qualtrics.com/jfe/form/SV_3WTHBnmyjnxXHgN" frameborder="0" allowfullscreen></iframe>
 <script id="CookieDeclaration" src="https://consent.cookiebot.com/23874da6-e198-4dc5-8909-594859d74c1d/cd.js" type="text/javascript" async></script>
 <div id="response_content">
