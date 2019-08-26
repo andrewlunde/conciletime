@@ -1,4 +1,4 @@
-@Library('piper-library-os-acl') _
+@Library('piper-library-os') _
 node() {
     stage('prepare') {
         checkout scm

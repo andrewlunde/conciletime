@@ -20,7 +20,8 @@ modules:
       app-name: conciletime-srv
       memory: 512M
       disk-quota: 256M
-      host: conciletime-srv
+      host: service-${space}
+      domain: conciletime.com
     provides:
       - name: srv_api
         properties:
@@ -35,7 +36,7 @@ modules:
       app-name: conciletime-utl
       memory: 512M
       disk-quota: 256M
-      host: utility
+      host: utility-${space}
       domain: conciletime.com
     provides:
       - name: util_api
@@ -50,7 +51,8 @@ modules:
       app-name: conciletime-app
       memory: 512M
       disk-quota: 256M
-      host: conciletime-app
+      host: app-${space}
+      domain: conciletime.com
     provides:
      - name: app_api
        properties:
@@ -64,7 +66,7 @@ modules:
       app-name: conciletime-jpy
       memory: 1024M
       disk-quota: 2048M
-      host: jupyter
+      host: jupyter-${space}
       domain: conciletime.com
       health-check-type: http
       health-check-http-endpoint: /jupyter
@@ -81,7 +83,7 @@ modules:
       app-name: conciletime-cht
       memory: 128M
       disk-quota: 512M
-      host: chat
+      host: chat-${space}
       domain: conciletime.com
       health-check-type: none
       health-check-http-endpoint: /chat
@@ -100,7 +102,8 @@ modules:
       memory: 512M
       disk-quota: 256M
       #host: conciletime
-      host: '*'
+      #host: '*'
+      hosts: conciletime - whatever
       domain: conciletime.com
     requires:
      - name: conciletime-uaa
