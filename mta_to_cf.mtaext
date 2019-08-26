@@ -27,9 +27,9 @@ modules:
    parameters:
      app-name: concile_cht_v0
      
- - name: conciletime-pha
-   parameters:
-     app-name: concile_pha_v0
+# - name: conciletime-pha
+#   parameters:
+#     app-name: concile_pha_v0
      
  - name: conciletime-web
    parameters:
