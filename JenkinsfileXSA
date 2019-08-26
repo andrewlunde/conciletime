@@ -1,6 +1,7 @@
 @Library('piper-library-os-xs') _
 node() {
     stage('prepare') {
+    	deleteDir()
         checkout scm
         setupCommonPipelineEnvironment script:this, configFile: '.pipeline/configXSA.yml'
     }
