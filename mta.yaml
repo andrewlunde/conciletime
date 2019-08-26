@@ -173,7 +173,7 @@ resources:
     parameters:
       service-name: CONCILETIME_V0
       config:
-        schema: CONCILETIME_V0_DEV
+        schema: CONCILETIME_V0_${space}
     properties:
       hdi-container-name: ${service-name}
   - name: conciletime-uaa
