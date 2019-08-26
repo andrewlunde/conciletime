@@ -95,7 +95,7 @@ modules:
       - name: conciletime-uaa
       - name: conciletime-hdb
   - name: conciletime-pha
-    #type: custom
+    type: docker
     parameters:
       app-name: conciletime-pha
       memory: 1024M
