@@ -66,8 +66,8 @@ vi registry-config.json
 ```
 Create the saas-registry service instance and bind the module that serves the /callback/v1.0/tenants endpoint to it. 
 ```
-cf cs saas-registry application conciltime-registry -c registry-config.json
-cf bs concile_utl_v0 conciltime-registry
+cf create-service saas-registry application CONCILE_REG -c registry-config-dev.json
+cf bind-service concile_utl_v0 CONCILE_REG
 cf restage concile_utl_v0
 
 // Manually Deleting Subscriptions...Using Postman!  See snippets.txt

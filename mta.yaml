@@ -36,8 +36,8 @@ modules:
       app-name: conciletime-utl
       memory: 512M
       disk-quota: 256M
-      #host: utility-${space} #The registry-config.json specifies this hostname uniquely
-      host: utility
+      host: utility-${space} #The registry-config-${space}.json specifies this hostname uniquely
+      #host: utility
       domain: conciletime.com
     provides:
       - name: util_api
@@ -124,8 +124,8 @@ modules:
       app-name: conciletime-web
       memory: 512M
       disk-quota: 256M
-      #host: conciletime
-      host: '*'
+      host: conciletime-${space}
+      #host: '*' #This mapping is done in the postdeploy step of the build
       #hosts: 
       # - conciletime
       # - whatever
