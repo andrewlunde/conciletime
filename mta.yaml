@@ -94,6 +94,12 @@ modules:
     requires:
       - name: conciletime-uaa
       - name: conciletime-hdb
+#      
+# cf push concile_pha_v0 --docker-image alunde/phantomjs -d conciletime.com -n phantom -u none -k 1G -m 1G  
+# cf ssh concile_pha_v0
+#
+# /usr/local/bin/phantomjs --webdriver=8080
+#    
 #  - name: conciletime-pha
 #    type: application
 #    path: phantom
