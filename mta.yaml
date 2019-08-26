@@ -105,10 +105,10 @@ modules:
       domain: conciletime.com
       health-check-type: none
       #health-check-http-endpoint: /???
-    docker:
-    image: alunde/phantomjs
-    #username: <optional username>
-    #password: <optional password>
+      docker:
+      image: alunde/phantomjs
+      #username: <optional username>
+      #password: <optional password>
   - name: conciletime-web
     type: html5
     path: web
