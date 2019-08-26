@@ -7,6 +7,7 @@
             "source_data": {
                 "data_type": "CSV",
                 "file_name": "my.bookshop-Books.csv",
+                "delete_existing_foreign_data": true,
                 "has_header": true,
                 "type_config" : { 
                 	"delimiter" : ";" 
