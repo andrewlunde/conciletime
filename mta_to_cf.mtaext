@@ -40,8 +40,8 @@ resources:
    parameters:
      service-name: CONCILE_HDB
      config:
-       schema: CONCILE_V0
-#       schema: CONCILE_V0_${space}
+#       schema: CONCILE_V0
+       schema: CONCILE_V0_${space}
       
  - name: conciletime-uaa
    parameters:
