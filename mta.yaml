@@ -95,7 +95,7 @@ modules:
       - name: conciletime-uaa
       - name: conciletime-hdb
   - name: conciletime-pha
-    type: docker
+    type: custom
     path: phantom
     parameters:
       app-name: conciletime-pha
