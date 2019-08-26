@@ -1,6 +1,6 @@
 {
-	"appId": "conciletime!t2387",
-	"displayName": "ConcileTime-PROD",
+	"appId": "conciletime-prod!t2387",
+	"displayName": "ConcileTime",
 	"description": "Business App that helps to (re)Concile Time.",
 	"category": "Provider A-Team",
 	"appUrls": {

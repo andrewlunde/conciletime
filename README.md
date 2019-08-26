@@ -58,6 +58,7 @@ git push origin --tags
 ## Set up ConcileTime for Subscriptions
 Determine the Internal app name.
 ```
+cf t -s (dev/prod)
 cf env concile_utl_v0 | grep -A 30 '"xsuaa":' | grep xsappname
 ```
 Adjust the registry-config.json file.
@@ -66,8 +67,7 @@ vi registry-config.json
 ```
 Create the saas-registry service instance and bind the module that serves the /callback/v1.0/tenants endpoint to it. 
 ```
-cf t -s (dev/prod)
-cf create-service saas-registry application CONCILE_REG -c registry-config-(dev/prod).json
+cf create-service saas-registry application CONCILE_REG -c registry-config-prod.json
 cf bind-service concile_utl_v0 CONCILE_REG
 cf restage concile_utl_v0
 
