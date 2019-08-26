@@ -179,7 +179,7 @@ resources:
   - name: conciletime-uaa
     type: org.cloudfoundry.managed-service
     parameters:
-      path: xs-security-dev.json
+      path: xs-security.json
       service-name: CONCILETIME_UAA
       service-plan: default
       service: xsuaa

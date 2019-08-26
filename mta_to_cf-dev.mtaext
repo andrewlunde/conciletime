@@ -44,13 +44,13 @@ resources:
       
  - name: conciletime-uaa
    parameters:
-     path: xs-security.json
+     path: xs-security-prod.json
      service-name: CONCILE_UAA
      service-plan: application
      service: xsuaa
      shared: true
      config:
-       xsappname: conciletime
+       xsappname: conciletime-prod
        tenant-mode: shared
  - name: conciletime-log
    parameters:
