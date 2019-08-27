@@ -1,0 +1,9 @@
+{
+	"appId": "ZZZZ",
+	"displayName": "ConcileTime-QA",
+	"description": "Business App that helps to (re)Concile Time.",
+	"category": "Provider A-Team",
+	"appUrls": {
+		"onSubscription": "https://utility-qa.conciletime.com/callback/v1.0/tenants/{tenantId}"
+	}
+}
