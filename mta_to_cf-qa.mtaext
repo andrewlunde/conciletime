@@ -5,52 +5,52 @@ extends: conciletime
 modules:
  - name: conciletime-db
    parameters:
-     app-name: concile_db_##
+     app-name: concile_db_v0
      
  - name: conciletime-srv
    parameters:
-     app-name: concile_srv_##
+     app-name: concile_srv_v0
      
  - name: conciletime-utl
    parameters:
-     app-name: concile_utl_##
+     app-name: concile_utl_v0
      
  - name: conciletime-app
    parameters:
-     app-name: concile_app_##
+     app-name: concile_app_v0
    
  - name: conciletime-jpy
    parameters:
-     app-name: concile_jpy_##
+     app-name: concile_jpy_v0
      
  - name: conciletime-cht
    parameters:
-     app-name: concile_cht_##
+     app-name: concile_cht_v0
      
 # - name: conciletime-pha
 #   parameters:
-#     app-name: concile_pha_##
+#     app-name: concile_pha_v0
 #     
  - name: conciletime-web
    parameters:
-     app-name: concile_web_##
+     app-name: concile_web_v0
      
 resources:
  - name: conciletime-hdb
    parameters:
      service-name: CONCILE_HDB
      config:
-       schema: CONCILE_V0_xxx
+       schema: CONCILE_V0_qa
       
  - name: conciletime-uaa
    parameters:
-     path: xs-security-xxx.json
+     path: xs-security-qa.json
      service-name: CONCILE_UAA
      service-plan: application
      service: xsuaa
      shared: true
      config:
-       xsappname: conciletime-xxx
+       xsappname: conciletime-qa
        tenant-mode: shared
  - name: conciletime-log
    parameters:
