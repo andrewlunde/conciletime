@@ -10,8 +10,12 @@ Run the prepare for deploy script.
 tools/1_prep_deploy cf uat v9
 ```
 
-Now set up a Jenkins job that point to the proper version of the Jenkinsfile.
-Trigger the Jenkins job and notice that it will fail, but will set up for the next step.
+With git, add these new files, commit and push them to your git repo.
+
+Now set up a Jenkins job that pulls the proper version of the Jenkinsfile (JenkinsfileUAT here).
+
+Trigger the Jenkins job and notice that it will fail, but will set up application for the next step.
+
 Now run the post deploy script.
 ```
 tools/2_post_deploy cf uat v9
