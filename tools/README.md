@@ -14,7 +14,7 @@ With git, add these new files, commit and push them to your git repo.
 
 Now set up a Jenkins job that pulls the proper version of the Jenkinsfile (JenkinsfileUAT here).
 
-Trigger the Jenkins job and notice that it will fail, but will set up application for the next step.
+Trigger the Jenkins job and notice that it will fail, but will set up the application for the next step.
 
 Now run the post deploy script.
 ```
@@ -22,11 +22,12 @@ tools/2_post_deploy cf uat v9
 ```
 
 Trigger the Jenkins job again and verify that the build completes successfully.
-Notice that you should be able to subscribe/unsubscribe to the version of conciletime in this space
+Notice that you should be able to subscribe/unsubscribe to the version of conciletime in this space from any other subaccount other than the provider subaccount.
 
 Continue developing/building/testing until you are ready to tear-down this version and space.
 
-Unsubscibe all your subscribers from this version of conciletime in this space.
+First, unsubscibe all your subscribers from this version of conciletime in this space.  If you run into difficulty or the app is not allowing unsubscriptions, follow the steps in this video.  [SAP HANA Academy - SAP CP MT: 06. RESTful API](https://www.youtube.com/watch?v=RjSKrDsnew0&list=PLkzo92owKnVx3Sh0nemX8GoSNzJGfsWJM&index=6)
+
 Run the prepare to undeploy script.  It will give you hints for manually unsubscribing if you need it.
 ```
 tools/3_prep_undeploy cf uat v9
