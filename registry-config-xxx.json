@@ -1,9 +1,9 @@
 {
-	"appId": "conciletime!t2387",
-	"displayName": "ConcileTime-DEV",
+	"appId": "conciletime!tZZZZ",
+	"displayName": "ConcileTime-XXX",
 	"description": "Business App that helps to (re)Concile Time.",
 	"category": "Provider A-Team",
 	"appUrls": {
-		"onSubscription": "https://utility-dev.conciletime.com/callback/v1.0/tenants/{tenantId}"
+		"onSubscription": "https://utility-xxx.conciletime.com/callback/v1.0/tenants/{tenantId}"
 	}
 }
