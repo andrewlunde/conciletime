@@ -59,7 +59,7 @@ if [ "$#" -eq 3 ]; then
 
   cmd=$xsorcf' target -o '$org' -s '$targetspace
   echo $cmd
-  #if [ $do_run -eq 1 ]; then eval $cmd; fi
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   #echo 'HDI SERVICE RESULT:'$RESULT
@@ -79,31 +79,46 @@ if [ "$#" -eq 3 ]; then
   #cf env concile_utl_v0
   cmd=$xsorcf' env concile_utl_'$version_lc' | head'
   echo $cmd
-  if [ $do_run -eq 1 ]; then echo -n 'Org GUID=' ; eval $cmd; fi
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
 
   #cf unbind-service concile_utl_v0 CONCILE_REG
   cmd=$xsorcf' unbind-service concile_utl_'$version_lc' CONCILE_REG'
   echo $cmd
-  if [ $do_run -eq 1 ]; then echo -n 'Org GUID=' ; eval $cmd; fi
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   #cf delete-service CONCILE_REG -f
   cmd=$xsorcf' delete-service CONCILE_REG -f'
   echo $cmd
-  if [ $do_run -eq 1 ]; then echo -n 'Org GUID=' ; eval $cmd; fi
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
 
-  echo "If you are now ready to undeploy concile, use this following command."
+  echo "If you are now ready to undeploy concile, Continue to undeploy."
   echo "Note that using the --delete-services params will remove any HDI containers and their data!!!"
   echo ""
 
-  cmd=$xsorcf' undeploy conciletime -f'
+  cmd=$xsorcf' undeploy conciletime -f --delete-services'
   echo $cmd
-  #if [ $do_run -eq 1 ]; then echo -n 'Org GUID=' ; eval $cmd; fi
+  #if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
+
+  echo "DANGER!  The remainder of the script undeploys conciletime app but leaves the HDI container."
+
+  echo -n "Continue(y/n)? "
+  read continue_yn
+
+  if echo "$continue_yn" | grep -iq "^y" ;then
+    cmd=$xsorcf' undeploy conciletime -f'
+    echo $cmd
+    if [ $do_run -eq 1 ]; then eval $cmd; fi
+    RESULT=$?
+
+  else
+    echo "Aborting..."
+  fi
 
   echo ""
   

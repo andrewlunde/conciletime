@@ -57,7 +57,7 @@ if [ "$#" -eq 3 ]; then
   echo UnPreparation of TargetSpace $targetspace_uc in Org: $org with Version: $version_uc Starting...
   echo ""
 
-  cmd=$xsorcf' target -o '$org' -s '$space
+  cmd=$xsorcf' target -o '$org' -s '$targetspace
   echo $cmd
   #if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
@@ -104,49 +104,73 @@ if [ "$#" -eq 3 ]; then
   #RESULT=$?
 
 
-  echo "Don't forget to go back and edit the "$tofile" and replace the ZZZZ with your appid."
-  #cmd='sed -e "s/ZZZZ/'$version_lc'/g" -i "" '$tofile
-  #echo $cmd
-  ##if [ $do_run -eq 1 ]; then eval $cmd; fi
-  ##RESULT=$?
-
   # DB Permission reminder
 
-  echo "You may want to remove HANA DB to create services instances in this deleted space!."
+  echo "DANGER!  The remainder of the script deletes any HDI container and removes the $targetspace space!."
 
-  cmd=$xsorcf' org '$org' --guid'
-  echo $cmd
-  if [ $do_run -eq 1 ]; then echo -n 'Org GUID=' ; eval $cmd; fi
-  #RESULT=$?
+  echo -n "Continue(y/n)? "
+  read continue_yn
 
-  #echo 'HDI SERVICE RESULT:'$RESULT
+  if echo "$continue_yn" | grep -iq "^y" ;then
 
-  cmd=$xsorcf' space '$targetspace_lc' --guid'
-  echo $cmd
-  if [ $do_run -eq 1 ]; then echo -n 'Space GUID=' ; eval $cmd; fi
-  #RESULT=$?
+    cmd=$xsorcf' delete-service CONCILE_HDB'
+    echo $cmd
+    if [ $do_run -eq 1 ]; then eval $cmd; fi
+    RESULT=$?
 
-  #echo 'HDI SERVICE RESULT:'$RESULT
+    cmd=$xsorcf' service CONCILE_HDB'
+    echo $cmd
+    if [ $do_run -eq 1 ]; then eval $cmd; fi
+    RESULT=$?
 
+      # Service creation is NOT guarenteed to happen right away
+  # Might want to add a timeout counter...
+    while [ $RESULT -eq 0 ]; do
+      echo "Sleeping for 10secs..."
+      sleep 10
 
-  # Potential target space deletion
+      if [ $xsorcf = "xs" ]; then
+        cmd=$xsorcf' service CONCILE_HDB'
+        echo $cmd
+        if [ $do_run -eq 1 ]; then eval $cmd; fi
+        RESULT=$?
+        #echo 'RESULT:'$RESULT
+      else
+        # Handle CF creation of services a bit differently
+        # cf services | grep dat368-hdi | grep "create succeeded"
+        cmd=$xsorcf' service CONCILE_HDB'
+        echo $cmd
+        if [ $do_run -eq 1 ]; then eval $cmd; fi
+        RESULT=$?
+        #echo 'RESULT:'$RESULT
+      fi
+    done
 
-  cmd=$xsorcf' delete-space '$targetspace_lc' -f'
-  echo $cmd
-  if [ $do_run -eq 1 ]; then eval $cmd; fi
-  #RESULT=$?
+    cmd=$xsorcf' target -o '$org' -s '$space
+    echo $cmd
+    if [ $do_run -eq 1 ]; then eval $cmd; fi
+    RESULT=$?
 
-  #echo 'HDI SERVICE RESULT:'$RESULT
+    # Potential target space deletion
 
-  echo ""
+    cmd=$xsorcf' delete-space '$targetspace_lc' -f'
+    echo $cmd
+    if [ $do_run -eq 1 ]; then eval $cmd; fi
+    #RESULT=$?
 
+    #echo 'HDI SERVICE RESULT:'$RESULT
 
-  tofile='Jenkinsfile'$targetspace_uc
-  echo "Don't forget to remove your Jenkins build job that pulls from the '$tofile'."
-  echo "Also, refresh your IDE and git commit/push your removed files back to your repo."
+    echo ""
 
-  echo ""
+    tofile='Jenkinsfile'$targetspace_uc
+    echo "Don't forget to remove your Jenkins build job that pulls from the '$tofile'."
+    echo "Also, refresh your IDE and git commit/push your removed files back to your repo."
+
+    echo ""
   
+  else
+    echo "Aborting..."
+  fi
   #exit 1
 
 else
