@@ -101,24 +101,24 @@ modules:
 #
 # /usr/local/bin/phantomjs --webdriver=8080
 #    
-  - name: conciletime-pha
-#    type: application
-    type: javascript.nodejs
-    path: phantom
-    parameters:
-      app-name: conciletime-pha
-      memory: 1024M
-      disk-quota: 1024M
-      host: phantom-${space}
-      domain: conciletime.com
-      health-check-type: none
-#      #health-check-http-endpoint: /???
-      docker:
-        image: alunde/phantomjs:latest
+#  - name: conciletime-pha
+##    type: application
+#    type: javascript.nodejs
+#    path: phantom
+#    parameters:
+#      app-name: conciletime-pha
+#      memory: 1024M
+#      disk-quota: 1024M
+#      host: phantom-${space}
+#      domain: conciletime.com
+#      health-check-type: none
+##      #health-check-http-endpoint: /???
 #      docker:
-#        image: alunde/phantomjs
-#        #username: <optional username>
-#        #password: <optional password>
+#        image: alunde/phantomjs:latest
+##      docker:
+##        image: alunde/phantomjs
+##        #username: <optional username>
+##        #password: <optional password>
 #
   - name: conciletime-web
     type: html5
