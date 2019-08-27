@@ -57,14 +57,41 @@ if [ "$#" -eq 3 ]; then
   echo Post Deploy to TargetSpace $targetspace_uc in Org: $org with Version: $version_uc Starting...
   echo ""
 
-  cmd=$xsorcf' target -o '$org' -s '$space
+  cmd=$xsorcf' target -o '$org' -s '$targetspace
   echo $cmd
-  #if [ $do_run -eq 1 ]; then eval $cmd; fi
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  #RESULT=$?
+
+
+  cmd=$xsorcf' target -o '$org' -s '$targetspace
+  echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   #echo 'HDI SERVICE RESULT:'$RESULT
 
   echo ""
+
+  cmd=$xsorcf' env concile_utl_'$version_lc' '$doexport1
+  echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo ""
+  
+  #lineNum=$(grep -n VCAP_APPLICATION /tmp/xscfenv.out | head -n 1 | cut -d: -f1)
+  
+  #head -n $[$lineNum - 3] /tmp/xscfenv.out
+
+  #lineNum=$[$lineNum - 3]
+    
+  #echo "lineNum="$lineNum
+
+  #cat /tmp/xscfenv.out  | jq -r '"'"'.VCAP_SERVICES.xsuaa[0].credentials.xsappname'"'"' 2>/dev/null | head -n 1
+
+  cmd='XSAPPNAME=$(cat /tmp/xscfenv.out  | jq -r '"'"'.VCAP_SERVICES.xsuaa[0].credentials.xsappname'"'"' 2>/dev/null | head -n 1)'
+  echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo 'export XSAPPNAME='$XSAPPNAME
+
 
   # File manipulation
   #cmd='sed -e "s/xs_routing_mode=ports/xs_routing_mode=hostnames/g" -i "" auto_install.cfg'
@@ -91,11 +118,29 @@ if [ "$#" -eq 3 ]; then
   echo ""
 
   echo "Don't forget to go back and edit the "$tofile" and replace the ZZZZ with your appid."
-  #cmd='sed -e "s/ZZZZ/'$version_lc'/g" -i "" '$tofile
-  #echo $cmd
-  ##if [ $do_run -eq 1 ]; then eval $cmd; fi
-  ##RESULT=$?
+  cmd='sed -e "s/ZZZZ/'$XSAPPNAME'/g" -i "" '$tofile
+  echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  #RESULT=$?
 
+#cf create-service saas-registry application CONCILE_REG -c registry-config-prod.json
+  cmd=$xsorcf' create-service saas-registry application CONCILE_REG -c registry-config-'$targetspace_lc'.json'
+  echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo ""
+ 
+#cf bind-service concile_utl_v0 CONCILE_REG
+  cmd=$xsorcf' bind-service concile_utl_'$version_lc' CONCILE_REG'
+  echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo ""
+ 
+#cf restage concile_utl_v0
+  cmd=$xsorcf' restage concile_utl_'$version_lc
+  echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo ""
+ 
   #exit 1
 
 else
@@ -104,4 +149,17 @@ else
 fi
 echo ""
 echo Post Deploy to TargetSpace $targetspace Finished
+echo ""
+echo "You should now be able to subscribe/unsubscribe to ConcileTime-$targetspace_uc from subaccounts other than the ConcileTime provider subaccount."
+echo ""
+
+echo "Warning! Any subscribers will be taken to the version of conciletime in the space where the '*' route is mapped."
+echo "         Unless there is an explicit subdomain.conciletime.com route mapping to a conciletime in a different space."
+echo ""
+
+  cmd=$xsorcf' routes --orglevel'
+  echo $cmd
+  if [ $do_run -eq 1 ]; then eval $cmd; fi
+  echo ""
+ 
 echo ""

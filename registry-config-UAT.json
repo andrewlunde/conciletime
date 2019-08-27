@@ -1,9 +1,0 @@
-{
-	"appId": "conciletime!tZZZZ",
-	"displayName": "ConcileTime-UAT",
-	"description": "Business App that helps to (re)Concile Time.",
-	"category": "Provider A-Team",
-	"appUrls": {
-		"onSubscription": "https://utility-uat.conciletime.com/callback/v1.0/tenants/{tenantId}"
-	}
-}

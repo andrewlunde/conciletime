@@ -72,6 +72,9 @@ cf bind-service concile_utl_v0 CONCILE_REG
 cf restage concile_utl_v0
 
 // Manually Deleting Subscriptions...Using Postman!  See snippets.txt
+// Follow Philip's excellent video for all the details
+[SAP HANA Academy - SAP CP MT: 06. RESTful API](https://www.youtube.com/watch?v=RjSKrDsnew0&list=PLkzo92owKnVx3Sh0nemX8GoSNzJGfsWJM&index=6)
+ 
 cf env concile_utl_v0
 
 POST https://conciletime.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials&response_type=token

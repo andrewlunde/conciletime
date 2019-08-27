@@ -84,14 +84,14 @@ if [ "$#" -eq 3 ]; then
   echo ""
 
   cmd=$xsorcf' org '$org' --guid'
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then echo -n 'Org GUID=' ; eval $cmd; fi
   #RESULT=$?
 
   #echo 'HDI SERVICE RESULT:'$RESULT
 
   cmd=$xsorcf' space '$targetspace_lc' --guid'
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then echo -n 'Space GUID=' ; eval $cmd; fi
   #RESULT=$?
 
@@ -107,17 +107,17 @@ if [ "$#" -eq 3 ]; then
   tofile='mta_to_cf-'$targetspace_lc'.mtaext'
 
   cmd='cp '$fromfile' '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   cmd='sed -e "s/xxx/'$targetspace_lc'/g" -i "" '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   cmd='sed -e "s/##/'$version_lc'/g" -i "" '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
@@ -126,12 +126,12 @@ if [ "$#" -eq 3 ]; then
   tofile='xs-security-'$targetspace_lc'.json'
 
   cmd='cp '$fromfile' '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   cmd='sed -e "s/xxx/'$targetspace_lc'/g" -i "" '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
@@ -140,12 +140,12 @@ if [ "$#" -eq 3 ]; then
   tofile='Jenkinsfile'$targetspace_uc
 
   cmd='cp '$fromfile' '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   cmd='sed -e "s/XXX/'$targetspace_uc'/g" -i "" '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
@@ -154,17 +154,17 @@ if [ "$#" -eq 3 ]; then
   tofile='.pipeline/config'$targetspace_uc'.yml'
 
   cmd='cp '$fromfile' '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   cmd='sed -e "s/xxx/'$targetspace_lc'/g" -i "" '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   cmd='sed -e "s/##/'$version_lc'/g" -i "" '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
@@ -173,17 +173,17 @@ if [ "$#" -eq 3 ]; then
   tofile='registry-config-'$targetspace_uc'.json'
 
   cmd='cp '$fromfile' '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   cmd='sed -e "s/xxx/'$targetspace_lc'/g" -i "" '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
   cmd='sed -e "s/XXX/'$targetspace_uc'/g" -i "" '$tofile
-  echo $cmd
+  #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
@@ -191,7 +191,15 @@ if [ "$#" -eq 3 ]; then
 
   tofile='Jenkinsfile'$targetspace_uc
   echo "Don't forget to go create your Jenkins build job to pull the "$tofile" specifically."
+  echo ""
 
+  echo "Also, be sure there is enough saas-registry, Application Logging and Application Runtime quota in the subaccount containing the $org organization for the deploy."
+  echo ""
+
+  echo "Note:  The first deploy attempt will fail due to the concile_utl_$version_lc not having been bound to the CONCILE_REG service yet."
+  echo "       Run the following command to create the CONCILE_REG service instance and bind to it, then rerun the build."
+  echo ""
+  echo "tools/post_deploy $xsorcf $targetspace $version_lc"
   echo ""
 
   #exit 1
