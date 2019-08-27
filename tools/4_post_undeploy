@@ -142,7 +142,8 @@ if [ "$#" -eq 3 ]; then
 
 
   tofile='Jenkinsfile'$targetspace_uc
-  echo "Don't forget to remove your Jenkins build job that pulls from the "$tofile"."
+  echo "Don't forget to remove your Jenkins build job that pulls from the '$tofile'."
+  echo "Also, refresh your IDE and git commit/push your removed files back to your repo."
 
   echo ""
   
