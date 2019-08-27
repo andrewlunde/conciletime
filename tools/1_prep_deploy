@@ -190,6 +190,7 @@ if [ "$#" -eq 3 ]; then
   echo ""
 
   tofile='Jenkinsfile'$targetspace_uc
+  echo "With git, add these new files, commit and push them to your git repo. And..."
   echo "Don't forget to go create your Jenkins build job to pull the "$tofile" specifically."
   echo ""
 
