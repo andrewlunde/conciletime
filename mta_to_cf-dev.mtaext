@@ -60,4 +60,5 @@ resources:
  - name: conciletime-reg
    parameters:
      path: registry-config-dev.json
+     service-name: CONCILE_REG
          
