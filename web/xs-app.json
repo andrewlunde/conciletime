@@ -16,10 +16,16 @@
         "authenticationType": "xsuaa"
     },
     {
-      "source": "(login/)(.*)",
-      "destination": "util_be",
-      "csrfProtection": true,
-      "authenticationType": "none"
+        "source": "(login/)(.*)",
+        "destination": "util_be",
+        "csrfProtection": true,
+        "authenticationType": "xsuaa"
+    },
+    {
+        "source": "(logout/)(.*)",
+        "destination": "util_be",
+        "csrfProtection": true,
+        "authenticationType": "xsuaa"
     },
     {
       "source": "(callback/)(.*)",
@@ -41,6 +47,12 @@
     },
     {
         "source": "(chat/)(.*)",
+        "destination": "chat_be",
+        "csrfProtection": true,
+        "authenticationType": "xsuaa"
+    },
+    {
+        "source": "(socket.io/)(.*)",
         "destination": "chat_be",
         "csrfProtection": true,
         "authenticationType": "xsuaa"

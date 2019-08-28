@@ -35,6 +35,16 @@ app.delete("/callback/v1.0/tenants/*", function (req, res) {
 	res.status(200).send("");
 });
 
+app.get("/login/*", function (req, res) {
+
+	var responseStr = "";
+	responseStr += "<!DOCTYPE HTML><html><head><title>ConcileTime</title></head><body><h1>ConcileTime</h1><h2>SUCCESS!</h2><br />";
+	responseStr += "You have successfully logged in.<br />";
+	responseStr += "<a href=\"/\">Return to home page.</a><br />";
+	responseStr += "</body></html>";
+	res.status(200).send(responseStr);
+});
+
 var server = require("http").createServer();
 var port = process.env.PORT || 3000;
 
