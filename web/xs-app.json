@@ -55,7 +55,8 @@
         "source": "(socket.io/)(.*)",
         "destination": "chat_be",
         "csrfProtection": true,
-        "authenticationType": "xsuaa"
+        "httpMethods": ["GET", "POST"],
+        "authenticationType": "none"
     },
     {
       "localDir": "resources",
