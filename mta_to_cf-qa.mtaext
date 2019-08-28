@@ -57,7 +57,9 @@ resources:
      service-name: CONCILE_LOG
      service-plan: standard
      service: application-logs
- - name: conciletime-reg
-   parameters:
-     path: registry-config-qa.json
+# See comments in the mta.yaml file about the saas service
+# - name: conciletime-reg
+#   parameters:
+#     service-name: CONCILE_REG
+#     path: registry-config-qa.json
          
