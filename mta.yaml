@@ -201,6 +201,7 @@ resources:
     type: org.cloudfoundry.managed-service
     parameters:
       path: registry-config-xxx.json
+      service-name: CONCILETIME_REG
       service: saas-registry
       service-plan: application
       #config: # service config parameters
