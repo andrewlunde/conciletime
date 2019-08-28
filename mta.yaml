@@ -45,6 +45,7 @@ modules:
           url: ${default-url}
     requires:
       - name: conciletime-uaa
+      - name: conciletime-reg
   - name: conciletime-app
     type: nodejs
     path: app
@@ -101,26 +102,26 @@ modules:
 #
 # /usr/local/bin/phantomjs --webdriver=8080
 #    
-  - name: conciletime-pha
-    type: application
-#    type: javascript.nodejs
-    path: phantom
-    parameters:
-      app-name: conciletime-pha
-      memory: 1024M
-      disk-quota: 1024M
-      host: phantom-${space}
-      domain: conciletime.com
-#      health-check-type: none
-      health-check-type: process
-##      #health-check-http-endpoint: /???
+#  - name: conciletime-pha
+#    type: application
+##    type: javascript.nodejs
+#    path: phantom
+#    parameters:
+#      app-name: conciletime-pha
+#      memory: 1024M
+#      disk-quota: 1024M
+#      host: phantom-${space}
+#      domain: conciletime.com
+##      health-check-type: none
+#      health-check-type: process
+###      #health-check-http-endpoint: /???
+##      docker:
+##        image: alunde/phantomjs:latest
 #      docker:
-#        image: alunde/phantomjs:latest
-      docker:
-        image: alunde/phantomjs
-##        #username: <optional username>
-##        #password: <optional password>
-#
+#        image: alunde/phantomjs
+###        #username: <optional username>
+###        #password: <optional password>
+##
   - name: conciletime-web
     type: html5
     path: web
@@ -196,5 +197,17 @@ resources:
       service-name: CONCILETIME_LOG
       service-plan: lite
       service: application-logs
+  - name: conciletime-reg
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: registry-config-xxx.json
+      service: saas-registry
+      service-plan: application
+      #config: # service config parameters
+      #  xsappname: <your xsappname>
+      #  # CIS appname. If not provided, an internal name will be used
+      #  appName: <your appname>
+      #  appUrls: 
+      #     onSubscription:  <your onboarding url>
     
     

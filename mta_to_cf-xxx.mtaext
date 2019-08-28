@@ -57,4 +57,7 @@ resources:
      service-name: CONCILE_LOG
      service-plan: standard
      service: application-logs
+ - name: conciletime-reg
+   parameters:
+     path: registry-config-xxx.json
          
