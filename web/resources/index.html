@@ -35,7 +35,7 @@ function doOnLoad() {
 		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
 		sendVisit(uu, expires);
 	}
-	if (window.location.hostname != "www.conciletime.com") {
+	if (window.location.hostname == "www.conciletime.com") {
 		document.getElementById("provider_login").style.visibility = "hidden";
 		document.getElementById("subscriber_login").style.visibility = "hidden";
 		document.getElementById("authorized_links").style.visibility = "hidden";
