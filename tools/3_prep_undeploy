@@ -125,7 +125,7 @@ if [ "$#" -eq 3 ]; then
   #exit 1
 
 else
-    echo "Usage ./unpost_deploy xs[cf] targetspace version"
+    echo "Usage ./3_unpost_deploy xs[cf] targetspace version"
     exit 1
 fi
 echo ""

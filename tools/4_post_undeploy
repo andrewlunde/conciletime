@@ -174,7 +174,7 @@ if [ "$#" -eq 3 ]; then
   #exit 1
 
 else
-    echo "Usage ./unprep_space xs[cf] targetspace version"
+    echo "Usage ./4_unprep_space xs[cf] targetspace version"
     exit 1
 fi
 echo ""

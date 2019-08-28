@@ -1,6 +1,7 @@
 #!/bin/bash
 do_run=1 # Execute(evaluate) the commands
 #do_run=0 # Don't evaluate any commands
+wildcard_space="dev" # Space name to which wildcard route will be mapped.
 #
 #MY_DIR=$(dirname $(readlink -f $0))
 MY_DIR="/Users/i830671/git/conciletime/tools"
@@ -158,16 +159,30 @@ if [ "$#" -eq 3 ]; then
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
+  if [ "$targetspace" == "$wildcard_space" ]; then
+    echo "IMPORTANT!  The $wildcard_space will be used for the wildcard route."
+    echo ""
+    cmd='sed -e "s/YYYY/cf map-route concile_web_VV conciletime.com --hostname '"'"'*'"'"' ; /g" -i "" '$tofile
+    echo $cmd
+    echo ""
+    if [ $do_run -eq 1 ]; then eval $cmd; fi
+    #RESULT=$?
+  else
+    cmd='sed -e "s/YYYY//g" -i "" '$tofile
+    #echo $cmd
+    if [ $do_run -eq 1 ]; then eval $cmd; fi
+    #RESULT=$?
+  fi
+
   cmd='sed -e "s/xxx/'$targetspace_lc'/g" -i "" '$tofile
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
 
-  cmd='sed -e "s/##/'$version_lc'/g" -i "" '$tofile
+  cmd='sed -e "s/VV/'$version_lc'/g" -i "" '$tofile
   #echo $cmd
   if [ $do_run -eq 1 ]; then eval $cmd; fi
   #RESULT=$?
-
 
   fromfile='registry-config-xxx.json'
   tofile='registry-config-'$targetspace_uc'.json'
@@ -200,13 +215,13 @@ if [ "$#" -eq 3 ]; then
   echo "Note:  The first deploy attempt will fail due to the concile_utl_$version_lc not having been bound to the CONCILE_REG service yet."
   echo "       Run the following command to create the CONCILE_REG service instance and bind to it, then rerun the build."
   echo ""
-  echo "tools/post_deploy $xsorcf $targetspace $version_lc"
+  echo "tools/2_post_deploy $xsorcf $targetspace $version_lc"
   echo ""
 
   #exit 1
 
 else
-    echo "Usage ./prep_deploy xs[cf] targetspace version"
+    echo "Usage ./1_prep_deploy xs[cf] targetspace version"
     exit 1
 fi
 echo ""
