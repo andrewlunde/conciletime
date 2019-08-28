@@ -45,7 +45,8 @@ modules:
           url: ${default-url}
     requires:
       - name: conciletime-uaa
-      - name: conciletime-reg
+      #- name: conciletime-reg # NOTE! This won't work because the app name in the registry-config.json can't be known on initial deploy
+      #                                The 2_post_deploy script fixes it up and the .pipeline/config binds it after deploy.
   - name: conciletime-app
     type: nodejs
     path: app
@@ -197,18 +198,20 @@ resources:
       service-name: CONCILETIME_LOG
       service-plan: lite
       service: application-logs
-  - name: conciletime-reg
-    type: org.cloudfoundry.managed-service
-    parameters:
-      path: registry-config-xxx.json
-      service-name: CONCILETIME_REG
-      service: saas-registry
-      service-plan: application
-      #config: # service config parameters
-      #  xsappname: <your xsappname>
-      #  # CIS appname. If not provided, an internal name will be used
-      #  appName: <your appname>
-      #  appUrls: 
-      #     onSubscription:  <your onboarding url>
+# While this seems like a neat way to create the service and bind it, you get into a chicken and egg issue with the appname
+# not being known prior to the initial attempt at deploying the app into a new space.  This is fixed by using the scripts.
+#  - name: conciletime-reg
+#    type: org.cloudfoundry.managed-service
+#    parameters:
+#      path: registry-config-xxx.json
+#      service-name: CONCILETIME_REG
+#      service: saas-registry
+#      service-plan: application
+#      #config: # service config parameters
+#      #  xsappname: <your xsappname>
+#      #  # CIS appname. If not provided, an internal name will be used
+#      #  appName: <your appname>
+#      #  appUrls: 
+#      #     onSubscription:  <your onboarding url>
     
     

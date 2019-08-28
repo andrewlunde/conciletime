@@ -3,7 +3,7 @@ node() {
     stage('prepare') {
     	deleteDir()
         checkout scm
-        setupCommonPipelineEnvironment script:this, configFile: '.pipeline/configPROD.yml'
+        setupCommonPipelineEnvironment script:this, configFile: '.pipeline/configQA.yml'
     }
     stage('Build') {
         mtaBuild script: this

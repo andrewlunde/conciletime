@@ -14,12 +14,12 @@ steps:
     cloudFoundry:
       apiEndpoint: 'https://api.cf.us10.hana.ondemand.com'
       org: 'ConcileTime'
-      space: 'prod'
+      space: 'qa'
       credentialsId: 'CF_CREDENTIALSID'
       dockerImage: 's4sdk/docker-cf-cli'
       dockerWorkspace: '/home/jenkins/piper'
-    mtaDeployParameters: '-f -e mta_to_cf-prod.mtaext'
-    postDeployCommand: "cf bs concile_utl_v0 CONCILE_REG ; cf restage concile_utl_v0"
+    mtaDeployParameters: '-f -e mta_to_cf-qa.mtaext'
+    postDeployCommand: "cf --version"
   xsaDeploy:
     XSA:
       apiEndpoint: 'https://api.parvus.lcfx.net'
