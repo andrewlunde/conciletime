@@ -35,11 +35,21 @@ function doOnLoad() {
 		console.log("ConcileTimeUU Cookie: " + uu + " expires: " + expires);
 		sendVisit(uu, expires);
 	}
-	if (window.location.hostname == "conciletime.conciletime.com") {
-		document.getElementById("response_content").style.visibility = "visible";
-	}	
+	if (window.location.hostname != "www.conciletime.com") {
+		document.getElementById("provider_login").style.visibility = "hidden";
+		document.getElementById("subscriber_login").style.visibility = "hidden";
+		document.getElementById("authorized_links").style.visibility = "hidden";
+	}
 	else {
-		document.getElementById("response_content").style.visibility = "hidden";
+		document.getElementById("authorized_links").style.visibility = "visible";
+		if (window.location.hostname == "conciletime.conciletime.com") {
+			document.getElementById("provider_login").style.visibility = "visible";
+			document.getElementById("subscriber_login").style.visibility = "hidden";
+		}	
+		else {
+			document.getElementById("provider_login").style.visibility = "hidden";
+			document.getElementById("subscriber_login").style.visibility = "visible";
+		}
 	}
 }
 
@@ -108,11 +118,13 @@ function sendVisit(uu, expires)
 </script>
 </head>
 <body style="font-family: Tahoma, Geneva, sans-serif" onload="doOnLoad()">
-<strong><a href="/">ConcileTime</a></strong> <div id="provider_login"><a href="https://counciltime.conciletime.com">Provider Login</a></div><br />
+<strong><a href="/">ConcileTime</a></strong> <div id="provider_login"><a href="https://counciltime.conciletime.com">Provider Login</a></div><div id="subscriber_login"><a href="https://counciltime.conciletime.com">Subscriber Login</a></div><br />
 <br />
 <a href="/catalog/Visits?$top=5&$orderby=createdAt%20desc">Last 5 Visits</a> via ODATA(noauth)<br />
+<div id="authorized_links">
 <a href="/catalog/">ODATA Catalog</a> Provided by the srv module.(auth required)<br />
 <a href="/catalog/$metadata">catalog/$metadata</a> Provided by the srv module, Metadata.(auth required)<br />
+</div>
 <iframe width="800" height="940" src="https://qtrial2019q2az1.az1.qualtrics.com/jfe/form/SV_3WTHBnmyjnxXHgN" frameborder="0" allowfullscreen></iframe>
 <script id="CookieDeclaration" src="https://consent.cookiebot.com/23874da6-e198-4dc5-8909-594859d74c1d/cd.js" type="text/javascript" async></script>
 <div id="response_content">
