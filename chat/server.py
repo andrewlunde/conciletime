@@ -325,7 +325,7 @@ def auth_db_valid():
 #        pub_pem = "-----BEGIN PUBLIC KEY-----\n" + vkey[26:-24] + "\n-----END PUBLIC KEY-----\n"
 #        #output += 'pub_pem = ' + pub_pem + '\n'
 #
-#	# Manipulate the pem key so that we can verify it.
+#    # Manipulate the pem key so that we can verify it.
 #        pub_key = RSA.importKey(pub_pem)
 #        (header, claim, sig) = jwtoken.split('.')
 #        header = jws.utils.from_base64(header)
@@ -418,6 +418,26 @@ def auth_db_valid():
 
 @socketio.on('my_event', namespace='/chat')
 def test_message(message):
+    print("test_message: " + str(message))
+    # https://github.com/SAP/cloud-pysec/wiki Docs
+    uaa_service = env.get_service(label='xsuaa').credentials
+    access_token = request.headers.get('authorization')[7:]
+    #print("access_token: " + str(access_token))
+    security_context = xssec.create_security_context(access_token, uaa_service)
+    print("security_context: " + str(security_context))
+    isAuthorized = security_context.check_scope('openid')
+    if isAuthorized :
+      print("Authorized")
+      print('get_logon_name: ' + security_context.get_logon_name())
+      print('get_given_name: ' + security_context.get_given_name())
+      print('get_family_name: ' + security_context.get_family_name())
+      print('get_email: ' + security_context.get_email())
+      print('get_origin: ' + security_context.get_origin())
+      print('get_subdomain: ' + security_context.get_subdomain())
+      print('get_subaccount_id: ' + security_context.get_subaccount_id())
+    else:
+      print("Unauthorized")
+
     session['receive_count'] = session.get('receive_count', 0) + 1
     emit('my_response',
          {'data': message['data'], 'count': session['receive_count']})
@@ -508,5 +528,4 @@ if __name__ == '__main__':
     # Use this for debugging 
     #app.run(debug=True, host='0.0.0.0', port=port)
     # Websocket mode , cors_allowed_origins='*'
-    socketio.run(app, host='0.0.0.0', port=port)
-
+    socketio.run(app, debug=True, host='0.0.0.0', port=port)

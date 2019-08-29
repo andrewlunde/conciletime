@@ -115,5 +115,5 @@ https://www.kubeflow.org/docs/notebooks/custom-notebook/
 
 
 ```
-cf push concile_cht_v0 -k 512M -m 128M -u none -n chat -d conciletime.com -p chat
+cf push concile_cht_v0 -k 512M -m 128M -u none -n chat-dev -d conciletime.com -p chat
 ```
