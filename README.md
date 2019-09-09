@@ -5,9 +5,13 @@ Welcome to ConcileTime.
 ## Blog Posts
 
 [00 Naïve Sherpa : Meet The Naïve Sherpa](https://blogs.sap.com/2019/07/22/00-naive-sherpa-meet-the-naive-sherpa/)
+
 [01 Naïve Sherpa : The Journey](https://blogs.sap.com/2019/08/02/01-naive-sherpa-the-journey/)
+
 [02 Naïve Sherpa : Project ConcileTime](https://blogs.sap.com/2019/08/07/02-naive-sherpa-project-conciletime/)
+
 [03 Naïve Sherpa : Tasking Your Minion](https://blogs.sap.com/2019/08/14/03-naive-sherpa-tasking-your-minion/)
+
 [04 Naïve Sherpa : Gathering Data](https://blogs.sap.com/2019/08/07/02-naive-sherpa-project-conciletime/)
 
 ## Project Structure
