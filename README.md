@@ -12,7 +12,7 @@ Welcome to ConcileTime.
 
 [03 Naïve Sherpa : Tasking Your Minion](https://blogs.sap.com/2019/08/14/03-naive-sherpa-tasking-your-minion/)
 
-[04 Naïve Sherpa : Gathering Data](https://blogs.sap.com/2019/08/07/02-naive-sherpa-project-conciletime/)
+[04 Naïve Sherpa : Gathering Data](https://blogs.sap.com/2019/09/09/04-naive-sherpa-gathering-data/)
 
 ## Project Structure
 
