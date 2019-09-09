@@ -7,6 +7,8 @@ Welcome to ConcileTime.
 [00 Naïve Sherpa : Meet The Naïve Sherpa](https://blogs.sap.com/2019/07/22/00-naive-sherpa-meet-the-naive-sherpa/)
 [01 Naïve Sherpa : The Journey](https://blogs.sap.com/2019/08/02/01-naive-sherpa-the-journey/)
 [02 Naïve Sherpa : Project ConcileTime](https://blogs.sap.com/2019/08/07/02-naive-sherpa-project-conciletime/)
+[03 Naïve Sherpa : Tasking Your Minion](https://blogs.sap.com/2019/08/14/03-naive-sherpa-tasking-your-minion/)
+[04 Naïve Sherpa : Gathering Data](https://blogs.sap.com/2019/08/07/02-naive-sherpa-project-conciletime/)
 
 ## Project Structure
 
@@ -14,15 +16,22 @@ File / Folder | Purpose
 ---------|----------
 `.pipleline/` | Piper configuration
 `app/` | main application code
+`chat/` | chat client for WebSocket connections
 `db/` | database content
 `domain/` | custom domain artifacts
 `files/` | docs and the like
+`jupyter/` | Python Jupyter notebook development
 `srv/` | models and code
+`phantom/` | PhantomJS scripted automation test
 `tools/` | command line tools
 `util/` | multitenant subscribe/unsubscribe code
 `web/` | front-end UI(lame) and static content
 `package.json` | project metadata and configuration
+`mta_to_cf-xxx.mtaext` | MTA Extension file template
+`mta.yaml` | Multi-Target Application Development Description
 `README.md` | this README
+`registry-config-xxx.json` | template for Multitenant uniquely named app
+`xs-seurity-xxx.json` | template for UAA unique named app
 
 
 ## More...
@@ -47,6 +56,7 @@ git tag -a post00 -m "Naïve Sherpa : Meet The Naïve Sherpa"
 git tag -a post01 -m "Naïve Sherpa : The Journey"
 git tag -a post02 -m "Naïve Sherpa : The Project"
 git tag -a post03 -m "Naïve Sherpa : Tasking Your Minion"
+git tag -a post04 -m "Naïve Sherpa : Gathering Data"
 
 git push origin --tags
 ```
