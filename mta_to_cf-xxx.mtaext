@@ -31,6 +31,10 @@ modules:
 #   parameters:
 #     app-name: concile_pha_##
 #     
+ - name: conciletime-ina
+   parameters:
+     app-name: concile_ina_##
+     
  - name: conciletime-web
    parameters:
      app-name: concile_web_##
