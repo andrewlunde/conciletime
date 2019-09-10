@@ -11,6 +11,10 @@
 			]
 		},
 		{
+			"name": "$XSAPPNAME.display", 
+			"description": "Display INA data"
+		},
+		{
 			"name": "$XSAPPNAME.view", 
 			"description": "View data"
 		},
@@ -21,6 +25,13 @@
 
 	],
 	"role-templates":[
+		{
+			"name": "ConcileTimeINA", 
+			"description": "Role for displaying data via INA",
+			"scope-references": [ 
+				"$XSAPPNAME.display" 
+			]
+		},
 		{
 			"name": "ConcileTimeManager", 
 			"description": "Role for creating and viewing data",

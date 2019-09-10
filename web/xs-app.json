@@ -59,6 +59,18 @@
         "authenticationType": "none"
     },
     {
+		"source": "/sap/bc/ina",
+		"destination": "ina_be",
+		"httpMethods": ["POST", "GET"],
+		"authenticationType": "xsuaa",
+		"scope": "$XSAPPNAME.display"
+	}, {
+		"source": "/sap/bc/ina",
+		"destination": "ina_be",
+		"httpMethods": ["OPTIONS"],
+		"authenticationType": "none"
+	},
+    {
       "localDir": "resources",
       "source": "^/(.*)",
       "authenticationType": "none"
