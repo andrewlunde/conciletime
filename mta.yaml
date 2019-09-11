@@ -148,6 +148,13 @@ modules:
     requires:
       - name: conciletime-uaa
       - name: conciletime-hdb
+  - name: conciletime-sit
+    type: application
+    path: phantom
+    provides:
+     - name: sites_api
+       properties:
+          url: 'https://flpnwc-h0f8fed5d.dispatcher.us3.hana.ondemand.com/sites#Shell-home'
   - name: conciletime-web
     type: html5
     path: web
@@ -198,6 +205,13 @@ modules:
        group: destinations
        properties:
          name: ina_be
+         url: ~{url}
+         forwardAuthToken: true
+         timeout: 600000
+     - name: sites_api
+       group: destinations
+       properties:
+         name: sites_be
          url: ~{url}
          forwardAuthToken: true
          timeout: 600000
