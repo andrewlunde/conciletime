@@ -149,7 +149,7 @@ modules:
       - name: conciletime-uaa
       - name: conciletime-hdb
   - name: conciletime-sit
-    type: application
+    type: com.sap.portal.content
     path: phantom
     provides:
      - name: sites_api
