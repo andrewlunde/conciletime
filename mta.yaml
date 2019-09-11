@@ -148,13 +148,13 @@ modules:
     requires:
       - name: conciletime-uaa
       - name: conciletime-hdb
-  - name: conciletime-sit
-    type: com.sap.portal.content
-    path: phantom
-    provides:
-     - name: sites_api
-       properties:
-          url: 'https://flpnwc-h0f8fed5d.dispatcher.us3.hana.ondemand.com/sites#Shell-home'
+#  - name: conciletime-sit
+#    type: com.sap.portal.content
+#    path: phantom
+#    provides:
+#     - name: sites_api
+#       properties:
+#          url: 'https://flpnwc-h0f8fed5d.dispatcher.us3.hana.ondemand.com/sites#Shell-home'
   - name: conciletime-web
     type: html5
     path: web
@@ -208,13 +208,13 @@ modules:
          url: ~{url}
          forwardAuthToken: true
          timeout: 600000
-     - name: sites_api
-       group: destinations
-       properties:
-         name: sites_be
-         url: ~{url}
-         forwardAuthToken: true
-         timeout: 600000
+ #    - name: sites_api
+ #      group: destinations
+ #      properties:
+ #        name: sites_be
+ #        url: ~{url}
+ #        forwardAuthToken: true
+ #        timeout: 600000
     properties:
       CORS: '[{"uriPattern": "^/sap/bc/ina/(.*)$", "allowedOrigin": [{"host":"ateam-isveng.us10.sapanalytics.cloud", "protocol":"https"}], "allowedMethods": ["GET", "POST", "OPTIONS"], "allowedHeaders": ["Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "X-Sap-Cid", "X-Csrf-Token"], "exposeHeaders": ["Accept", "Authorization", "X-Requested-With", "X-Sap-Cid", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "X-Csrf-Token", "Content-Type"]}]'
       INCOMING_CONNECTION_TIMEOUT: 600000

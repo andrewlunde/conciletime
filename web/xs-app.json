@@ -77,11 +77,6 @@
 		"httpMethods": ["OPTIONS"],
 		"authenticationType": "none"
 	},
-	{
-        "source": "(sites/)(.*)",
-		"destination": "sites_be",
-		"authenticationType": "none"
-	},
     {
       "localDir": "resources",
       "source": "^/(.*)",
