@@ -58,12 +58,6 @@
         "httpMethods": ["GET", "POST"],
         "authenticationType": "none"
     },
-	{
-		"source": "/sap/bc/ina/service/v2/GetServerInfo",
-		"destination": "ina_be",
-		"httpMethods": ["GET"],
-		"authenticationType": "none"
-	},
     {
 		"source": "/sap/bc/ina",
 		"destination": "ina_be",
