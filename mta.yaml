@@ -123,6 +123,9 @@ modules:
 ###        #username: <optional username>
 ###        #password: <optional password>
 ##
+#
+# https://www.youtube.com/watch?v=V0XL8x_1Pcs&list=PLkzo92owKnVxm3TMoUliy5b5UO1G5GP50&index=16
+#
   - name: conciletime-ina
     type: java
     path: ina
@@ -140,7 +143,7 @@ modules:
       JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'conciletime-hdb'}]"
       USE_NAMED_USER: true
       SECONDARY_ROUTING_PERCENT: 0
-      SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-ina", "identityzone": "*"}]'
+      SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
     provides:
      - name: ina_api
        properties:

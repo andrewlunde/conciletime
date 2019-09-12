@@ -42,6 +42,10 @@ function doOnLoad() {
 	}
 	else {
 		document.getElementById("authorized_links").style.visibility = "visible";
+		document.getElementById("check_scopes").innerHTML = "<a href=\"https://" + (window.location.hostname).split(".")[0] + ".authentication.us10.hana.ondemand.com/config?action=who\">Check Auth Scopes</a><br />";
+		document.getElementById("check_ina").innerHTML = "<a href=\"https://" + window.location.hostname + "/sap/bc/ina/service/v2/GetServerInfo\">Check INA Server Info</a><br /></div>";
+
+		
 		if (window.location.hostname == "conciletime.conciletime.com") {
 			document.getElementById("provider_login").style.visibility = "visible";
 			document.getElementById("subscriber_login").style.visibility = "hidden";
@@ -129,6 +133,8 @@ function sendVisit(uu, expires)
 <a href="/catalog/">ODATA Catalog</a> Provided by the srv module.(auth required)<br />
 <a href="/catalog/$metadata">catalog/$metadata</a> Provided by the srv module, Metadata.(auth required)<br />
 <a href="/chat/client">Chat Client</a> Provided by the cht module.(auth required)<br />
+<div id="check_ina"><a href="https://conciletime.conciletime.com/sap/bc/ina/service/v2/GetServerInfo">Check INA Server Info</a><br /></div>
+<div id="check_scopes"><a href="https://conciletime.authentication.us10.hana.ondemand.com/config?action=who">Check Auth Scopes</a><br /></div>
 </div>
 <iframe width="800" height="940" src="https://qtrial2019q2az1.az1.qualtrics.com/jfe/form/SV_3WTHBnmyjnxXHgN" frameborder="0" allowfullscreen></iframe>
 <script id="CookieDeclaration" src="https://consent.cookiebot.com/23874da6-e198-4dc5-8909-594859d74c1d/cd.js" type="text/javascript" async></script>

@@ -35,7 +35,6 @@ modules:
    parameters:
      app-name: concile_ina_v0
    properties:
-     JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'CONCILE_HDB'}]"
      SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-dev", "identityzone": "*"}]'
      
  - name: conciletime-web

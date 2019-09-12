@@ -34,6 +34,8 @@ modules:
  - name: conciletime-ina
    parameters:
      app-name: concile_ina_##
+   properties:
+     SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
      
  - name: conciletime-web
    parameters:
