@@ -131,3 +131,6 @@ https://www.kubeflow.org/docs/notebooks/custom-notebook/
 ```
 cf push concile_cht_v0 -k 512M -m 128M -u none -n chat-dev -d conciletime.com -p chat
 ```
+```
+mta --build-target=CF --mtar=target/concile_CF.mtar -e mta_to_cf-dev.mtaext build
+```

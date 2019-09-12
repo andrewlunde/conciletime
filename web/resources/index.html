@@ -43,7 +43,7 @@ function doOnLoad() {
 	else {
 		document.getElementById("authorized_links").style.visibility = "visible";
 		document.getElementById("check_scopes").innerHTML = "<a href=\"https://" + (window.location.hostname).split(".")[0] + ".authentication.us10.hana.ondemand.com/config?action=who\">Check Auth Scopes</a><br />";
-		document.getElementById("check_ina").innerHTML = "<a href=\"https://" + window.location.hostname + "/sap/bc/ina/service/v2/GetServerInfo\">Check INA Server Info</a><br /></div>";
+		document.getElementById("check_ina").innerHTML = "<a href=\"https://" + window.location.hostname + "/sap/bc/ina/service/v2/GetServerInfo\">Check INA Server Info</a><br />\n<a href=\"https://" + window.location.hostname + "/sap/bc/ina/service/v2/HeartBeat\">Check INA HeartBeat</a><br />";
 
 		
 		if (window.location.hostname == "conciletime.conciletime.com") {
@@ -133,7 +133,10 @@ function sendVisit(uu, expires)
 <a href="/catalog/">ODATA Catalog</a> Provided by the srv module.(auth required)<br />
 <a href="/catalog/$metadata">catalog/$metadata</a> Provided by the srv module, Metadata.(auth required)<br />
 <a href="/chat/client">Chat Client</a> Provided by the cht module.(auth required)<br />
-<div id="check_ina"><a href="https://conciletime.conciletime.com/sap/bc/ina/service/v2/GetServerInfo">Check INA Server Info</a><br /></div>
+<div id="check_ina">
+<a href="https://conciletime.conciletime.com/sap/bc/ina/service/v2/GetServerInfo">Check INA Server Info</a><br />
+<a href="https://conciletime.conciletime.com/sap/bc/ina/service/v2/HeartBeat">Check INA HeartBeat</a><br />
+</div>
 <div id="check_scopes"><a href="https://conciletime.authentication.us10.hana.ondemand.com/config?action=who">Check Auth Scopes</a><br /></div>
 </div>
 <iframe width="800" height="940" src="https://qtrial2019q2az1.az1.qualtrics.com/jfe/form/SV_3WTHBnmyjnxXHgN" frameborder="0" allowfullscreen></iframe>
