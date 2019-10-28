@@ -128,31 +128,31 @@ modules:
 # ina-dev.conciletime.com/sap/bc/ina/service/v2/GetServerInfo
 # https://conciletime.conciletime.com/sap/bc/ina/service/v2/GetServerInfo
 #
-#  - name: conciletime-ina
-#    type: java.tomee
-#    path: ina/target/java-xsahaa.war
-#    parameters:
-#      app-name: conciletime-ina
-#      memory: 1024M
-#      buildpack: sap_java_buildpack
-#      disk-quota: 2048M
-#      host: ina-${space}
-#      domain: conciletime.com
-#      #health-check-type: http
-#      #health-check-http-endpoint: /
-#    properties:
-#      TARGET_RUNTIME: tomee
-#      JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'xsahaa-container'}]"
-#      USE_NAMED_USER: true
-#      SECONDARY_ROUTING_PERCENT: 0
-#      #SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
-#    provides:
-#     - name: ina_api
-#       properties:
-#          url: ${default-url}
-#    requires:
-#      - name: conciletime-uaa
-#      - name: conciletime-hdb
+  - name: conciletime-ina
+    type: java
+    path: ina
+    parameters:
+      app-name: conciletime-ina
+      memory: 1024M
+      buildpack: sap_java_buildpack
+      disk-quota: 2048M
+      host: ina-${space}
+      domain: conciletime.com
+      #health-check-type: http
+      #health-check-http-endpoint: /
+    properties:
+      TARGET_RUNTIME: tomee
+      JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'conciletime-hdb'}]"
+      USE_NAMED_USER: true
+      SECONDARY_ROUTING_PERCENT: 0
+      SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
+    provides:
+     - name: ina_api
+       properties:
+          url: ${default-url}
+    requires:
+      - name: conciletime-uaa
+      - name: conciletime-hdb
 #  - name: conciletime-sit
 #    type: com.sap.portal.content
 #    path: phantom
@@ -173,49 +173,57 @@ modules:
       # - conciletime
       # - whatever
       domain: conciletime.com
-      requires:
-        - name: conciletime-uaa
-        - name: conciletime-log
-        - name: srv_api
-          group: destinations
-          properties:
-            name: odata_be
-            url: ~{url}
-            forwardAuthToken: true
-        - name: util_api
-          group: destinations
-          properties:
-            name: util_be
-            url: ~{url}
-            forwardAuthToken: true
-        - name: app_api
-          group: destinations
-          properties:
-            name: app_be
-            url: ~{url}
-            forwardAuthToken: true
-        - name: jupyter_api
-          group: destinations
-          properties:
-            name: jupyter_be
-            url: ~{url}
-            forwardAuthToken: true
-        - name: chat_api
-          group: destinations
-          properties:
-            name: chat_be
-            url: ~{url}
-            forwardAuthToken: true
-        - name: headless-chr
-          group: destinations
-          properties:
-            name: chrome_be
-            url: https://conciletime-dev-headless-chrome.cfapps.us10.hana.ondemand.com
-            forwardAuthToken: true
+    requires:
+     - name: conciletime-uaa
+     - name: conciletime-log
+     - name: srv_api
+       group: destinations
+       properties:
+         name: odata_be
+         url: ~{url}
+         forwardAuthToken: true
+     - name: util_api
+       group: destinations
+       properties:
+         name: util_be
+         url: ~{url}
+         forwardAuthToken: true
+     - name: app_api
+       group: destinations
+       properties:
+         name: app_be
+         url: ~{url}
+         forwardAuthToken: true
+     - name: jupyter_api
+       group: destinations
+       properties:
+         name: jupyter_be
+         url: ~{url}
+         forwardAuthToken: true
+     - name: chat_api
+       group: destinations
+       properties:
+         name: chat_be
+         url: ~{url}
+         forwardAuthToken: true
+     - name: ina_api
+       group: destinations
+       properties:
+         name: ina_be
+         url: ~{url}
+         forwardAuthToken: true
+         timeout: 600000
+ #    - name: sites_api
+ #      group: destinations
+ #      properties:
+ #        name: sites_be
+ #        url: ~{url}
+ #        forwardAuthToken: true
+ #        timeout: 600000
     properties:
-#      CORS: '[{"uriPattern": "^/sap/bc/ina/(.*)$", "allowedOrigin": [{"host":"ateam-isveng.us10.sapanalytics.cloud", "protocol":"https"}], "allowedMethods": ["GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE"], "allowedHeaders": ["Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "X-Sap-Cid", "X-Csrf-Token"], "exposeHeaders": ["Accept", "Authorization", "X-Requested-With", "X-Sap-Cid", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "X-Csrf-Token", "Content-Type"]}]'
-#      INCOMING_CONNECTION_TIMEOUT: 600000
-#      #TENANT_HOST_PATTERN: '^(.*).cfapps.(.*).hana.ondemand.com'
+      CORS: '[{"uriPattern": "^/sap/bc/ina/(.*)$", "allowedOrigin": [{"host":"ateam-isveng.us10.sapanalytics.cloud", "protocol":"https"}], "allowedMethods": ["GET", "POST", "OPTIONS"], "allowedHeaders": ["Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "X-Sap-Cid", "X-Csrf-Token"], "exposeHeaders": ["Accept", "Authorization", "X-Requested-With", "X-Sap-Cid", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "X-Csrf-Token", "Content-Type"]}]'
+      INCOMING_CONNECTION_TIMEOUT: 600000
+      #TENANT_HOST_PATTERN: '^(.*).cfapps.(.*).hana.ondemand.com'
       TENANT_HOST_PATTERN: '^(.*).conciletime.com'
       
 resources:
@@ -243,13 +251,14 @@ resources:
       service-name: CONCILETIME_LOG
       service-plan: lite
       service: application-logs
-  - name: headless-chr
-    type: configuration
-    parameters:
-      provider-nid: mta
-      provider-id: headless-chrome:headless-browser
-      version: ">=0.0.1"
-
+# Don't do this yet as this MTA will then depend on the headless-chrome MTA to be deployed into the same space prior to this deploy
+#  - name: headless-chr
+#    type: configuration
+#    parameters:
+#      provider-nid: mta
+#      provider-id: headless-chrome:headless-browser
+#      version: ">=0.0.1"
+#
 # While this seems like a neat way to create the service and bind it, you get into a chicken and egg issue with the appname
 # not being known prior to the initial attempt at deploying the app into a new space.  This is fixed by using the scripts.
 #  - name: conciletime-reg
@@ -265,5 +274,4 @@ resources:
 #      #  appName: <your appname>
 #      #  appUrls: 
 #      #     onSubscription:  <your onboarding url>
-    
     
