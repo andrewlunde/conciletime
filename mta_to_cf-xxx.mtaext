@@ -31,16 +31,23 @@ modules:
 #   parameters:
 #     app-name: concile_pha_##
 #     
- - name: conciletime-ina
-   parameters:
-     app-name: concile_ina_##
-   properties:
-     JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'CONCILE_HDB'}]"
-     SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
+# - name: conciletime-ina
+#   parameters:
+#     app-name: concile_ina_##
+#   properties:
+#     JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'CONCILE_HDB'}]"
+#     SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
      
  - name: conciletime-web
    parameters:
      app-name: concile_web_##
+     requires:
+      - name: headless-chr
+        group: destinations
+        properties:
+          name: chrome_be
+          url: https://conciletime-dev-headless-chrome.cfapps.us10.hana.ondemand.com
+          forwardAuthToken: true
      
 resources:
  - name: conciletime-hdb

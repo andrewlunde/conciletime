@@ -40,6 +40,13 @@ modules:
  - name: conciletime-web
    parameters:
      app-name: concile_web_v0
+     requires:
+     - name: headless-chr
+       group: destinations
+       properties:
+         name: chrome_be
+         url: https://conciletime-dev-headless-chrome.cfapps.us10.hana.ondemand.com
+         forwardAuthToken: true
      
 resources:
  - name: conciletime-hdb

@@ -11,17 +11,26 @@
 			]
 		},
 		{
-			"name": "$XSAPPNAME.display", 
+			"name": "$XSAPPNAME.Display", 
 			"description": "Display INA data"
 		},
 		{
-			"name": "$XSAPPNAME.view", 
+			"name": "$XSAPPNAME.View", 
 			"description": "View data"
 		},
 		{
-			"name": "$XSAPPNAME.create",
+			"name": "$XSAPPNAME.Create",
 			"description": "Create data"
+		},
+		{
+			"name": "$XSAPPNAME.Admin",
+			"description": "ConcileTime Admin"
+		},
+		{
+			"name": "$XSAPPNAME.TenantAdmin",
+			"description": "ConcileTime Tenant Admin"
 		}
+
 
 	],
 	"role-templates":[
@@ -29,22 +38,41 @@
 			"name": "ConcileTimeINA", 
 			"description": "Role for displaying data via INA",
 			"scope-references": [ 
-				"$XSAPPNAME.display" 
+				"$XSAPPNAME.Display" 
 			]
 		},
 		{
-			"name": "ConcileTimeManager", 
+			"name": "ConcileTimeAdmin", 
 			"description": "Role for creating and viewing data",
 			"scope-references": [ 
-				"$XSAPPNAME.create",
-				"$XSAPPNAME.view" 
+				"$XSAPPNAME.Admin",
+				"$XSAPPNAME.Create",
+				"$XSAPPNAME.View" 
 			]
 		},
 		{
-			"name": "ConcileTimeMultiUser",
+			"name": "ConcileTimeTenantAdmin", 
+			"description": "Role for ConcileTime Tenant Administration",
+			"scope-references": [ 
+				"$XSAPPNAME.TenantAdmin",
+				"$XSAPPNAME.Admin",
+				"$XSAPPNAME.Create",
+				"$XSAPPNAME.View" 
+			]
+		},
+		{
+			"name": "ConcileTimeCreator", 
+			"description": "Role for ConcileTime Data Creation",
+			"scope-references": [ 
+				"$XSAPPNAME.Create",
+				"$XSAPPNAME.View" 
+			]
+		},
+		{
+			"name": "ConcileTimeUser",
 			"description": "Role for viewing data only",
 			"scope-references":  [ 
-				"$XSAPPNAME.view" 
+				"$XSAPPNAME.View" 
 			]
 		}
 	],
