@@ -125,10 +125,12 @@ modules:
 ##
 #
 # https://www.youtube.com/watch?v=V0XL8x_1Pcs&list=PLkzo92owKnVxm3TMoUliy5b5UO1G5GP50&index=16
+# ina-dev.conciletime.com/sap/bc/ina/service/v2/GetServerInfo
+# https://conciletime.conciletime.com/sap/bc/ina/service/v2/GetServerInfo
 #
   - name: conciletime-ina
-    type: java
-    path: ina
+    type: java.tomee
+    path: ina/target/java-xsahaa.war
     parameters:
       app-name: conciletime-ina
       memory: 1024M
@@ -140,10 +142,10 @@ modules:
       #health-check-http-endpoint: /
     properties:
       TARGET_RUNTIME: tomee
-      JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'conciletime-hdb'}]"
+      JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'xsahaa-container'}]"
       USE_NAMED_USER: true
       SECONDARY_ROUTING_PERCENT: 0
-      SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
+      #SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
     provides:
      - name: ina_api
        properties:
@@ -219,7 +221,7 @@ modules:
  #        forwardAuthToken: true
  #        timeout: 600000
     properties:
-      CORS: '[{"uriPattern": "^/sap/bc/ina/(.*)$", "allowedOrigin": [{"host":"ateam-isveng.us10.sapanalytics.cloud", "protocol":"https"}], "allowedMethods": ["GET", "POST", "OPTIONS"], "allowedHeaders": ["Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "X-Sap-Cid", "X-Csrf-Token"], "exposeHeaders": ["Accept", "Authorization", "X-Requested-With", "X-Sap-Cid", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "X-Csrf-Token", "Content-Type"]}]'
+      CORS: '[{"uriPattern": "^/sap/bc/ina/(.*)$", "allowedOrigin": [{"host":"ateam-isveng.us10.sapanalytics.cloud", "protocol":"https"}], "allowedMethods": ["GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE"], "allowedHeaders": ["Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "X-Sap-Cid", "X-Csrf-Token"], "exposeHeaders": ["Accept", "Authorization", "X-Requested-With", "X-Sap-Cid", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "X-Csrf-Token", "Content-Type"]}]'
       INCOMING_CONNECTION_TIMEOUT: 600000
       #TENANT_HOST_PATTERN: '^(.*).cfapps.(.*).hana.ondemand.com'
       TENANT_HOST_PATTERN: '^(.*).conciletime.com'
