@@ -128,31 +128,31 @@ modules:
 # ina-dev.conciletime.com/sap/bc/ina/service/v2/GetServerInfo
 # https://conciletime.conciletime.com/sap/bc/ina/service/v2/GetServerInfo
 #
-  - name: conciletime-ina
-    type: java
-    path: ina
-    parameters:
-      app-name: conciletime-ina
-      memory: 1024M
-      buildpack: sap_java_buildpack
-      disk-quota: 2048M
-      host: ina-${space}
-      domain: conciletime.com
-      #health-check-type: http
-      #health-check-http-endpoint: /
-    properties:
-      TARGET_RUNTIME: tomee
-      JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'conciletime-hdb'}]"
-      USE_NAMED_USER: true
-      SECONDARY_ROUTING_PERCENT: 0
-      SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
-    provides:
-     - name: ina_api
-       properties:
-          url: ${default-url}
-    requires:
-      - name: conciletime-uaa
-      - name: conciletime-hdb
+#  - name: conciletime-ina
+#    type: java
+#    path: ina
+#    parameters:
+#      app-name: conciletime-ina
+#      memory: 1024M
+#      buildpack: sap_java_buildpack
+#      disk-quota: 2048M
+#      host: ina-${space}
+#      domain: conciletime.com
+#      #health-check-type: http
+#      #health-check-http-endpoint: /
+#    properties:
+#      TARGET_RUNTIME: tomee
+#      JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'conciletime-hdb'}]"
+#      USE_NAMED_USER: true
+#      SECONDARY_ROUTING_PERCENT: 0
+#      SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-xxx", "identityzone": "*"}]'
+#    provides:
+#     - name: ina_api
+#       properties:
+#          url: ${default-url}
+#    requires:
+#      - name: conciletime-uaa
+#      - name: conciletime-hdb
 #  - name: conciletime-sit
 #    type: com.sap.portal.content
 #    path: phantom
@@ -206,13 +206,13 @@ modules:
          name: chat_be
          url: ~{url}
          forwardAuthToken: true
-     - name: ina_api
-       group: destinations
-       properties:
-         name: ina_be
-         url: ~{url}
-         forwardAuthToken: true
-         timeout: 600000
+#     - name: ina_api
+#       group: destinations
+#       properties:
+#         name: ina_be
+#         url: ~{url}
+#         forwardAuthToken: true
+#         timeout: 600000
  #    - name: sites_api
  #      group: destinations
  #      properties:
