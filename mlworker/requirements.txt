@@ -1,5 +1,10 @@
+#--no-index 
+--trusted-host thedrop.sap-a-team.com
+--find-links http://thedrop.sap-a-team.com/files/hana_ml-1.0.7.tar.gz
 # Bring dependencies local with pip
-Flask
+Flask>=1.1.1
+#Flask
+#flask
 #cfenv
 #sap_py_jwt
 #sap_xssec
@@ -27,8 +32,8 @@ hdbcli
 #pip install -t local -f /tmp hdbcli
 #./local/hdbcli-2.3.14.tar.gz
 #git+https://github.com/alundesap/hana_ml#egg=hana_ml
-git+https://github.com/alundesap/hana_ml#egg=hana_ml
-#hana_ml
+#git+https://github.com/alundesap/hana_ml#egg=hana_ml
+hana_ml
 #Eclipse Based Debugging
 #https://pypi.org/project/pydevd/
 pydevd
