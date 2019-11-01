@@ -29,5 +29,9 @@ hdbcli
 #git+https://github.com/alundesap/hana_ml#egg=hana_ml
 git+https://github.com/alundesap/hana_ml#egg=hana_ml
 #hana_ml
+#Eclipse Based Debugging
 #https://pypi.org/project/pydevd/
 pydevd
+#VSCode Based Debugging
+#https://docs.microsoft.com/en-us/visualstudio/python/debugging-python-in-visual-studio?view=vs-2019
+#ptvsd
