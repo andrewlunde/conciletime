@@ -27,6 +27,10 @@ modules:
    parameters:
      app-name: concile_cht_##
      
+ - name: conciletime-mlw
+   parameters:
+     app-name: concile_mlw_##
+     
 # - name: conciletime-pha
 #   parameters:
 #     app-name: concile_pha_##

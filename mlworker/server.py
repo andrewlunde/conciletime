@@ -68,7 +68,7 @@ def hello_world():
     output += '<a href="/env">/env</a><br />\n'
     output += '<a href="/mlworker/test">/mlworker/test</a><br />\n'
     output += '<a href="/mlworker/db_only">/mlworker/db_only</a><br />\n'
-    output += '<a href="/auth_python/db_valid">/auth_python/db_valid</a><br />\n'
+    output += '<a href="/mlworker/db_valid">/mlworker/db_valid</a><br />\n'
     return output
     
 # Satisfy browser requests for favicon.ico so that don't return 404
@@ -227,7 +227,7 @@ def unauth_db_only():
     return output
 
 # If there is a request for a python/test2, return Testing message and then check JWT and connect to the data service and retrieve some data
-@app.route('/auth_python/db_valid')
+@app.route('/mlworker/db_valid')
 def auth_db_valid():
     output = 'Python Authorized DB Validated Request. \n'
     output += '\n'
