@@ -1,17 +1,33 @@
 # Bring dependencies local with pip
-#Flask
+Flask
 #cfenv
 #sap_py_jwt
 #sap_xssec
 #hdbcli
 #pydevd
-#
+#https://pypi.org/project/cfenv/
 cfenv
+#https://pypi.org/project/sap-py-jwt/
+sap-py-jwt
+#https://pypi.org/project/sap-xssec/
 sap-xssec
+#https://pypi.org/project/hdbcli/
 hdbcli
 #git+https://github.com/alundesap/hana_ml#egg=hana_ml
 #In a Jupyter Terminal...
 #wget -c http://thedrop.sap-a-team.com/files/hana_ml-1.0.7.tar.gz
 #pip3 uninstall hana_ml -y
 #pip3 install hana_ml --find-links ./hana_ml-1.0.7.tar.gz
-jupyter
+#git+https://github.com/alundesap/benign.git@sap-py-jwt
+#git+https://github.com/alundesap/benign.git@PySec
+#Use PyPi
+#Use github
+#git+https://github.com/alundesap/benign.git@hdbcli
+#Use local from XS_PYTHON.zip unzipped into /tmp
+#pip install -t local -f /tmp hdbcli
+#./local/hdbcli-2.3.14.tar.gz
+#git+https://github.com/alundesap/hana_ml#egg=hana_ml
+git+https://github.com/alundesap/hana_ml#egg=hana_ml
+#hana_ml
+#https://pypi.org/project/pydevd/
+pydevd
