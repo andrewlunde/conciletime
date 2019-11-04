@@ -116,7 +116,7 @@ However, if the subsciber tries to go the the application, it will give this err
 404 Not Found: Requested route ('ct-sub0.conciletime.com') does not exist.
 
 ```
-cf push concile_db_v0 -k 1024M -m 256M --no-hostname -p db
+cf push concile_db_v0 -k 256M -m 256M -u none -n conciletime-db -d conciletime.com -p db ; sleep 30 ; cf stop concile_db_v0
 cf push concile_jpy_v0 -k 1024M -m 1024M -u none -n jupyter -d conciletime.com -p jupyter
 ```
 
