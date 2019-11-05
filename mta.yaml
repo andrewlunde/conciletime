@@ -254,9 +254,9 @@ resources:
   - name: conciletime-hdb
     type: com.sap.xs.hdi-container
     parameters:
-      service-name: CONCILETIME_V0
+      service-name: CONCILE_HDB
       config:
-        schema: CONCILETIME_V0_${space}
+        schema: CONCILE_V0_dev
     properties:
       hdi-container-name: ${service-name}
   - name: conciletime-uaa
