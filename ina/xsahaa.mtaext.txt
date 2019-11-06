@@ -1,0 +1,7 @@
+_schema-version: '2.0.0'
+ID: com.sap.xsahaa-mtaex
+extends: com.sap.xsahaa
+modules:
+ - name: xsahaa-entry
+   properties:
+      TENANT_HOST_PATTERN: '^(.*)-dev-xsahaa-entry.cfapps.(.*).hana.ondemand.com'

@@ -65,6 +65,18 @@
       "authenticationType": "xsuaa"
     },
     {
+      "source": "^/sap/bc/ina/(.*)$",
+      "destination": "ina_be",
+      "httpMethods": ["POST", "GET"],
+      "authenticationType": "xsuaa"
+    }, 
+    {
+      "source": "^/sap/bc/ina/(.*)$",
+      "destination": "ina_be",
+      "httpMethods": ["OPTIONS"],
+      "authenticationType": "none"
+    },
+    {
       "localDir": "resources",
       "source": "^/(.*)",
       "authenticationType": "none"

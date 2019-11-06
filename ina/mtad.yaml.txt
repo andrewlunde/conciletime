@@ -1,0 +1,54 @@
+_schema-version: "2.0.0"
+ID: com.sap.xsahaa
+version: "1.0"
+
+modules:
+  - name: xsahaa-entry
+    type: javascript.nodejs
+    path: approuter/
+    requires:
+      - name: xsahaa-java
+        group: destinations
+        properties:
+          name: xsahaa-java
+          url: ~{url}
+          forwardAuthToken: true
+          timeout: 600000
+      - name: xsahaa-uaa
+    properties:
+      CORS: >
+        [
+          {
+            "uriPattern": "^/sap/bc/ina/(.*)$",
+            "allowedOrigin": [{"host" : "", "protocol" : "", "port" : ""}],
+            "allowedMethods": ["GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE"],
+            "allowedHeaders": ["Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "X-Sap-Cid", "X-Csrf-Token"],
+            "exposeHeaders": ["Accept", "Authorization", "X-Requested-With", "X-Sap-Cid", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "X-Csrf-Token", "Content-Type"]
+          }
+        ]
+      INCOMING_CONNECTION_TIMEOUT: 600000
+
+
+  - name: xsahaa-java
+    type: java.tomee
+    path: java-xsahaa.war
+    provides:
+      - name: xsahaa-java
+        properties:
+          url: "${default-url}"
+    properties:
+      JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'xsahaa-container'}]"
+      USE_NAMED_USER: true
+      SECONDARY_ROUTING_PERCENT: 0
+    requires:
+      - name: xsahaa-container
+      - name: xsahaa-uaa
+
+resources:
+  - name: xsahaa-container
+    type: com.sap.xs.hdi-container
+
+  - name: xsahaa-uaa
+    type: com.sap.xs.uaa
+    parameters:
+      config-path: xs-security.json
