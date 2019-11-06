@@ -35,12 +35,10 @@ modules:
 #   parameters:
 #     app-name: concile_pha_v0
 #     
-# - name: conciletime-ina
-#   parameters:
-#     app-name: concile_ina_v0
-#   properties:
-#     SAP_JWT_TRUST_ACL: '[{"clientid":"sb-conciletime-dev", "identityzone": "*"}]'
-#     
+ - name: conciletime-ina
+   parameters:
+     app-name: concile_ina_v0
+     
  - name: conciletime-web
    parameters:
      app-name: concile_web_v0
