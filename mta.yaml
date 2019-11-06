@@ -243,6 +243,7 @@ modules:
  #        forwardAuthToken: true
  #        timeout: 600000
     properties:
+      TENANT_HOST_PATTERN: '^(.*).conciletime.com'
       CORS: >
          [
            {
