@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="lasthour" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="lasthour"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="RESCUETIME_SLICES_DURATION">
+    <resourceUri>RESCUETIME_SLICES_DURATION</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="RESCUETIME_SLICES_DURATION" filterExpressionLanguage="SQL">
+  <attributes>
+    <attribute id="APPLICATION" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="APPLICATION"/>
+      <keyMapping columnObjectName="RESCUETIME_SLICES_DURATION" columnName="APPLICATION"/>
+    </attribute>
+    <attribute id="DOCUMENT" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DOCUMENT"/>
+      <keyMapping columnObjectName="RESCUETIME_SLICES_DURATION" columnName="DOCUMENT"/>
+    </attribute>
+    <attribute id="SLICETIME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SLICETIME"/>
+      <keyMapping columnObjectName="RESCUETIME_SLICES_DURATION" columnName="SLICETIME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="DURATION" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DURATION"/>
+      <measureMapping columnObjectName="RESCUETIME_SLICES_DURATION" columnName="DURATION"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+
+  <filter>&quot;SLICETIME&quot; &gt; ADD_SECONDS(NOW(), -3600)</filter>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
