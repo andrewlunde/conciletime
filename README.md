@@ -134,3 +134,10 @@ cf push concile_cht_v0 -k 512M -m 128M -u none -n chat-dev -d conciletime.com -p
 ```
 mta --build-target=CF --mtar=target/concile_CF.mtar -e mta_to_cf-dev.mtaext build
 ```
+Work out INA module.
+```
+cf push conciletime-ina -k 1024M -m 2048M -u none -n ina-dev -d conciletime.com -b sap_java_buildpack --no-start -p ina
+cf bind-service conciletime-ina CONCILE_UAA
+cf bind-service conciletime-ina CONCILE_HDB
+cf restage conciletime-ina
+```

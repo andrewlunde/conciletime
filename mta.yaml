@@ -161,7 +161,7 @@ modules:
     properties:
       TARGET_RUNTIME: tomee
       SAP_JWT_TRUST_ACL: '[{"clientid":"*", "identityzone": "*"}]'
-      JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'conciletime-hdb'}]"
+      JBP_CONFIG_RESOURCE_CONFIGURATION: "['tomee/webapps/ROOT/WEB-INF/resources.xml': {'xsahaa-hdi-container':'CONCILE_HDB'}]"
     provides:
      - name: ina_api
        properties:
