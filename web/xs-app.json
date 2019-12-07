@@ -46,19 +46,6 @@
         "authenticationType": "none"
     },
     {
-        "source": "(chat/)(.*)",
-        "destination": "chat_be",
-        "csrfProtection": true,
-        "authenticationType": "xsuaa"
-    },
-    {
-        "source": "(socket.io/)(.*)",
-        "destination": "chat_be",
-        "csrfProtection": true,
-        "httpMethods": ["GET", "POST"],
-        "authenticationType": "none"
-    },
-    {
       "source": "(mlworker/)(.*)",
       "destination": "mlw_be",
       "csrfProtection": true,

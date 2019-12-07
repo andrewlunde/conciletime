@@ -79,24 +79,44 @@ modules:
           url: ${default-url}
     requires:
       - name: conciletime-hdb
-  - name: conciletime-cht
-    type: python
-    path: chat
-    parameters:
-      app-name: conciletime-cht
-      memory: 128M
-      disk-quota: 512M
-      host: chat-${space}
-      domain: conciletime.com
-      health-check-type: none
-      health-check-http-endpoint: /chat
-    provides:
-     - name: chat_api
-       properties:
-          url: ${default-url}
-    requires:
-      - name: conciletime-uaa
-      - name: conciletime-hdb
+# This was breaking the build with the following.
+# ERR WebSocket transport not available. Install eventlet or gevent and gevent-websocket for improved performance.
+# May have to revisit the python websocket implementation or try another.
+# 
+# Route code from xs-app.json stored here since json comments no-go
+#  
+#    {
+#        "source": "(chat/)(.*)",
+#        "destination": "chat_be",
+#        "csrfProtection": true,
+#        "authenticationType": "xsuaa"
+#    },
+#    {
+#        "source": "(socket.io/)(.*)",
+#        "destination": "chat_be",
+#        "csrfProtection": true,
+#        "httpMethods": ["GET", "POST"],
+#        "authenticationType": "none"
+#    },
+# 
+#  - name: conciletime-cht
+#    type: python
+#    path: chat
+#    parameters:
+#      app-name: conciletime-cht
+#      memory: 128M
+#      disk-quota: 512M
+#      host: chat-${space}
+#      domain: conciletime.com
+#      health-check-type: none
+#      health-check-http-endpoint: /chat
+#    provides:
+#     - name: chat_api
+#       properties:
+#          url: ${default-url}
+#    requires:
+#      - name: conciletime-uaa
+#      - name: conciletime-hdb
   - name: conciletime-mlw
     type: python
     path: mlworker
