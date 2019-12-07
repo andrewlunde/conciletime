@@ -236,12 +236,12 @@ modules:
          name: jupyter_be
          url: ~{url}
          forwardAuthToken: true
-     - name: chat_api
-       group: destinations
-       properties:
-         name: chat_be
-         url: ~{url}
-         forwardAuthToken: true
+#     - name: chat_api
+#       group: destinations
+#       properties:
+#         name: chat_be
+#         url: ~{url}
+#         forwardAuthToken: true
      - name: mlw_api
        group: destinations
        properties:
