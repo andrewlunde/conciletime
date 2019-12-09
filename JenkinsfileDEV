@@ -1,7 +1,6 @@
 @Library('piper-library-os-acl') _
 node() {
     stage('prepare') {
-    	deleteDir()
         checkout scm
         setupCommonPipelineEnvironment script:this, configFile: '.pipeline/configDEV.yml'
     }
