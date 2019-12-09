@@ -16,7 +16,7 @@ steps:
       org: 'ConcileTime'
       space: 'dev'
       credentialsId: 'CF_CREDENTIALSID'
-      dockerImage: 's4sdk/docker-cf-cli'
+      dockerImage: 'ppiper/cf-cli'
       dockerWorkspace: '/home/jenkins/piper'
     mtaDeployParameters: '-f -e mta_to_cf-dev.mtaext'
     postDeployCommand: "cf map-route concile_web_v0 conciletime.com --hostname '*' ; cf bs concile_utl_v0 CONCILE_REG ; cf restage concile_utl_v0 ; cf --version"
