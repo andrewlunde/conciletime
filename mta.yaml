@@ -117,26 +117,32 @@ modules:
 #    requires:
 #      - name: conciletime-uaa
 #      - name: conciletime-hdb
-#  - name: conciletime-mlw
 ##
-#    type: python
-#    path: mlworker
-#    parameters:
-#      app-name: conciletime-mlw
-#      memory: 512M
-#      disk-quota: 512M
-#      host: mlworker-${space}
-#      domain: conciletime.com
-#      health-check-type: http
-#      health-check-http-endpoint: /
-#    provides:
-#     - name: mlw_api
-#       properties:
-#          url: ${default-url}
-#    requires:
-#      - name: conciletime-uaa
-#      - name: conciletime-hdb
-#      
+#    {
+#        "source": "(mlworker/)(.*)",
+#        "destination": "mlw_be",
+#        "csrfProtection": true,
+#        "authenticationType": "xsuaa"
+#    },
+  - name: conciletime-mlw
+    type: python
+    path: mlworker
+    parameters:
+      app-name: conciletime-mlw
+      memory: 512M
+      disk-quota: 512M
+      host: mlworker-${space}
+      domain: conciletime.com
+      health-check-type: http
+      health-check-http-endpoint: /
+    provides:
+     - name: mlw_api
+       properties:
+          url: ${default-url}
+    requires:
+      - name: conciletime-uaa
+      - name: conciletime-hdb
+      
 # cf push concile_pha_v0 --docker-image alunde/phantomjs -d conciletime.com -n phantom -u none -k 1G -m 1G  
 # cf ssh concile_pha_v0
 #
@@ -243,12 +249,12 @@ modules:
 #         name: chat_be
 #         url: ~{url}
 #         forwardAuthToken: true
-#     - name: mlw_api
-#       group: destinations
-#       properties:
-#         name: mlw_be
-#         url: ~{url}
-#         forwardAuthToken: true
+     - name: mlw_api
+       group: destinations
+       properties:
+         name: mlw_be
+         url: ~{url}
+         forwardAuthToken: true
      - name: ina_api
        group: destinations
        properties:

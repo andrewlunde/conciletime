@@ -34,6 +34,12 @@
       "authenticationType": "none"
     },
     {
+      "source": "(util/)(.*)",
+      "destination": "util_be",
+      "csrfProtection": true,
+      "authenticationType": "none"
+    },
+    {
       "source": "(app/)(.*)",
       "destination": "app_be",
       "csrfProtection": true,
@@ -44,6 +50,12 @@
         "destination": "jupyter_be",
         "csrfProtection": true,
         "authenticationType": "none"
+    },
+    {
+        "source": "(mlworker/)(.*)",
+        "destination": "mlw_be",
+        "csrfProtection": true,
+        "authenticationType": "xsuaa"
     },
     {
       "source": "^/sap/bc/ina/(.*)$",

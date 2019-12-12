@@ -45,6 +45,27 @@ app.get("/login/*", function (req, res) {
 	res.status(200).send(responseStr);
 });
 
+app.get("/util/links", function (req, res) {
+
+	var responseStr = "";
+	responseStr += "<!DOCTYPE HTML><html><head><title>ConcileTime</title></head><body><h1>ConcileTime Utils</h1><h2>SUCCESS!</h2><br />";
+	responseStr += "<a href=\"/util/links\">This links page.</a><br />";
+	responseStr += "<a href=\"/util/test\">Run Tests.</a><br />";
+	responseStr += "<a href=\"/\">Return to home page.</a><br />";
+	responseStr += "</body></html>";
+	res.status(200).send(responseStr);
+});
+
+app.get("/util/test", function (req, res) {
+
+	var responseStr = "";
+	responseStr += "<!DOCTYPE HTML><html><head><title>ConcileTime</title></head><body><h1>ConcileTime Utils</h1><h2>SUCCESS!</h2><br />";
+	responseStr += "<a href=\"/util/links\">Back to Links page.</a><br />";
+	responseStr += "<a href=\"/\">Return to home page.</a><br />";
+	responseStr += "</body></html>";
+	res.status(200).send(responseStr);
+});
+
 var server = require("http").createServer();
 var port = process.env.PORT || 3000;
 

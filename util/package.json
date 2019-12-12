@@ -1,17 +1,16 @@
 {
   "dependencies": {
-		"@sap/xsenv": "latest",
-		"@sap/xssec": "latest",
-		"@sap/hdbext": "latest",
-		"express": "~4.16.0",
-		"passport": "^0.4.0",
-		"stringify-object": "latest",
-	    "nodemon": "latest",
-	    "body-parser": "latest"
+    "@sap/xsenv": "latest",
+    "@sap/xssec": "latest",
+    "@sap/hdbext": "latest",
+    "express": "~4.16.0",
+    "passport": "^0.4.0",
+    "stringify-object": "latest",
+    "nodemon": "latest",
+    "body-parser": "latest"
   },
   "description": "Utility Module for  Callback and Logon Routines",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "files": [],
   "main": "server.js",
   "name": "util",

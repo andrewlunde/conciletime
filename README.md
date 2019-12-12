@@ -133,6 +133,8 @@ cf push concile_cht_v0 -k 512M -m 128M -u none -n chat-dev -d conciletime.com -p
 ```
 ```
 mta --build-target=CF --mtar=target/concile_CF.mtar -e mta_to_cf-dev.mtaext build
+cf deploy target/concile_CF.mtar -f -e mta_to_cf-dev.mtaext
+cf map-route concile_web_v0 conciletime.com --hostname '*' ; cf bs concile_utl_v0 CONCILE_REG ; cf restage concile_utl_v0
 ```
 Work out INA module.
 ```
