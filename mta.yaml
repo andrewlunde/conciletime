@@ -284,6 +284,30 @@ modules:
            }
          ]
       
+
+  - name: conciletime-com
+    type: hdb
+    path: db_com
+    parameters:
+       app-name: conciletime-com
+       memory: 256M
+       disk-quota: 256M
+       host: conciletime-com
+    requires:
+     - name: conciletime-hdb-com
+
+
+  - name: conciletime-sub
+    type: hdb
+    path: db_sub
+    parameters:
+       app-name: conciletime-sub
+       memory: 256M
+       disk-quota: 256M
+       host: conciletime-sub
+    requires:
+     - name: conciletime-hdb-sub
+
 resources:
   - name: conciletime-hdb
     type: com.sap.xs.hdi-container
@@ -332,4 +356,24 @@ resources:
 #      #  appName: <your appname>
 #      #  appUrls: 
 #      #     onSubscription:  <your onboarding url>
+    
+  - name: conciletime-hdb-com
+    type: com.sap.xs.hdi-container
+    parameters:
+       service-name: CONCILE_COM
+       config:
+          schema: CONCILE_COM_V0_dev
+    properties:
+       hdi-container-name_com: ${service-name}
+
+    
+  - name: conciletime-hdb-sub
+    type: com.sap.xs.hdi-container
+    parameters:
+       service-name: CONCILE_SUB
+       config:
+          schema: CONCILE_SUB_V0_dev
+    properties:
+       hdi-container-name_sub: ${service-name}
+
     

@@ -9,6 +9,7 @@
     },
     "files": [
         "db",
+        "db_com",
         "srv"
     ],
     "dependencies": {

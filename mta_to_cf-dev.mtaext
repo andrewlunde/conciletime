@@ -78,3 +78,16 @@ resources:
 #     service-name: CONCILE_REG
 #     path: registry-config-dev.json
          
+ - name: conciletime-hdb-com
+   parameters:
+     service-name: CONCILE_COM
+     config:
+       schema: CONCILE_COM_V0_dev
+      
+ - name: conciletime-hdb-sub
+   parameters:
+     service-name: CONCILE_SUB
+     config:
+       schema: CONCILE_SUB_V0_dev
+      
+

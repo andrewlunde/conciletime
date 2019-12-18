@@ -13,6 +13,24 @@
                 }
             },
             {
+                "for": "hana",
+                "src": "db_com",
+                "options": {
+                    "model": [
+                        "db_com"
+                    ]
+                }
+            },
+            {
+                "for": "hana",
+                "src": "db_sub",
+                "options": {
+                    "model": [
+                        "db_sub"
+                    ]
+                }
+            },
+            {
                 "for": "node-cf",
                 "src": "srv",
                 "options": {
