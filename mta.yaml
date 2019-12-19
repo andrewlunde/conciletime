@@ -45,6 +45,7 @@ modules:
           url: ${default-url}
     requires:
       - name: conciletime-uaa
+      - name: conciletime-sub
       #- name: conciletime-reg # NOTE! This won't work because the app name in the registry-config.json can't be known on initial deploy
       #                                The 2_post_deploy script fixes it up and the .pipeline/config binds it after deploy.
   - name: conciletime-app

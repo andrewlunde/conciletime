@@ -49,7 +49,13 @@ modules:
 #         name: chrome_be
 #         url: https://conciletime-dev-headless-chrome.cfapps.us10.hana.ondemand.com
 #         forwardAuthToken: true
-     
+ - name: conciletime-com
+   parameters:
+     app-name: concile_com_v0
+ - name: conciletime-sub
+   parameters:
+     app-name: concile_sub_v0
+          
 resources:
  - name: conciletime-hdb
    parameters:
