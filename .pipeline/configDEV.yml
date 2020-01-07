@@ -7,9 +7,12 @@ steps:
     collectTelemetryData: true
   mtaBuild:
     buildTarget: 'CF'
+    mtaBuildTool: cloudMbt
+    platform: 'cf'
     defaultNpmRegistry: 'https://registry.npmjs.org/'
     cloudMbt:
       dockerImage: 'devxci/mbtci:1.0.6'
+    postBuildAction: "mbt --version"
   cloudFoundryDeploy:
     deployTool: 'mtaDeployPlugin'
     deployType: 'standard'
