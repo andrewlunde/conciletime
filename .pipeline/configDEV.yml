@@ -8,6 +8,8 @@ steps:
   mtaBuild:
     buildTarget: 'CF'
     defaultNpmRegistry: 'https://registry.npmjs.org/'
+    cloudMbt:
+      dockerImage: 'devxci/mbtci:1.0.6'
   cloudFoundryDeploy:
     deployTool: 'mtaDeployPlugin'
     deployType: 'standard'

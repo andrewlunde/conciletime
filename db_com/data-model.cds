@@ -1,4 +1,4 @@
-namespace common;
+namespace com;
 using { Country, managed } from '@sap/cds/common';
 
 entity Things {

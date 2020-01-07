@@ -146,4 +146,5 @@ cf restage conciletime-ina
 Other DB modules
 ```
 cf push concile_com_v0 -k 256M -m 256M -u none -n concile-com -d conciletime.com -p db_com
+cf push concile_sub_v0 -k 256M -m 256M -u none -n concile-sub -d conciletime.com -p db_sub
 ```

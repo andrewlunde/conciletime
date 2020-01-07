@@ -197,13 +197,29 @@ modules:
     requires:
       - name: conciletime-uaa
       - name: conciletime-hdb
-#  - name: conciletime-sit
-#    type: com.sap.portal.content
-#    path: phantom
-#    provides:
-#     - name: sites_api
-#       properties:
-#          url: 'https://flpnwc-h0f8fed5d.dispatcher.us3.hana.ondemand.com/sites#Shell-home'
+  - name: conciletime-cli
+    type: custom
+##    type: javascript.nodejs
+    path: cf_cli
+    build-parameters:
+      supported-platforms: [] #Don't include it in the mtar at all
+    parameters:
+      app-name: conciletime-cli
+      memory: 1G
+      disk-quota: 1G
+      host: cli-${space}
+      domain: conciletime.com
+      health-check-type: none
+#      health-check-type: process
+###      #health-check-http-endpoint: /???
+      docker:
+        image: alunde/cf-cli:latest
+#      docker:
+#        image: alunde/phantomjs
+###        #username: <optional username>
+###        #password: <optional password>
+##
+
   - name: conciletime-web
     type: html5
     path: web
