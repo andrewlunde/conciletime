@@ -148,3 +148,19 @@ Other DB modules
 cf push concile_com_v0 -k 256M -m 256M -u none -n concile-com -d conciletime.com -p db_com
 cf push concile_sub_v0 -k 256M -m 256M -u none -n concile-sub -d conciletime.com -p db_sub
 ```
+
+Using MBT Build
+```
+mbt build -p=cf -t=target --mtar=concile_CF-mbt.mtar
+
+cf deploy target/concile_CF-mbt.mtar -f -m conciletime-cli
+```
+
+Fixing mtar so docker based modules deploy properly
+cf push mbtci -k 2G -m 1G -u none -n build -d conciletime.com --docker-image devxci/mbtci:latest
+
+cf enable-ssh mbtci
+cf restart mbtci
+
+cf ssh mbtci
+
