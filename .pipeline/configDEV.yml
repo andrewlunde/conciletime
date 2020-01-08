@@ -7,7 +7,7 @@ steps:
     collectTelemetryData: true
   mtaBuild:
     buildTarget: 'CF'
-    mtaBuildTool: cloudMbt
+    mtaBuildTool: 'cloudMbt'
     platform: 'cf'
     defaultNpmRegistry: 'https://registry.npmjs.org/'
     cloudMbt:
