@@ -38,7 +38,12 @@ modules:
  - name: conciletime-ina
    parameters:
      app-name: concile_ina_v0
-     
+
+ - name: conciletime-cli
+   parameters:
+     app-name: concile_cli_v0
+
+    
  - name: conciletime-web
    parameters:
      app-name: concile_web_v0
