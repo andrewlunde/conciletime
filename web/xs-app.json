@@ -1,6 +1,9 @@
 {
   "welcomeFile": "index.html",
   "authenticationMethod": "route",
+  "websockets": {
+      "enabled": true
+  },
   "routes": [
     {
       "source": "(catalog/Visits)(.*)",
@@ -74,10 +77,5 @@
       "source": "^/(.*)",
       "authenticationType": "none"
     }
-  ],
-  {
-    "websockets": {
-      "enabled": true
-    }
-  }
+  ]
 }
