@@ -74,5 +74,10 @@
       "source": "^/(.*)",
       "authenticationType": "none"
     }
-  ]
+  ],
+  {
+    "websockets": {
+      "enabled": true
+    }
+  }
 }

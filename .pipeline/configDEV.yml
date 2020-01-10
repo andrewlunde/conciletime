@@ -12,7 +12,8 @@ steps:
     defaultNpmRegistry: 'https://registry.npmjs.org/'
     cloudMbt:
       dockerImage: 'alunde/mbtci:latest'
-    postBuildAction: "mbt --version"
+    dockerBasedModules: ['conciletime-cli']
+    postBuildAction: 'mbt --version'
   cloudFoundryDeploy:
     deployTool: 'mtaDeployPlugin'
     deployType: 'standard'
@@ -22,8 +23,12 @@ steps:
       space: 'dev'
       credentialsId: 'CF_CREDENTIALSID'
       dockerImage: 'ppiper/cf-cli'
+      #dockerImage: 'alunde/cf-cli-ci'
       dockerWorkspace: '/home/jenkins/piper'
-    mtaDeployParameters: '-t 900 -f -e mta_to_cf-dev.mtaext'
+      #https://docs.pivotal.io/pivotalcf/2-6/devguide/deploy-apps/large-app-deploy.html
+      #CF_STAGING_TIMEOUT: 15
+      #CF_STARTUP_TIMEOUT: 5
+    mtaDeployParameters: '-t 9000 -f -e mta_to_cf-dev.mtaext'
     postDeployAction: "cf map-route concile_web_v0 conciletime.com --hostname '*' ; cf bs concile_utl_v0 CONCILE_REG ; cf restage concile_utl_v0 ; cf --version"
   xsaDeploy:
     XSA:
