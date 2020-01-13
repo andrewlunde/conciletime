@@ -92,8 +92,6 @@ cf restage concile_utl_v0
 cf env concile_utl_v0
 
 POST https://conciletime.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials&response_type=token
-Username : sb-52a0b95f-6f53-43e8-9f82-541bdfbd4f92-clone!b2387|lps-registry-broker!b4
-Password : vzj8oO+wdlDM5yx31hQcKgjvF/Y=
 
 GET https://tenant-onboarding.cfapps.us10.hana.ondemand.com/api/v2.0/subscription
 
