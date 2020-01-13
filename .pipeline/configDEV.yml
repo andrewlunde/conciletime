@@ -14,8 +14,11 @@ steps:
       dockerImage: 'alunde/mbtci:latest'
     dockerBasedModules: ['conciletime-cli']
     postBuildAction: 'mbt --version'
+  # https://github.wdf.sap.corp/pages/ContinuousDelivery/piper-doc/steps/cloudFoundryDeploy/
   cloudFoundryDeploy:
-    deployTool: 'mtaDeployPlugin'
+    verbose: false
+    #deployTool: 'mtaDeployPlugin'
+    deployTool: 'cf_native'
     deployType: 'standard'
     cloudFoundry:
       apiEndpoint: 'https://api.cf.us10.hana.ondemand.com'
