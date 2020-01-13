@@ -31,8 +31,9 @@ steps:
       #https://docs.pivotal.io/pivotalcf/2-6/devguide/deploy-apps/large-app-deploy.html
       #CF_STAGING_TIMEOUT: 15
       #CF_STARTUP_TIMEOUT: 5
-    mtaDeployParameters: '-t 9000 -f -m conciletime-sub -e mta_to_cf-dev.mtaext'
-    postDeployCommand: "cf map-route concile_web_v0 conciletime.com --hostname '*' ; cf bs concile_utl_v0 CONCILE_REG ; cf restage concile_utl_v0 ; cf --version"
+    # -s {service list as named in mta.yaml} -m {module list as named in mta.yaml}
+    mtaDeployParameters: '-t 9000 -f -e mta_to_cf-dev.mtaext'
+    postDeployCommand: "cf map-route concile_web_v0 conciletime.com --hostname '*' ; cf bs concile_utl_v0 CONCILE_REG ; cf restage concile_utl_v0 ; cf routes"
   xsaDeploy:
     XSA:
       apiEndpoint: 'https://api.parvus.lcfx.net'
