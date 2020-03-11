@@ -3,6 +3,9 @@ _schema-version: "2.1"
 description: CAP ConcileTime Data App
 version: 0.0.0
 modules:
+
+### New Modules Here ###
+
   - name: conciletime-db
     type: hdb
     path: db
@@ -235,6 +238,7 @@ modules:
     requires:
      - name: conciletime-uaa
      - name: conciletime-log
+    ### New Destinations Here ###
      - name: srv_api
        group: destinations
        properties:
@@ -312,7 +316,7 @@ modules:
     requires:
      - name: conciletime-hdb-com
 
-
+# cf push concile_sub_v0 -p db_sub -m 256M -k 256M --no-hostname -u none ; sleep 30 ; cf stop concile_sub_v0
   - name: conciletime-sub
     type: hdb
     path: db_sub
@@ -325,6 +329,9 @@ modules:
      - name: conciletime-hdb-sub
 
 resources:
+
+### New Resources Here ###
+
   - name: conciletime-hdb
     type: com.sap.xs.hdi-container
     parameters:
