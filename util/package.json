@@ -18,6 +18,7 @@
     "start": "nodemon server.js"
   },
   "engines": {
+    "node": "10.x",
     "node": "8.x"
   },
   "version": "1.0.0"

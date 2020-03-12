@@ -305,6 +305,9 @@ modules:
          ]
       
 
+# cf push concile_com_v0 -p db_com -m 256M -k 256M -d conciletime.com -n concile_com_v0 -u none 
+# cf bs concile_com_v0 CONCILE_COM
+# cf stop concile_com_v0
   - name: conciletime-com
     type: hdb
     path: db_com
@@ -316,7 +319,9 @@ modules:
     requires:
      - name: conciletime-hdb-com
 
-# cf push concile_sub_v0 -p db_sub -m 256M -k 256M --no-hostname -u none ; sleep 30 ; cf stop concile_sub_v0
+# cf push concile_sub_v0 -p db_sub -m 256M -k 256M -d conciletime.com -n concile_sub_v0 -u none 
+# cf bs concile_sub_v0 CONCILE_SUB
+# cf stop concile_sub_v0
   - name: conciletime-sub
     type: hdb
     path: db_sub
@@ -366,6 +371,7 @@ resources:
 #
 # While this seems like a neat way to create the service and bind it, you get into a chicken and egg issue with the appname
 # not being known prior to the initial attempt at deploying the app into a new space.  This is fixed by using the scripts.
+# cf update-service CONCILE_REG -c ./registry-config-DEV.json
 #  - name: conciletime-reg
 #    type: org.cloudfoundry.managed-service
 #    parameters:

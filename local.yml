@@ -1,0 +1,191 @@
+applications:
+- name: concile_app_v0
+  buildpacks:
+  - https://github.com/cloudfoundry/nodejs-buildpack.git#v1.7.8
+  disk_quota: 256M
+  memory: 128M
+  staging_env:
+    npm_config_@sap:registry: https://npm.sap.com
+  running_env:
+    CREDHUB_API: https://credhub.service.cf.internal
+  env:
+    DEPLOY_ATTRIBUTES: |-
+      {
+        "app-content-digest" : "94453380342F1475C18B5998C6FF9808"
+      }
+    MTA_METADATA: |-
+      {
+        "id" : "conciletime",
+        "version" : "0.0.0"
+      }
+    MTA_MODULE_METADATA: |-
+      {
+        "name" : "conciletime-app"
+      }
+    MTA_MODULE_PROVIDED_DEPENDENCIES: '[ ]'
+    MTA_SERVICES: '[ "CONCILE_UAA" ]'
+- name: concile_web_v0
+  buildpacks:
+  - https://github.com/cloudfoundry/nodejs-buildpack.git#v1.7.8
+  disk_quota: 256M
+  memory: 128M
+  staging_env:
+    npm_config_@sap:registry: https://npm.sap.com
+  running_env:
+    CREDHUB_API: https://credhub.service.cf.internal
+  env:
+    CORS: |
+      [
+        {
+         "uriPattern": "^/sap/bc/ina/(.*)$",
+         "allowedOrigin": [ { "host": "*", "protocol": "https" },
+                            { "host": "*", "protocol": "http" }
+         ],
+         "allowedMethods": ["GET", "POST", "HEAD", "OPTIONS", "PUT", "DELETE"],
+         "allowedHeaders": ["Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "X-Sap-Cid", "X-Csrf-Token", "Accept-Language"],
+         "exposeHeaders": ["Accept", "Authorization", "X-Requested-With", "X-Sap-Cid", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "X-Csrf-Token", "Content-Type"]
+        }
+      ]
+    DEPLOY_ATTRIBUTES: |-
+      {
+        "app-content-digest" : "9F5180F26BD6634E0ED25CF7D8A15050"
+      }
+    MTA_METADATA: |-
+      {
+        "id" : "conciletime",
+        "version" : "0.0.0"
+      }
+    MTA_MODULE_METADATA: |-
+      {
+        "name" : "conciletime-web"
+      }
+    MTA_MODULE_PROVIDED_DEPENDENCIES: '[ ]'
+    MTA_SERVICES: '[ "CONCILE_UAA", "CONCILE_LOG" ]'
+    TENANT_HOST_PATTERN: ^(.*).conciletime.com
+    destinations: |-
+      [ {
+        "forwardAuthToken" : true,
+        "name" : "odata_be",
+        "url" : "https://service-dev.conciletime.com"
+      }, {
+        "forwardAuthToken" : false,
+        "name" : "util_be",
+        "url" : "http://localhost:8003"
+      }, {
+        "forwardAuthToken" : false,
+        "name" : "app_be",
+        "url" : "http://localhost:8002"
+      }, {
+        "forwardAuthToken" : true,
+        "name" : "jupyter_be",
+        "url" : "https://jupyter-dev.conciletime.com"
+      }, {
+        "forwardAuthToken" : true,
+        "name" : "mlw_be",
+        "url" : "https://mlworker-dev.conciletime.com"
+      }, {
+        "forwardAuthToken" : true,
+        "name" : "ina_be",
+        "timeout" : 600000,
+        "url" : "https://ina-dev.conciletime.com"
+      } ]
+  services:
+    xsuaa:
+    - name: CONCILE_UAA
+      label: xsuaa
+      tags:
+      - xsuaa
+      plan: application
+      credentials:
+        apiurl: https://api.authentication.us10.hana.ondemand.com
+        clientid: sb-conciletime-dev!t2387
+        clientsecret: xG+Kvs7MVfjCwgAqPxzeHzjwBA4=
+        identityzone: conciletime
+        identityzoneid: 6e3ca693-c112-4862-9c30-254a18b59a55
+        sburl: https://internal-xsuaa.authentication.us10.hana.ondemand.com
+        tenantid: 6e3ca693-c112-4862-9c30-254a18b59a55
+        tenantmode: shared
+        uaadomain: authentication.us10.hana.ondemand.com
+        url: https://conciletime.authentication.us10.hana.ondemand.com
+        verificationkey: '-----BEGIN PUBLIC KEY-----MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx2ZOcKplHEIvBx1j0dNK9J/3E8uKrWFnJRBsdrYvSI6gbV2j2vakAobNxGEz0rXVn+Ljz+2XMgFxlv8in7coW7wzLNkOZDXkI6m27hxAdFtihDzoVGRGDhLkxMytvNcz/uVwoa+RSviA3kJ56s7D5h2kXsVEUQVHURvfku6MwDO0+ZnEuY174QY6NiwCn6DiMDyQWFtPwHT3l2b9uQaLh2szCC21Stze788prD142LePX1CdhRLkwrOZOoAlMNrEdlqqNLadO5WX2m71VICIGjp6iQ4qFHPPJ8tD0d7cRSFnjsBXcbGfzFEhDoYTAF37upXQhhsQywP37AD2q0E9LqRwaMkYOuDEEY5Q/Ph9EVeu8zmWbNRQCoqwJ4CbTJ2CMgYCGPj2cgc+lKkPXQOIAYN8yh2MaLDPybV0P+dBMI9z2jeeT5ODRsgyfa+7ucLQnOXrR8fRUgULbmtLfHNqGZOmhD1cN0MI+S6KxqvPDJmqHOn+nGAQ7uXnW9mjXlNwn3xqZgoXP7+sMRoldDuwGcCIAjRF7DOvNkT0cgyYIJD98tCHMWVm/Q6AxKsEwnvxp55g+wNaVaG20qRyDssR2DTCQW4cpkgZpWk6jKHZh6tsgzcm0EOB2h0LQiN/hM9sF/BX2cd8ihXfxgWuEkbLXWjQAXI68eIOaUJ1LqsoEJsCAwEAAQ==-----END
+          PUBLIC KEY-----'
+        xsappname: conciletime-dev!t2387
+- name: concile_utl_v0
+  buildpacks:
+  - https://github.com/cloudfoundry/nodejs-buildpack.git#v1.7.8
+  disk_quota: 256M
+  memory: 128M
+  staging_env:
+    npm_config_@sap:registry: https://npm.sap.com
+  running_env:
+    CREDHUB_API: https://credhub.service.cf.internal
+  env:
+    DEPLOY_ATTRIBUTES: |-
+      {
+        "app-content-digest" : "7F2E156D2198A68589184017D3578A99"
+      }
+    MTA_METADATA: |-
+      {
+        "id" : "conciletime",
+        "version" : "0.0.0"
+      }
+    MTA_MODULE_METADATA: |-
+      {
+        "name" : "conciletime-utl"
+      }
+    MTA_MODULE_PROVIDED_DEPENDENCIES: '[ ]'
+    MTA_SERVICES: '[ "CONCILE_UAA" ]'
+- name: concile_mlw_v0
+  buildpacks:
+  - https://github.com/cloudfoundry/python-buildpack.git#v1.7.5
+  disk_quota: 256M
+  memory: 128M
+  staging_env:
+    npm_config_@sap:registry: https://npm.sap.com
+  running_env:
+    CREDHUB_API: https://credhub.service.cf.internal
+  env:
+    DEPLOY_ATTRIBUTES: |-
+      {
+        "app-content-digest" : "80E1CBAEB12D385E60D45A9A529C38BE"
+      }
+    MTA_METADATA: |-
+      {
+        "id" : "conciletime",
+        "version" : "0.0.0"
+      }
+    MTA_MODULE_METADATA: |-
+      {
+        "name" : "conciletime-mlw"
+      }
+    MTA_MODULE_PROVIDED_DEPENDENCIES: '[ ]'
+    MTA_SERVICES: '[ "CONCILE_UAA", "CONCILE_HDB" ]'
+- name: concile_ina_v0
+  buildpacks:
+  - https://github.com/cloudfoundry/java-buildpack.git#v4.26
+  disk_quota: 2G
+  memory: 1G
+  staging_env:
+    npm_config_@sap:registry: https://npm.sap.com
+  running_env:
+    CREDHUB_API: https://credhub.service.cf.internal
+  env:
+    DEPLOY_ATTRIBUTES: |-
+      {
+        "app-content-digest" : "501A5D2D9A3925FA4967EE6881899AFF"
+      }
+    JBP_CONFIG_RESOURCE_CONFIGURATION: '[''tomee/webapps/ROOT/WEB-INF/resources.xml'':
+      {''xsahaa-hdi-container'':''CONCILE_HDB''}]'
+    MTA_METADATA: |-
+      {
+        "id" : "conciletime",
+        "version" : "0.0.0"
+      }
+    MTA_MODULE_METADATA: |-
+      {
+        "name" : "conciletime-ina"
+      }
+    MTA_MODULE_PROVIDED_DEPENDENCIES: '[ ]'
+    MTA_SERVICES: '[ "CONCILE_UAA", "CONCILE_HDB" ]'
+    SAP_JWT_TRUST_ACL: '[{"clientid":"*", "identityzone": "*"}]'
+    TARGET_RUNTIME: tomee

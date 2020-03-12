@@ -1,0 +1,17 @@
+Put notest about cf local here.
+The cf local pull command wipes out comments in local.yml.
+
+cf local stage concile_mlw_v0 -p mlworker
+
+cf local run concile_mlw_v0 -p 8004 -s concile_mlw_v0 -t
+
+cf local pull concile_ina_v0
+
+- name: concile_ina_v0
+  buildpacks:
+  - https://github.com/cloudfoundry/java-buildpack.git#v4.26
+  disk_quota: 2G
+  memory: 1G
+
+
+cf local stage concile_ina_v0 -p ina

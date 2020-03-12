@@ -35,3 +35,5 @@ APIExternalProducer.js
 files/~$ConcileTimeROI.xlsx
 
 .mta/
+*.droplet
+*.cache

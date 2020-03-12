@@ -5,7 +5,7 @@ extends: conciletime
 modules:
  - name: conciletime-db
    parameters:
-     app-name: concile_db_v0
+     app-name: concile_hdi_v0
      
  - name: conciletime-srv
    parameters:
