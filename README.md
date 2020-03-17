@@ -151,7 +151,8 @@ Using MBT Build
 ```
 mbt build -p=cf -t=target --mtar=concile_CF-mbt.mtar
 
-cf deploy target/concile_CF-mbt.mtar -f -m conciletime-cli
+cf deploy target/concile_CF-mbt.mtar -f -e mta_to_cf-dev.mtaext
+cf deploy target/concile_CF-mbt.mtar -f -m conciletime-utl -e mta_to_cf-dev.mtaext
 ```
 
 Fixing mtar so docker based modules deploy properly
