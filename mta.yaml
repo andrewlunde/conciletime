@@ -9,6 +9,9 @@ modules:
   - name: conciletime-db
     type: hdb
     path: db
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
       app-name: conciletime-db
       memory: 256M
@@ -16,9 +19,13 @@ modules:
       host: conciletime-db
     requires:
       - name: conciletime-hdb
+# cf push concile_srv_v0 -p srv -d conciletime.com -n service-dev -k 256M -m 512M
   - name: conciletime-srv
     type: nodejs
     path: srv
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
       app-name: conciletime-srv
       memory: 512M
@@ -32,11 +39,17 @@ modules:
     requires:
       - name: conciletime-hdb
       - name: conciletime-uaa
+# cf push concile_utl_v0 -p util -d conciletime.com -n utility-dev -k 256M -m 512M
   - name: conciletime-utl
     type: nodejs
     path: util
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
       app-name: conciletime-utl
+      #buildpack: nodejs_buildpack #Current buildpack
+      buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git#v1.7.8 #Specific(pinned) buildpack
       memory: 512M
       disk-quota: 256M
       host: utility-${space} #The registry-config-${space}.json specifies this hostname uniquely
@@ -51,9 +64,13 @@ modules:
       - name: conciletime-sub
       #- name: conciletime-reg # NOTE! This won't work because the app name in the registry-config.json can't be known on initial deploy
       #                                The 2_post_deploy script fixes it up and the .pipeline/config binds it after deploy.
+# cf push concile_app_v0 -p app -d conciletime.com -n app-dev -k 256M -m 512M
   - name: conciletime-app
     type: nodejs
     path: app
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
       app-name: conciletime-app
       memory: 512M
@@ -66,9 +83,13 @@ modules:
           url: ${default-url}
     requires:
       - name: conciletime-uaa
+# cf push concile_jpy_v0 -p jupyter -d conciletime.com -n jupyter-dev -k 2048M -m 1024M
   - name: conciletime-jpy
     type: python
     path: jupyter
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
       app-name: conciletime-jpy
       memory: 1024M
@@ -128,9 +149,13 @@ modules:
 #        "csrfProtection": true,
 #        "authenticationType": "xsuaa"
 #    },
+# cf push concile_mlw_v0 -p mlworker -d conciletime.com -n mlworker-dev -k 512M -m 512M
   - name: conciletime-mlw
     type: python
     path: mlworker
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
       app-name: conciletime-mlw
       memory: 512M
@@ -180,6 +205,9 @@ modules:
   - name: conciletime-ina
     type: java
     path: ina
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
       app-name: conciletime-ina
       memory: 1024M
@@ -206,6 +234,9 @@ modules:
     path: cf_cli
 #    build-parameters:
 #      supported-platforms: [] #Don't include it in the mtar at all #Not working...
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
       app-name: conciletime-cli
       memory: 1G
@@ -222,9 +253,13 @@ modules:
 ###        #username: <optional username>
 ###        #password: <optional password>
 ##
+# cf push concile_web_v0 -p web -d conciletime.com -n conciletime-dev -k 256M -m 512M
   - name: conciletime-web
     type: html5
     path: web
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
       app-name: conciletime-web
       memory: 512M
@@ -311,6 +346,9 @@ modules:
   - name: conciletime-com
     type: hdb
     path: db_com
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
        app-name: conciletime-com
        memory: 256M
@@ -325,6 +363,9 @@ modules:
   - name: conciletime-sub
     type: hdb
     path: db_sub
+    build-parameters:
+      builder: custom
+      commands: []
     parameters:
        app-name: conciletime-sub
        memory: 256M

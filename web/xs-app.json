@@ -58,7 +58,7 @@
         "source": "(mlworker/)(.*)",
         "destination": "mlw_be",
         "csrfProtection": true,
-        "authenticationType": "xsuaa"
+        "authenticationType": "none"
     },
     {
       "source": "^/sap/bc/ina/(.*)$",
