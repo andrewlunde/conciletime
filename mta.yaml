@@ -23,9 +23,9 @@ modules:
   - name: conciletime-srv
     type: nodejs
     path: srv
-    build-parameters:
-      builder: custom
-      commands: []
+    #build-parameters:
+    #  builder: custom
+    #  commands: []
     parameters:
       app-name: conciletime-srv
       memory: 512M
