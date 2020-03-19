@@ -5,17 +5,18 @@
     "license": "ISC",
     "version": "1.0.0",
     "engines": {
-        "node": "^10.15.3"
+        "node": "^12"
     },
     "files": [
         "db",
         "db_com",
+        "db_sub",
         "srv"
     ],
     "dependencies": {
-        "@sap/cds": "^3.13.0",
+        "@sap/cds": "^3.31.2",
         "express": "^4.17.1",
-        "hdb": "^0.17.0"
+        "hdb": "^0.17.1"
     },
     "devDependencies": {},
     "scripts": {
